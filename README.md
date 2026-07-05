@@ -4,6 +4,13 @@ O Universo MGO é uma plataforma de aventuras outdoor para pais e filhos.
 
 Nosso propósito é transformar lugares reais em desafios memoráveis.
 
+As missões são construídas pela combinação de:
+
+- Estilo
+- Arquitetura
+- Narrativa
+- Cenário
+
 ## Pilares
 
 - A família é sempre protagonista.
