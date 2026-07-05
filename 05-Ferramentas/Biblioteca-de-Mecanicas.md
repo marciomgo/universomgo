@@ -22,5 +22,8 @@ Cada mecânica deve ser catalogada contendo:
 - Ambientes em que pode ser aplicada
 - Narrativas com as quais combina
 - Exemplos de aplicação
+- Processos Cognitivos estimulados
+
+Arquiteturas em que pode ser utilizada
 
 As missões são construídas pela combinação de diferentes mecânicas, organizadas por uma narrativa comum e orientadas pelos princípios do Método CODE.
