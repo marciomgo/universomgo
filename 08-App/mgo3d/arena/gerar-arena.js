@@ -53,11 +53,15 @@ if (rel.type === 'way') aneis = costurar([coords(rel.geometry)]);
 else aneis = costurar(rel.members.filter((m) => m.role === 'outer' && m.geometry).map((m) => coords(m.geometry)));
 if (!aneis.length) { console.error('contorno vazio'); process.exit(1); }
 aneis.sort((a, b) => turf.area(turf.polygon([b])) - turf.area(turf.polygon([a])));
-if (aneis.length > 1) console.log('aviso: o contorno tem ' + aneis.length + ' partes; usando a maior (' + Math.round(turf.area(turf.polygon([aneis[0]]))) + ' m2)');
+const PARTE_MINIMA_M2 = 2000; // partes menores que isso (0,2 ha) sao ignoradas
+const partesDoParque = aneis.filter((r, i) => i === 0 || turf.area(turf.polygon([r])) >= PARTE_MINIMA_M2);
+if (aneis.length > 1) console.log('contorno com ' + aneis.length + ' partes no OpenStreetMap; usando ' + partesDoParque.length + ' (' + partesDoParque.map((r) => Math.round(turf.area(turf.polygon([r])) / 100) / 100 + ' ha').join(' + ') + ')');
 const anelOriginalOSM = aneis[0]; // o contorno como o OpenStreetMap o tem (para o editor comparar com o seu)
 const PERIMETRO_EDITADO = ler('perimetro.json', null); // contorno ajustado a mao pelo Marcio (substitui o do OpenStreetMap)
 const anel = PERIMETRO_EDITADO ? fechar(PERIMETRO_EDITADO) : aneis[0];
-const parque = turf.polygon([anel]);
+const extrasDoParque = PERIMETRO_EDITADO ? [] : partesDoParque.slice(1); // o contorno que voce desenha no editor e um anel so; sem ele, vale o parque inteiro (todas as partes)
+if (extrasDoParque.length) OP.usarTodasAsPartes = true; // parque com varias partes: a area segura tem que cobrir todas, nao so a maior
+const parque = extrasDoParque.length ? turf.multiPolygon([[anel]].concat(extrasDoParque.map((r) => [r]))) : turf.polygon([anel]);
 
 // ---- zonas proibidas: as do Marcio (satelite) + as que o mapa mostra (parquinhos e quadras) ----
 const poligonoDaZona = (z) => (z.poligono ? turf.polygon([fechar(z.poligono)]) : turf.circle([z.lng, z.lat], z.r, { units: 'meters', steps: 48 }));
@@ -314,7 +318,7 @@ const cobMed = (lista) => { if (!lista.length) return null; const ds = pontos.ma
 const seguraGeo = seguroPoli ? turf.truncate(turf.simplify(seguroPoli, { tolerance: 0.00001, highQuality: true }), { precision: 7 }).geometry : null;
 
 // o editor mostra so o que fica dentro ou perto (30 m) do parque: a gente baixa um retangulo maior que o parque e o resto da cidade so atrapalha a vista
-const parqueVis = turf.buffer(turf.polygon([anelFinal]), 30, { units: 'meters' });
+const parqueVis = turf.buffer(extrasDoParque.length ? parque : turf.polygon([anelFinal]), 30, { units: 'meters' });
 const perto = (g2) => { try { return turf.booleanIntersects(g2, parqueVis); } catch (e) { return true; } };
 const vPoly = (arr) => arr.filter((c) => perto(turf.polygon([c])));
 function recortar(c) { // pedacos de uma linha que ficam dentro da area de exibicao (as linhas compridas que so encostam nela nao aparecem inteiras)
@@ -333,7 +337,7 @@ const saida = {
   slug,
   nome: (rel.tags && rel.tags.name) || slug,
   largada: ll(largada),
-  perimetro: JSON.stringify(anelFinal.map((c) => [arred(c[0]), arred(c[1])])), perimetroOriginal: JSON.stringify(anelOriginalOSM.map((c) => [arred(c[0]), arred(c[1])])), seguraEditada,
+  perimetro: JSON.stringify(anelFinal.map((c) => [arred(c[0]), arred(c[1])])), perimetroExtra: JSON.stringify(extrasDoParque.map((r) => r.map((c) => [arred(c[0]), arred(c[1])]))), perimetroOriginal: JSON.stringify(anelOriginalOSM.map((c) => [arred(c[0]), arred(c[1])])), seguraEditada,
   pontos: pontos.map((p, i) => Object.assign({ codigo: i + 1, distLargada: Math.round(dist(p, largada)), distCaminho: Math.round(distCaminho(p)), seguro: !inseguros.has(p) }, ll(p))),
   curas: curas.map((p, i) => Object.assign({ codigo: i + 1 }, ll(p))),
   pedrasNormais: pedrasNormais.map((p, i) => Object.assign({ codigo: i + 1 }, ll(p))),

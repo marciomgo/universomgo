@@ -120,12 +120,12 @@ fetch('dados/'+slug+'.json?'+Date.now()).then(function(r){return r.json();}).the
  var T=A.terreno||{},gAguaT=L.layerGroup().addTo(m),gMata=L.layerGroup().addTo(m),gMataF=L.layerGroup().addTo(m),gRestr=L.layerGroup().addTo(m),gBarr=L.layerGroup(),gLib=L.layerGroup();
  (T.agua||[]).forEach(function(r){L.polygon(r.map(ll),{color:'#00b0ff',weight:1.5,fillColor:'#00b0ff',fillOpacity:.35,interactive:false,pane:'zonasAuto'}).addTo(gAguaT);});
  (T.aguaLinhas||[]).forEach(function(r){L.polyline(r.map(ll),{color:'#00b0ff',weight:3,interactive:false,pane:'zonasAuto'}).addTo(gAguaT);});
- (T.mata||[]).forEach(function(g){var polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;polys.forEach(function(p){L.polygon(p.map(function(r){return r.map(ll);}),{color:'#1b5e20',weight:1,fillColor:'#1b5e20',fillOpacity:.45,interactive:false,pane:'zonasAuto'}).addTo(gMata);});});
- (T.mataFechada||[]).forEach(function(g){var polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;polys.forEach(function(p){L.polygon(p.map(function(r){return r.map(ll);}),{color:'#4e342e',weight:2,fillColor:'#3e2723',fillOpacity:.5,interactive:false,pane:'zonasAuto'}).addTo(gMataF);});});
- (T.restrito||[]).forEach(function(r){L.polygon(r.map(ll),{color:'#d500f9',weight:1.5,fillColor:'#d500f9',fillOpacity:.3,interactive:false,pane:'zonasAuto'}).addTo(gRestr);});
+ (T.mata||[]).forEach(function(g){var polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;polys.forEach(function(p){L.polygon(p.map(function(r){return r.map(ll);}),{color:'#c62828',weight:1.5,fillColor:'#ff1744',fillOpacity:.38,interactive:false,pane:'zonasAuto'}).addTo(gMata);});});
+ (T.mataFechada||[]).forEach(function(g){var polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;polys.forEach(function(p){L.polygon(p.map(function(r){return r.map(ll);}),{color:'#b71c1c',weight:2,fillColor:'#ff0000',fillOpacity:.45,interactive:false,pane:'zonasAuto'}).addTo(gMataF);});});
+ (T.restrito||[]).forEach(function(r){L.polygon(r.map(ll),{color:'#b71c1c',weight:1.5,fillColor:'#ff0000',fillOpacity:.40,interactive:false,pane:'zonasAuto'}).addTo(gRestr);});
  (T.barreiras||[]).forEach(function(r){L.polyline(r.map(ll),{color:'#ff6d00',weight:3,dashArray:'2 4',interactive:false,pane:'zonasAuto'}).addTo(gBarr);});
  (T.libera||[]).forEach(function(z){L.circle([z.lat,z.lng],{radius:z.r,color:'#ffffff',weight:1.5,fillOpacity:.12,interactive:false,pane:'zonasAuto'}).addTo(gLib);});
- L.control.layers(bases,{'🌲 Mata FECHADA (sem trilha): proibida, prioridade total':gMataF,'🌳 Mata com trilha: bloqueada fora do corredor':gMata,'💧 Água, canais e alagadiço (bloqueados)':gAguaT,'⛔ Áreas restritas (privada, estacionamento, instalações)':gRestr,'🧱 Cercas e muros':gBarr,'🍖 Churrasqueira, piquenique, abrigo, banco (liberam a mata)':gLib,'🧭 Contorno original do OpenStreetMap (rosa pontilhado)':gOrig,'🏠 Prédios mapeados (vermelho)':gPredios,'💧 Água mapeada':gAgua,'🚗 Ruas de carro (bloqueadas)':gCarro,'🅿️ Vias de serviço/estacionamento':gServico},{position:'bottomright',collapsed:false}).addTo(m);
+ L.control.layers(bases,{'🔴 Mata FECHADA (sem trilha): proibida, prioridade total':gMataF,'🔴 Mata com trilha: bloqueada fora do corredor':gMata,'💧 Água, canais e alagadiço (bloqueados)':gAguaT,'🔴 Áreas restritas (privada, estacionamento, instalações)':gRestr,'🧱 Cercas e muros':gBarr,'🍖 Churrasqueira, piquenique, abrigo, banco (liberam a mata)':gLib,'🧭 Contorno original do OpenStreetMap (rosa pontilhado)':gOrig,'🏠 Prédios mapeados (vermelho)':gPredios,'💧 Água mapeada':gAgua,'🚗 Ruas de carro (bloqueadas)':gCarro,'🅿️ Vias de serviço/estacionamento':gServico},{position:'bottomright',collapsed:false}).addTo(m);
 
  // trilhas do mapa (OpenStreetMap): clicar = tirar / devolver
  var removidos={};
@@ -143,10 +143,11 @@ fetch('dados/'+slug+'.json?'+Date.now()).then(function(r){return r.json();}).the
  function zonaAuto(z,ign){
   var pts=z.poligono?z.poligono.map(ll):null;
   var forma=function(o){return pts?L.polygon(pts,o):L.circle([z.lat,z.lng],Object.assign({radius:18},o));};
-  var vis=forma({color:ign?'#9e9e9e':'#ff9100',weight:3,fill:false,dashArray:'4 3',interactive:false,pane:'zonasAuto'}).addTo(m);
+  var vermelho={color:'#d50000',weight:2,fill:true,fillColor:'#ff0000',fillOpacity:.35,dashArray:null},cinza={color:'#9e9e9e',weight:2,fill:false,dashArray:'4 3'};
+  var vis=forma(Object.assign({interactive:false,pane:'zonasAuto'},ign?cinza:vermelho)).addTo(m);
   var hit=forma({color:'#000',weight:14,fill:false,opacity:0,pane:'zonasAuto'}).addTo(m).bindTooltip(z.nome+(ign?' (ignorado)':' (achado no mapa)')+' — toque na borda para ignorar/devolver');
   var chave=z.lat+','+z.lng; if(ign)ignoradas[chave]=[z.lat,z.lng];
-  hit.on('click',function(){ if(ignoradas[chave]){delete ignoradas[chave];vis.setStyle({color:'#ff9100'});}else{ignoradas[chave]=[z.lat,z.lng];vis.setStyle({color:'#9e9e9e'});} marcarSujo(true);});
+  hit.on('click',function(){ if(ignoradas[chave]){delete ignoradas[chave];vis.setStyle(vermelho);}else{ignoradas[chave]=[z.lat,z.lng];vis.setStyle(cinza);} marcarSujo(true);});
  }
  (A.zonasAuto||[]).forEach(function(z){zonaAuto(z,false);});
  (A.zonasAutoIgnoradas||[]).forEach(function(z){zonaAuto(z,true);});
@@ -154,10 +155,11 @@ fetch('dados/'+slug+'.json?'+Date.now()).then(function(r){return r.json();}).the
 
  // o que o Marcio desenha / ajusta (editavel): contorno, area verde, zonas, liberacoes, trilhas novas
  var ed=new L.FeatureGroup().addTo(m);
- var ESTILO={perimetro:{color:'#ffeb3b',weight:4,fill:false,dashArray:'8 5'},segura:{color:'#76ff03',weight:2,fillColor:'#76ff03',fillOpacity:.18},proibida:{color:'#ff1744',weight:2,fillColor:'#ff1744',fillOpacity:.22},liberar:{color:'#00e676',weight:2,fillColor:'#00e676',fillOpacity:.25},caminho:{color:'#2979ff',weight:4,opacity:.95}};
+ var ESTILO={perimetro:{color:'#ffeb3b',weight:4,fill:false,dashArray:'8 5'},segura:{color:'#76ff03',weight:2,fillColor:'#76ff03',fillOpacity:.18},proibida:{color:'#d50000',weight:2,fillColor:'#ff0000',fillOpacity:.40},liberar:{color:'#00e676',weight:2,fillColor:'#00e676',fillOpacity:.25},caminho:{color:'#2979ff',weight:4,opacity:.95}};
  function adiciona(layer,tipo){layer._tipo=tipo;layer.setStyle(ESTILO[tipo]);ed.addLayer(layer);return layer;}
  var perimetroMexido=false,seguraMexida=false,voltarVerdeAuto=false,combateMexido=false,voltarCombateAuto=false;
  adiciona(pl,'perimetro');
+ (A.perimetroExtra?JSON.parse(A.perimetroExtra):[]).forEach(function(r){L.polygon(r.map(ll),{color:'#ffeb3b',weight:4,fill:false,dashArray:'8 5',interactive:false,pane:'perimetro'}).addTo(m);});
  function verde(latlngs){var p=L.polygon(latlngs,{pane:'verde'});return adiciona(p,'segura');}
  if(A.segura){var gg=A.segura.type==='Polygon'?[A.segura.coordinates]:A.segura.coordinates;gg.forEach(function(poly){verde(poly.map(function(r){return r.map(ll);}));});}
  (A.zonas||[]).forEach(function(z){ adiciona(z.poligono?L.polygon(z.poligono.map(ll),{pane:'edicao'}):L.circle([z.lat,z.lng],{radius:z.r,pane:'edicao'}),'proibida'); });

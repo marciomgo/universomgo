@@ -82,7 +82,7 @@ function montarCombate(arena) {
     resumo: { parque: arena.slug, bases: rota.length, percurso_m: compr, zumbis: zumbis.length, chefoes: chefoes.length, curas: curas.length, pedras: pedras.length, bombas: bombas.length },
     dados: {
       slug: 'combate-' + arena.slug, nomeParque: arena.nomeExibicao,
-      largada: L, perimetro: typeof arena.perimetro === 'string' ? JSON.parse(arena.perimetro) : arena.perimetro,
+      largada: L, perimetro: typeof arena.perimetro === 'string' ? JSON.parse(arena.perimetro) : arena.perimetro, perimetroExtra: arena.perimetroExtra ? JSON.parse(arena.perimetroExtra) : [],
       pontos: rota.map((p, i) => ({ n: i + 1, lat: p.lat, lng: p.lng })),
       curas: curas.map((p) => ({ lat: p.lat, lng: p.lng })),
       pedras: pedras.map((p) => ({ lat: p.lat, lng: p.lng, esp: false })),
@@ -147,7 +147,7 @@ regras.parques.forEach((pq) => {
   resumos.push(Object.assign({ arquivo: arq }, resumo));
   // material para o visualizador de conferencia (satelite): o combate montado + a area segura, os caminhos e as zonas
   fs.mkdirSync(path.join(RAIZ, 'conferir', 'dados'), { recursive: true });
-  fs.writeFileSync(path.join(RAIZ, 'conferir', 'dados', pq.slug + '.json'), JSON.stringify({ dados: dadosEditor, dinamico, combateEditado, arena: { terreno: arena.terreno, perimetroOriginal: arena.perimetroOriginal, seguraEditada: arena.seguraEditada, construcoes: arena.construcoes, agua: arena.agua, viasCarro: arena.viasCarro, viasServico: arena.viasServico, largada: arena.largada, segura: arena.segura, caminhos: arena.caminhos, caminhosIds: arena.caminhosIds, caminhosRemovidos: arena.caminhosRemovidos, caminhosExtra: arena.caminhosExtra, zonas: arena.zonas, zonasAuto: arena.zonasAuto, zonasAutoIgnoradas: arena.zonasAutoIgnoradas, zonasAutoLivres: arena.zonasAutoLivres, liberar: arena.liberar } }));
+  fs.writeFileSync(path.join(RAIZ, 'conferir', 'dados', pq.slug + '.json'), JSON.stringify({ dados: dadosEditor, dinamico, combateEditado, arena: { perimetroExtra: arena.perimetroExtra, terreno: arena.terreno, perimetroOriginal: arena.perimetroOriginal, seguraEditada: arena.seguraEditada, construcoes: arena.construcoes, agua: arena.agua, viasCarro: arena.viasCarro, viasServico: arena.viasServico, largada: arena.largada, segura: arena.segura, caminhos: arena.caminhos, caminhosIds: arena.caminhosIds, caminhosRemovidos: arena.caminhosRemovidos, caminhosExtra: arena.caminhosExtra, zonas: arena.zonas, zonasAuto: arena.zonasAuto, zonasAutoIgnoradas: arena.zonasAutoIgnoradas, zonasAutoLivres: arena.zonasAutoLivres, liberar: arena.liberar } }));
 });
 
 // ---- pagina de entrada: escolhe o parque ----

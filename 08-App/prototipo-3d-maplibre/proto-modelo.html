@@ -770,8 +770,9 @@ function pintarArea() {
   if (!AREA) return;
   quandoMapaPronto(function () {
     var anel = anelDaArea(), mundo = [[-180, -85], [180, -85], [180, 85], [-180, 85], [-180, -85]];
-    mapa.getSource('area-fora').setData({ type: 'Feature', geometry: { type: 'Polygon', coordinates: [mundo, anel] } });
-    mapa.getSource('area-linha').setData({ type: 'Feature', geometry: { type: 'LineString', coordinates: anel } });
+    var extras = AREA.extras || []; /* parques com mais de uma parte (ex.: Parcao): cada parte e um buraco no "fora da area" e uma linha de borda */
+    mapa.getSource('area-fora').setData({ type: 'Feature', geometry: { type: 'Polygon', coordinates: [mundo, anel].concat(extras) } });
+    mapa.getSource('area-linha').setData(extras.length ? { type: 'Feature', geometry: { type: 'MultiLineString', coordinates: [anel].concat(extras) } } : { type: 'Feature', geometry: { type: 'LineString', coordinates: anel } });
   });
 }
 function definirAreaLivre(lat, lng) { // modo livre/dupla: círculo de 150 m em volta de onde o jogo começa
@@ -781,7 +782,10 @@ function definirAreaLivre(lat, lng) { // modo livre/dupla: círculo de 150 m em 
 function dentroDaArea(lat, lng) {
   if (!AREA) return true;
   if (AREA.raio) return Math.hypot((lat - AREA.lat) * 111320, (lng - AREA.lng) * 111320 * Math.cos(AREA.lat * rad)) <= AREA.raio;
-  var a = AREA.anel, dentro = false;
+  return dentroDoAnel(AREA.anel, lat, lng) || (AREA.extras || []).some(function (r) { return dentroDoAnel(r, lat, lng); });
+}
+function dentroDoAnel(a, lat, lng) {
+  var dentro = false;
   for (var i = 0, j = a.length - 1; i < a.length; j = i++) { if (((a[i][1] > lat) !== (a[j][1] > lat)) && (lng < (a[j][0] - a[i][0]) * (lat - a[i][1]) / (a[j][1] - a[i][1]) + a[i][0])) dentro = !dentro; }
   return dentro;
 }
@@ -791,7 +795,7 @@ function checarArea() {
   foraDaArea = fora; document.body.classList.toggle('fora-area', fora);
   if (fora && navigator.vibrate) navigator.vibrate([120, 80, 120]);
 }
-if (DADOS.perimetro) { AREA = { anel: DADOS.perimetro }; pintarArea(); }
+if (DADOS.perimetro) { AREA = { anel: DADOS.perimetro, extras: DADOS.perimetroExtra || [] }; pintarArea(); }
 function spawnAoRedor(lat, lng) {
   if (DADOS.livre) definirAreaLivre(lat, lng);
   quandoMapaPronto(function () { if (carregarObstaculos(lat, lng)) construirGrade(lat, lng); spawnBase(lat, lng); });
