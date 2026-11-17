@@ -162,7 +162,84 @@
 <div id="trocaPedraWrap"><span id="pedraReserva2" class="pedra-reserva">🪨</span><span id="pedraReserva" class="pedra-reserva esp">🪨</span><button id="btnTrocaPedra" aria-label="Trocar de munição"><span>🪨</span><small id="qtdPedra">150</small></button></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/5.24.1/maplibre-gl.js"></script>
 <script>
-const DADOS = {"slug":"combate-parcao","nomeParque":"Parcão","largada":{"lat":-30.0258909,"lng":-51.2005913},"perimetro":[[-51.1999892,-30.0255489],[-51.2008371,-30.0247011],[-51.2016572,-30.0253623],[-51.201634,-30.0253845],[-51.2009167,-30.0260767],[-51.2007667,-30.0262104],[-51.2012933,-30.0266529],[-51.2014499,-30.026511],[-51.2014768,-30.0264866],[-51.2016956,-30.0266908],[-51.2018709,-30.0269375],[-51.2019329,-30.027215],[-51.2018809,-30.0285181],[-51.2018493,-30.0285477],[-51.2014932,-30.0285273],[-51.2013887,-30.028398],[-51.2007809,-30.0283764],[-51.2006255,-30.0284845],[-51.2004594,-30.0284771],[-51.2003659,-30.0284729],[-51.2002689,-30.0284269],[-51.1997857,-30.0278279],[-51.1996524,-30.0275882],[-51.1995294,-30.0270603],[-51.1995257,-30.0265639],[-51.1997038,-30.0260055],[-51.1999892,-30.0255489]],"pontos":[{"n":1,"lat":-30.0252521,"lng":-51.2010652},{"n":2,"lat":-30.0252255,"lng":-51.2006861},{"n":3,"lat":-30.0260226,"lng":-51.1999229},{"n":4,"lat":-30.02652,"lng":-51.1999148},{"n":5,"lat":-30.02701,"lng":-51.1999795}],"curas":[{"lat":-30.0256277,"lng":-51.200399},{"lat":-30.0272478,"lng":-51.2003749},{"lat":-30.0266995,"lng":-51.1997994},{"lat":-30.0254873,"lng":-51.2011967},{"lat":-30.0260433,"lng":-51.2000292}],"pedras":[{"lat":-30.0253007,"lng":-51.2004647,"esp":false},{"lat":-30.0270327,"lng":-51.1998884,"esp":false},{"lat":-30.0260751,"lng":-51.1998456,"esp":false},{"lat":-30.025329,"lng":-51.2011856,"esp":false}],"bombas":[{"lat":-30.0263631,"lng":-51.2007275,"e":"🍌"},{"lat":-30.0278443,"lng":-51.2000333,"e":"🐝"},{"lat":-30.0250476,"lng":-51.2007834,"e":"🐍"},{"lat":-30.0268409,"lng":-51.1998531,"e":"💩"},{"lat":-30.0259519,"lng":-51.2001746,"e":"🐶"}],"chefoes":[{"lat":-30.0252152,"lng":-51.2009482,"final":false},{"lat":-30.0252873,"lng":-51.2005841,"final":false},{"lat":-30.026116,"lng":-51.1999852,"final":false},{"lat":-30.0265106,"lng":-51.1997908,"final":false},{"lat":-30.0269038,"lng":-51.2000011,"final":false},{"lat":-30.0268412,"lng":-51.2000505,"final":true}],"zumbis":[{"lat":-30.0251846,"lng":-51.2010368},{"lat":-30.0253072,"lng":-51.2010118},{"lat":-30.0252646,"lng":-51.2011469},{"lat":-30.0251896,"lng":-51.2006142},{"lat":-30.0252974,"lng":-51.2006861},{"lat":-30.0251896,"lng":-51.200758},{"lat":-30.0260901,"lng":-51.1998945},{"lat":-30.0260777,"lng":-51.1999763},{"lat":-30.0259551,"lng":-51.1999513},{"lat":-30.0265751,"lng":-51.1998614},{"lat":-30.0265075,"lng":-51.1998331},{"lat":-30.0265075,"lng":-51.1998331},{"lat":-30.0270819,"lng":-51.1999795},{"lat":-30.0269478,"lng":-51.200021},{"lat":-30.0269741,"lng":-51.1999076}],"semEspecial":true,"celebraAoLimpar":true,"pesquisaUrl":"https://forms.gle/COLOCAR-O-LINK-DO-FORMS-AQUI"};
+const DADOS = {"slug":"combate-parcao","nomeParque":"Parcão","largada":{"lat":-30.0258909,"lng":-51.2005913},"perimetro":[[-51.1999892,-30.0255489],[-51.2008371,-30.0247011],[-51.2016572,-30.0253623],[-51.201634,-30.0253845],[-51.2009167,-30.0260767],[-51.2007667,-30.0262104],[-51.2012933,-30.0266529],[-51.2014499,-30.026511],[-51.2014768,-30.0264866],[-51.2016956,-30.0266908],[-51.2018709,-30.0269375],[-51.2019329,-30.027215],[-51.2018809,-30.0285181],[-51.2018493,-30.0285477],[-51.2014932,-30.0285273],[-51.2013887,-30.028398],[-51.2007809,-30.0283764],[-51.2006255,-30.0284845],[-51.2004594,-30.0284771],[-51.2003659,-30.0284729],[-51.2002689,-30.0284269],[-51.1997857,-30.0278279],[-51.1996524,-30.0275882],[-51.1995294,-30.0270603],[-51.1995257,-30.0265639],[-51.1997038,-30.0260055],[-51.1999892,-30.0255489]],"pontos":[],"curas":[],"pedras":[],"bombas":[],"chefoes":[],"zumbis":[],"semEspecial":true,"celebraAoLimpar":true,"pesquisaUrl":"https://forms.gle/COLOCAR-O-LINK-DO-FORMS-AQUI","dinamico":true,"arena":{"pontos":[{"lat":-30.0265332,"lng":-51.200847},{"lat":-30.0253001,"lng":-51.2008892},{"lat":-30.0255064,"lng":-51.2011799},{"lat":-30.0255457,"lng":-51.2005262},{"lat":-30.026563,"lng":-51.2001677},{"lat":-30.0275654,"lng":-51.2017013},{"lat":-30.0270533,"lng":-51.2007964},{"lat":-30.0271764,"lng":-51.2006313},{"lat":-30.0282772,"lng":-51.2013061},{"lat":-30.0268801,"lng":-51.2012904},{"lat":-30.027174,"lng":-51.2012864},{"lat":-30.0274782,"lng":-51.2002855},{"lat":-30.0271677,"lng":-51.2005142},{"lat":-30.0270909,"lng":-51.2017124},{"lat":-30.0274625,"lng":-51.2013901},{"lat":-30.0264335,"lng":-51.2008011},{"lat":-30.0258495,"lng":-51.2001978},{"lat":-30.0268373,"lng":-51.2015456},{"lat":-30.0270206,"lng":-51.2013176},{"lat":-30.0270365,"lng":-51.2000872},{"lat":-30.0266369,"lng":-51.1997867},{"lat":-30.0252535,"lng":-51.2011721},{"lat":-30.0254412,"lng":-51.2005368},{"lat":-30.0261685,"lng":-51.200088},{"lat":-30.0274058,"lng":-51.2012952},{"lat":-30.0264007,"lng":-51.2006099},{"lat":-30.0266152,"lng":-51.2003003},{"lat":-30.0267709,"lng":-51.2011256},{"lat":-30.0276914,"lng":-51.2007308},{"lat":-30.0262242,"lng":-51.2006301},{"lat":-30.0264203,"lng":-51.2000887},{"lat":-30.0282242,"lng":-51.2014989},{"lat":-30.0266798,"lng":-51.20145},{"lat":-30.0272774,"lng":-51.2005055},{"lat":-30.0271246,"lng":-51.2000416},{"lat":-30.0265619,"lng":-51.1999672},{"lat":-30.0276149,"lng":-51.2013838},{"lat":-30.0281051,"lng":-51.2006129},{"lat":-30.0277772,"lng":-51.2017081},{"lat":-30.0281451,"lng":-51.2002832},{"lat":-30.0259491,"lng":-51.2001543},{"lat":-30.0255798,"lng":-51.2007546},{"lat":-30.0252926,"lng":-51.2009984},{"lat":-30.0267478,"lng":-51.2000814},{"lat":-30.0279026,"lng":-51.2004848},{"lat":-30.0274647,"lng":-51.2008777},{"lat":-30.0280685,"lng":-51.2007958},{"lat":-30.0283187,"lng":-51.2016353},{"lat":-30.0282677,"lng":-51.2009274},{"lat":-30.0270368,"lng":-51.2016048},{"lat":-30.0278007,"lng":-51.2011025},{"lat":-30.0278586,"lng":-51.2003297},{"lat":-30.0252162,"lng":-51.2007631},{"lat":-30.0250877,"lng":-51.2008346},{"lat":-30.0271604,"lng":-51.2007415},{"lat":-30.0269253,"lng":-51.2001305},{"lat":-30.0270337,"lng":-51.1999363},{"lat":-30.0262806,"lng":-51.2000228},{"lat":-30.0257635,"lng":-51.2002518},{"lat":-30.0277986,"lng":-51.2000991},{"lat":-30.028128,"lng":-51.2004479},{"lat":-30.0258109,"lng":-51.2009818},{"lat":-30.0268053,"lng":-51.1998804},{"lat":-30.0268512,"lng":-51.2000045},{"lat":-30.0269375,"lng":-51.1999729},{"lat":-30.0282353,"lng":-51.2008041},{"lat":-30.025672,"lng":-51.2007663},{"lat":-30.0275897,"lng":-51.2003388},{"lat":-30.0256569,"lng":-51.2004208},{"lat":-30.0278898,"lng":-51.2010067}],"curas":[{"lat":-30.02636,"lng":-51.2007798},{"lat":-30.0282199,"lng":-51.2016222},{"lat":-30.0275925,"lng":-51.2002392},{"lat":-30.0250883,"lng":-51.200679},{"lat":-30.0271921,"lng":-51.2017106},{"lat":-30.0266445,"lng":-51.1999574},{"lat":-30.0256088,"lng":-51.200357},{"lat":-30.028104,"lng":-51.2009478},{"lat":-30.0272145,"lng":-51.200711},{"lat":-30.0255867,"lng":-51.20096},{"lat":-30.0267829,"lng":-51.2012721},{"lat":-30.0279413,"lng":-51.20028},{"lat":-30.0276108,"lng":-51.2016201}],"pedras":[{"lat":-30.026632,"lng":-51.2010748},{"lat":-30.0281028,"lng":-51.2017411},{"lat":-30.0249701,"lng":-51.2008005},{"lat":-30.0279076,"lng":-51.2001721},{"lat":-30.026809,"lng":-51.1997754},{"lat":-30.0259984,"lng":-51.200199},{"lat":-30.0275575,"lng":-51.2015442},{"lat":-30.028299,"lng":-51.2008495},{"lat":-30.0273171,"lng":-51.2003967},{"lat":-30.0258781,"lng":-51.2010202},{"lat":-30.0256718,"lng":-51.2003388},{"lat":-30.0269774,"lng":-51.2014274}],"bombas":[{"lat":-30.0273429,"lng":-51.200173},{"lat":-30.0253504,"lng":-51.200646},{"lat":-30.0263446,"lng":-51.2004808},{"lat":-30.0273342,"lng":-51.2015039},{"lat":-30.028063,"lng":-51.201554},{"lat":-30.0279948,"lng":-51.2010133},{"lat":-30.0281073,"lng":-51.2001718},{"lat":-30.0278533,"lng":-51.2013314},{"lat":-30.0251709,"lng":-51.2009312},{"lat":-30.0273512,"lng":-51.2010361},{"lat":-30.0253475,"lng":-51.2012683},{"lat":-30.0269274,"lng":-51.2011991},{"lat":-30.0266631,"lng":-51.2002066},{"lat":-30.0277325,"lng":-51.2006248},{"lat":-30.0282911,"lng":-51.2010705},{"lat":-30.026532,"lng":-51.2009654}],"segura":{"type":"Polygon","coordinates":[[[-51.201808,-30.027223],[-51.201759,-30.028434],[-51.201561,-30.028423],[-51.201476,-30.028321],[-51.201394,-30.02829],[-51.200764,-30.028269],[-51.200584,-30.028375],[-51.200401,-30.028366],[-51.200354,-30.028344],[-51.199894,-30.027773],[-51.199771,-30.027554],[-51.199677,-30.027147],[-51.199819,-30.027126],[-51.199792,-30.027047],[-51.199658,-30.027068],[-51.19965,-30.026578],[-51.19982,-30.026046],[-51.200092,-30.025611],[-51.200847,-30.024856],[-51.201483,-30.025369],[-51.200677,-30.026135],[-51.200644,-30.026191],[-51.200652,-30.026253],[-51.201226,-30.026744],[-51.201343,-30.026752],[-51.201475,-30.026644],[-51.201596,-30.026756],[-51.201753,-30.026977],[-51.201808,-30.027223]],[[-51.201286,-30.027227],[-51.201257,-30.027039],[-51.201116,-30.026797],[-51.200708,-30.026437],[-51.20056,-30.026461],[-51.200288,-30.026706],[-51.200123,-30.027062],[-51.200144,-30.027107],[-51.200346,-30.027185],[-51.200694,-30.027118],[-51.200808,-30.027037],[-51.200804,-30.027183],[-51.200876,-30.027288],[-51.201104,-30.027373],[-51.201237,-30.027327],[-51.201286,-30.027227]],[[-51.20063,-30.0263],[-51.200588,-30.026284],[-51.200404,-30.026464],[-51.200309,-30.026401],[-51.200256,-30.026466],[-51.200308,-30.026511],[-51.200062,-30.026485],[-51.200039,-30.026514],[-51.200374,-30.026559],[-51.20063,-30.0263]],[[-51.200605,-30.026006],[-51.200574,-30.025941],[-51.200499,-30.025914],[-51.200424,-30.025941],[-51.200393,-30.026006],[-51.200424,-30.026071],[-51.200499,-30.026097],[-51.200574,-30.026071],[-51.200605,-30.026006]],[[-51.200366,-30.026221],[-51.200252,-30.026135],[-51.200155,-30.02623],[-51.20027,-30.026317],[-51.200366,-30.026221]],[[-51.199964,-30.026291],[-51.199859,-30.026216],[-51.199748,-30.026286],[-51.199804,-30.026399],[-51.199927,-30.026389],[-51.199964,-30.026291]]]}},"regrasDinamicas":{"bases":{"quantidade":5,"raioMaxDaLargadaM":200,"distMinDaLargadaM":55,"alvoDaPrimeiraM":80,"distMinEntreBasesM":35},"monstros":{"zumbisPorBase":3,"zumbiDistDaBaseM":8,"chefaoEmCadaBase":true,"chefaoDistDaBaseM":12,"chefaoFinalDistDaBaseM":20},"itens":{"curas":5,"pedras":11,"bombas":5,"distMaxDaRotaM":60,"distMaxBombasM":100,"emojisBomba":["🍌","🐝","🐍","💩","🐶"]}}};
+// LARGADA LIVRE: monta o combate em volta de ONDE A PESSOA ESTA (dentro do parque), a partir da arena (piscina de pontos, curas, pedras, bombas e a area segura).
+// Roda no navegador (sem bibliotecas) e tambem no Node (para testar). Mesma regra do build, so que com a largada = posicao do jogador.
+// Entrada: L = { lat, lng }; A = { pontos, curas, pedras, bombas, segura }; R = { bases, monstros, itens } (conteudo/combate-teste.json).
+// Saida: { pontos, zumbis, chefoes, curas, pedras, bombas } no mesmo formato do DADOS, ou null se nao achar onde montar as bases.
+function gerarCombateDinamico(L, A, R) {
+  var rad = Math.PI / 180;
+  function dist(a, b) { var dl = (b.lat - a.lat) * 111320, dn = (b.lng - a.lng) * 111320 * Math.cos(a.lat * rad); return Math.sqrt(dl * dl + dn * dn); }
+  function em(p, m, ang) { return { lat: p.lat + (m * Math.cos(ang * rad)) / 111320, lng: p.lng + (m * Math.sin(ang * rad)) / (111320 * Math.cos(p.lat * rad)) }; }
+  function noAnel(p, r) { var d = false; for (var i = 0, j = r.length - 1; i < r.length; j = i++) { var xi = r[i][0], yi = r[i][1], xj = r[j][0], yj = r[j][1]; if (((yi > p.lat) !== (yj > p.lat)) && (p.lng < (xj - xi) * (p.lat - yi) / (yj - yi) + xi)) d = !d; } return d; }
+  function naSegura(p) {
+    var g = A.segura; if (!g) return true;
+    var polys = g.type === 'Polygon' ? [g.coordinates] : g.coordinates;
+    for (var i = 0; i < polys.length; i++) { if (noAnel(p, polys[i][0])) { var buraco = false; for (var k = 1; k < polys[i].length; k++) if (noAnel(p, polys[i][k])) buraco = true; if (!buraco) return true; } }
+    return false;
+  }
+  function distSeg(p, a, b) { // metros do ponto p ate o segmento a-b
+    var c = Math.cos(p.lat * rad), ax = (a.lng - p.lng) * 111320 * c, ay = (a.lat - p.lat) * 111320, bx = (b.lng - p.lng) * 111320 * c, by = (b.lat - p.lat) * 111320;
+    var dx = bx - ax, dy = by - ay, l2 = dx * dx + dy * dy, t = l2 ? Math.max(0, Math.min(1, -(ax * dx + ay * dy) / l2)) : 0;
+    var qx = ax + t * dx, qy = ay + t * dy; return Math.sqrt(qx * qx + qy * qy);
+  }
+  function distRota(p, linha) { var m = 1e9; for (var i = 0; i < linha.length - 1; i++) { var d = distSeg(p, linha[i], linha[i + 1]); if (d < m) m = d; } return m; }
+  function espalhar(c, n) { // n itens bem espalhados: o proximo e sempre o mais longe dos ja escolhidos
+    if (c.length <= n) return c.slice();
+    var esc = [c[0]];
+    while (esc.length < n) { var melhor = null, md = -1; for (var i = 0; i < c.length; i++) { if (esc.indexOf(c[i]) >= 0) continue; var d = 1e9; for (var k = 0; k < esc.length; k++) d = Math.min(d, dist(c[i], esc[k])); if (d > md) { md = d; melhor = c[i]; } } esc.push(melhor); }
+    return esc;
+  }
+  var B = R.bases, M = R.monstros, I = R.itens;
+
+  // 1) bases em sequencia a partir de onde a pessoa esta: a 1a a uns 80 m (nunca perto demais: os monstros acordam a 35 m), as outras sempre as mais proximas da anterior
+  var rota = [];
+  for (var raio = B.raioMaxDaLargadaM; raio <= 420; raio += 40) {
+    var cand = A.pontos.filter(function (p) { var d = dist(p, L); return d >= B.distMinDaLargadaM && d <= raio; });
+    if (!cand.length) continue;
+    cand.sort(function (a, b) { return Math.abs(dist(a, L) - B.alvoDaPrimeiraM) - Math.abs(dist(b, L) - B.alvoDaPrimeiraM); });
+    rota = [cand[0]]; var atual = cand[0];
+    while (rota.length < B.quantidade) {
+      var livres = cand.filter(function (p) { return rota.every(function (r) { return dist(p, r) >= B.distMinEntreBasesM; }); });
+      if (!livres.length) break;
+      livres.sort(function (a, b) { return dist(a, atual) - dist(b, atual); });
+      rota.push(livres[0]); atual = livres[0];
+    }
+    if (rota.length >= B.quantidade) break;
+  }
+  if (!rota.length) return null;
+  var linha = [L].concat(rota);
+
+  // 2) monstros: tentam o angulo/distancia pedidos e, se cairem fora da area segura, recuam
+  function posicao(base, m, ang) {
+    var fs = [1, 0.75, 0.5];
+    for (var f = 0; f < fs.length; f++) for (var k = 0; k < 12; k++) { var p = em(base, m * fs[f], ang + k * 30); if (naSegura(p)) return p; }
+    return null;
+  }
+  var zumbis = [], chefoes = [];
+  rota.forEach(function (b, i) {
+    var n = M.zumbisPorBase, ult = i === rota.length - 1;
+    for (var k = 0; k < n; k++) { var p = posicao(b, M.zumbiDistDaBaseM, (360 / n) * k + i * 40 + 20); if (p) zumbis.push(p); }
+    if (M.chefaoEmCadaBase) { var c = posicao(b, M.chefaoDistDaBaseM, 70 + i * 55); if (c) chefoes.push({ lat: c.lat, lng: c.lng, final: false }); }
+    if (ult) { var f2 = posicao(b, M.chefaoFinalDistDaBaseM, 250); if (f2) chefoes.push({ lat: f2.lat, lng: f2.lng, final: true }); }
+  });
+
+  // 3) itens: so os que ficam perto do percurso, bem espalhados
+  function perto(lista, max) { return lista.filter(function (p) { return distRota(p, linha) <= max; }); }
+  var curas = espalhar(perto(A.curas, I.distMaxDaRotaM), I.curas);
+  var pedras = espalhar(perto(A.pedras, I.distMaxDaRotaM), I.pedras);
+  var bombas = espalhar(perto(A.bombas, I.distMaxBombasM || I.distMaxDaRotaM), I.bombas);
+  return {
+    pontos: rota.map(function (p, i) { return { n: i + 1, lat: p.lat, lng: p.lng }; }),
+    zumbis: zumbis.map(function (z) { return { lat: z.lat, lng: z.lng }; }),
+    chefoes: chefoes,
+    curas: curas.map(function (p) { return { lat: p.lat, lng: p.lng }; }),
+    pedras: pedras.map(function (p) { return { lat: p.lat, lng: p.lng, esp: false }; }),
+    bombas: bombas.map(function (p, i) { return { lat: p.lat, lng: p.lng, e: I.emojisBomba[i % I.emojisBomba.length] }; })
+  };
+}
+if (typeof module !== 'undefined') module.exports = gerarCombateDinamico;
+
 
 var rad = Math.PI / 180;
 var MOSTRAR_ZONAS = false; // círculos/nuvens de alcance dos monstros: desligados; só o círculo do Mineu aparece (true = volta a mostrar)
@@ -831,15 +908,33 @@ function spawnBase(lat, lng) {
   atualizarZonas(chefoes);
 }
 
+/* LARGADA LIVRE (DADOS.dinamico): nao ha ponto de largada fixo. O combate e montado em volta de onde a pessoa esta, a partir do 1o sinal de GPS dentro do parque. */
+var combateMontado = false, popularMissao = null, missaoPendente = null;
+function montarCombateAqui(lat, lng, semGps) {
+  if (combateMontado) return true;
+  if (!semGps && !dentroDaArea(lat, lng)) { aviso('Você ainda não está dentro do parque. Vá até a área de jogo para começar.'); return false; }
+  var c = null;
+  try { c = gerarCombateDinamico({ lat: lat, lng: lng }, DADOS.arena, DADOS.regrasDinamicas); } catch (e) { c = null; }
+  if (!c || !c.pontos.length) { aviso('Não achei onde montar as bases perto de você. Vá para uma parte mais aberta do parque.'); return false; }
+  combateMontado = true; aviso('');
+  if (popularMissao) { popularMissao(c); quandoMapaPronto(ajustarInimigosFixos); } else missaoPendente = c;
+  return true;
+}
 mapa.on('load', function () {
   if (DADOS.livre) spawnAoRedor(POS.lat, POS.lng);
   var ICONES_NUMERADOS = ["https://static.wixstatic.com/media/f02643_48f7c1d977754b23977fd2e7f58c6c27~mv2.png","https://static.wixstatic.com/media/f02643_f14858e9c66d43feae48eff43148759e~mv2.png","https://static.wixstatic.com/media/f02643_cba7ab04f17845d98a60cbdb48466302~mv2.png","https://static.wixstatic.com/media/f02643_ea984cd4c0fc44aead08ba7a5af6b383~mv2.png","https://static.wixstatic.com/media/f02643_6a69d7baa0794d37848b3948fed51e44~mv2.png","https://static.wixstatic.com/media/f02643_801dffdc2e554552a5c134e097d91ea6~mv2.png","https://static.wixstatic.com/media/f02643_cd0ee07d3fcd40fb9a33810c88f2d851~mv2.png","https://static.wixstatic.com/media/f02643_91b88885a5c44c8c833417bc1190b7b5~mv2.png","https://static.wixstatic.com/media/f02643_1b89172049664af79ec14bce19a83033~mv2.png","https://static.wixstatic.com/media/f02643_033f68da0d1044bcbd9a97da09181820~mv2.png","https://static.wixstatic.com/media/f02643_193c340555f24225b4d92d767d84255a~mv2.png","https://static.wixstatic.com/media/f02643_1ff212affeb84c9584f484f04ba0535e~mv2.png","https://static.wixstatic.com/media/f02643_741fb6aae44744de8ed6e009fb318faf~mv2.png","https://static.wixstatic.com/media/f02643_b1b9ad3701be4696815636ec5dc6cedc~mv2.png","https://static.wixstatic.com/media/f02643_ed5489163f5f4182b136c62a8f93eb33~mv2.png","https://static.wixstatic.com/media/f02643_7ccdf03c1f824bea8af5c7f17a999e96~mv2.png","https://static.wixstatic.com/media/f02643_c8fe0d4b091b49f7aba79ef064ecfbae~mv2.png","https://static.wixstatic.com/media/f02643_77ea1b50292947b7adb0c8eac523973d~mv2.png","https://static.wixstatic.com/media/f02643_4695d3ce6947477ca8a54cf26fda87c6~mv2.png","https://static.wixstatic.com/media/f02643_5bc20c9e31a9428980ffd69a42beb7bb~mv2.png","https://static.wixstatic.com/media/f02643_514f5fbaf6134390b721277b01a65366~mv2.png","https://static.wixstatic.com/media/f02643_4c05aa018fc8463393cd0d9f0d63e102~mv2.png","https://static.wixstatic.com/media/f02643_8530ccc59ad743e78a7ad6977226335e~mv2.png","https://static.wixstatic.com/media/f02643_e692002f886449efb41c97bf50166f45~mv2.png","https://static.wixstatic.com/media/f02643_81eaeefadf2744878569f4cb8b6d73f1~mv2.png","https://static.wixstatic.com/media/f02643_c2baf60987ef4598af4bdc0d73e2fbd9~mv2.png","https://static.wixstatic.com/media/f02643_845aec3fa20e4ff595646def8a93b08c~mv2.png","https://static.wixstatic.com/media/f02643_009e01b80a6e4289adcbe915449e9652~mv2.png","https://static.wixstatic.com/media/f02643_37e8e810d5c248b5893ee19c8bceeba5~mv2.png","https://static.wixstatic.com/media/f02643_d2909286d264450c9c8321282b3e2c9e~mv2.png"]; // desenhos oficiais do jogo, 1 a 30
-  DADOS.pontos.forEach(function (p, i) { var u = ICONES_NUMERADOS[i]; pino('p-ponto', u ? '<img src="' + u + '" alt="' + (i + 1) + '">' : (i + 1), p.lat, p.lng); }); /* o desenho segue a ORDEM do ponto no percurso, nao o codigo */
-  DADOS.curas.forEach(function (c) { pino('p-cura', '✚', c.lat, c.lng); });
-  DADOS.pedras.forEach(function (p) { pino('p-pedra' + (p.esp ? ' esp' : ''), (p.esp ? '<span class="pe-amarela">🪨</span>' : '🪨'), p.lat, p.lng); });
-  DADOS.bombas.forEach(function (b) { pino('p-bomba', b.e, b.lat, b.lng); });
-  DADOS.zumbis.forEach(function (z) { novoInimigo(z.lat, z.lng, 'p-zumbi', '🧟', 5); });
-  (DADOS.chefoes || []).forEach(function (c) { novoInimigo(c.lat, c.lng, 'p-chefao', c.final ? '👿' : '👹', c.final ? 200 : 25); });
+  popularMissao = function (d) {
+    d.pontos.forEach(function (p, i) { var u = ICONES_NUMERADOS[i]; pino('p-ponto', u ? '<img src="' + u + '" alt="' + (i + 1) + '">' : (i + 1), p.lat, p.lng); }); /* o desenho segue a ORDEM do ponto no percurso, nao o codigo */
+    d.curas.forEach(function (c) { pino('p-cura', '✚', c.lat, c.lng); });
+    d.pedras.forEach(function (p) { pino('p-pedra' + (p.esp ? ' esp' : ''), (p.esp ? '<span class="pe-amarela">🪨</span>' : '🪨'), p.lat, p.lng); });
+    d.bombas.forEach(function (b) { pino('p-bomba', b.e, b.lat, b.lng); });
+    d.zumbis.forEach(function (z) { novoInimigo(z.lat, z.lng, 'p-zumbi', '🧟', 5); });
+    (d.chefoes || []).forEach(function (c) { novoInimigo(c.lat, c.lng, 'p-chefao', c.final ? '👿' : '👹', c.final ? 200 : 25); });
+  
+  };
+  popularMissao(DADOS);
+  if (missaoPendente) { popularMissao(missaoPendente); missaoPendente = null; quandoMapaPronto(ajustarInimigosFixos); }
+  if (DADOS.dinamico && location.search.indexOf('teste=1') >= 0) montarCombateAqui(DADOS.largada.lat, DADOS.largada.lng, true); /* ?teste=1: testar de casa, monta no ponto padrao do parque */
 });
 
 // o Mineu (cartaz em pé, sempre virado pra câmera)
@@ -1019,7 +1114,8 @@ document.getElementById('bGps').onclick = function () {
     navigator.geolocation.watchPosition(function (p) {
       ALVO.lat = p.coords.latitude; ALVO.lng = p.coords.longitude; aviso('');
       if (!ALVO.visto) { ALVO.visto = true; POS.lat = ALVO.lat; POS.lng = ALVO.lng; if (DADOS.livre) spawnAoRedor(POS.lat, POS.lng); }
-    }, function () { aviso('Sem GPS. Verifique se a localização está ligada e permitida.'); modoReal = false; }, { enableHighAccuracy: true });
+      if (DADOS.dinamico && !combateMontado) montarCombateAqui(ALVO.lat, ALVO.lng);
+    }, function () { aviso('Sem GPS. Verifique se a localização está ligada e permitida.'); modoReal = false; if (DADOS.dinamico && !combateMontado) montarCombateAqui(DADOS.largada.lat, DADOS.largada.lng, true); }, { enableHighAccuracy: true });
   }
   ligarBussola();
 };

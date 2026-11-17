@@ -36,7 +36,7 @@
     "buffer_m": 4
   },
   "mataDensa": {
-    "_o_que_e": "Verde escuro (mata/mato). Se passa trilha dentro dela, so vale um corredor em volta da trilha. Se nao passa nenhuma trilha, a mata inteira fica proibida.",
+    "_o_que_e": "Verde escuro (mata/mato). MATA FECHADA = nenhuma trilha atravessa: proibida inteira e com prioridade total (nenhum sinal a reabre). MATA COM TRILHA = so vale um corredor em volta da trilha; os sinais abaixo (churrasqueira, banco...) abrem circulos so dentro dela.",
     "natural": [
       "wood",
       "scrub"
@@ -44,7 +44,8 @@
     "landuse": [
       "forest"
     ],
-    "corredor_da_trilha_m": 8
+    "corredor_da_trilha_m": 8,
+    "trilha_minima_dentro_m": 15
   },
   "libera": {
     "_o_que_e": "Sinais de que da para ir ate la mesmo debaixo das arvores: churrasqueira, mesa de piquenique, abrigo, banco. Abrem um circulo dentro da mata densa.",
@@ -127,5 +128,21 @@
     ],
     "buffer_m": 2.5,
     "area_fechada_max_fracao_do_parque": 0.5
+  },
+  "margens": {
+    "_o_que_e": "Recuo so da BORDA do parque (erro do GPS). A folga de cada obstaculo (predio, quadra, parquinho, area restrita) esta no buffer_m da regra dele: 2 m. Agua 5 m, canais 4 m, ruas de carro 8 m.",
+    "borda_area_segura_m": 12,
+    "borda_itens_m": 6
+  },
+  "zonasAuto": {
+    "_o_que_e": "Quadras e parquinhos/pracinhas que o mapa ja marca: cada tipo diz se bloqueia e com quanta folga (m). O bloqueio segue a FORMA real, nunca circulo.",
+    "pitch": {
+      "bloquear": true,
+      "buffer_m": 2
+    },
+    "playground": {
+      "bloquear": false,
+      "buffer_m": 2
+    }
   }
 }

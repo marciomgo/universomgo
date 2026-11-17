@@ -97,6 +97,7 @@ function montarCombate(arena) {
 // ---- gera as paginas ----
 fs.mkdirSync(SAIDA, { recursive: true });
 const modelo = fs.readFileSync(MODELO, 'utf8');
+const fonteDinamica = fs.readFileSync(path.join(__dirname, 'combate-dinamico.js'), 'utf8'); // funcao que monta o combate no navegador (largada livre)
 const resumos = [];
 regras.parques.forEach((pq) => {
   const f = path.join(RAIZ, 'arena', 'parques', pq.slug, 'arena.json');
@@ -127,13 +128,26 @@ regras.parques.forEach((pq) => {
       if (fora) avisos.push(pq.slug + ': ' + fora + ' item(ns) do combate fora da area verde (vale o que voce decidiu)');
     }
   }
+  // LARGADA LIVRE: a pagina nao leva percurso pronto; leva a arena (piscina de pontos/itens + area segura) e monta o combate onde a pessoa estiver.
+  // Combate arrumado a mao (combate-editado.json) e um percurso FIXO e desliga a largada livre naquele parque.
+  const dinamico = regras.largadaLivre !== false && !combateEditado;
+  const dadosEditor = JSON.parse(JSON.stringify(dados)); // o editor mostra um exemplo montado a partir da largada padrao
+  if (dinamico) {
+    const cru = (l) => l.map((p) => ({ lat: p.lat, lng: p.lng }));
+    let seg = null; if (arena.segura) { try { seg = turf.truncate(turf.simplify(turf.feature(arena.segura), { tolerance: 0.00002, highQuality: true }), { precision: 6 }).geometry; } catch (e) { seg = arena.segura; } }
+    dados.dinamico = true;
+    dados.arena = { pontos: cru(arena.pontos.filter((p) => p.seguro !== false)), curas: cru(arena.curas), pedras: cru(arena.pedrasNormais), bombas: cru(arena.bombas), segura: seg };
+    dados.regrasDinamicas = { bases: regras.bases, monstros: regras.monstros, itens: regras.itens };
+    dados.pontos = []; dados.zumbis = []; dados.chefoes = []; dados.curas = []; dados.pedras = []; dados.bombas = [];
+  }
+  resumo.largadaLivre = dinamico;
   const arq = 'combate-' + pq.slug + '.html', man = 'manifest-combate-' + pq.slug + '.json';
-  fs.writeFileSync(path.join(SAIDA, arq), modelo.replace('/*DADOS*/', () => 'const DADOS = ' + JSON.stringify(dados) + ';').replace('__MANIFESTO__', man));
+  fs.writeFileSync(path.join(SAIDA, arq), modelo.replace('/*DADOS*/', () => 'const DADOS = ' + JSON.stringify(dados) + ';').replace('/*COMBATE_DINAMICO*/', () => fonteDinamica).replace('__MANIFESTO__', man));
   fs.writeFileSync(path.join(SAIDA, man), JSON.stringify({ name: 'MGO · Combate · ' + pq.nome, short_name: 'MGO', start_url: './' + arq, scope: './', display: 'standalone', orientation: 'portrait', background_color: '#1f5a2c', theme_color: '#2f6b3a', icons: [{ src: 'icon-192.png', sizes: '192x192', type: 'image/png' }, { src: 'icon-512.png', sizes: '512x512', type: 'image/png' }] }, null, 1));
   resumos.push(Object.assign({ arquivo: arq }, resumo));
   // material para o visualizador de conferencia (satelite): o combate montado + a area segura, os caminhos e as zonas
   fs.mkdirSync(path.join(RAIZ, 'conferir', 'dados'), { recursive: true });
-  fs.writeFileSync(path.join(RAIZ, 'conferir', 'dados', pq.slug + '.json'), JSON.stringify({ dados, combateEditado, arena: { terreno: arena.terreno, perimetroOriginal: arena.perimetroOriginal, seguraEditada: arena.seguraEditada, construcoes: arena.construcoes, agua: arena.agua, viasCarro: arena.viasCarro, viasServico: arena.viasServico, largada: arena.largada, segura: arena.segura, caminhos: arena.caminhos, caminhosIds: arena.caminhosIds, caminhosRemovidos: arena.caminhosRemovidos, caminhosExtra: arena.caminhosExtra, zonas: arena.zonas, zonasAuto: arena.zonasAuto, zonasAutoIgnoradas: arena.zonasAutoIgnoradas, liberar: arena.liberar } }));
+  fs.writeFileSync(path.join(RAIZ, 'conferir', 'dados', pq.slug + '.json'), JSON.stringify({ dados: dadosEditor, dinamico, combateEditado, arena: { terreno: arena.terreno, perimetroOriginal: arena.perimetroOriginal, seguraEditada: arena.seguraEditada, construcoes: arena.construcoes, agua: arena.agua, viasCarro: arena.viasCarro, viasServico: arena.viasServico, largada: arena.largada, segura: arena.segura, caminhos: arena.caminhos, caminhosIds: arena.caminhosIds, caminhosRemovidos: arena.caminhosRemovidos, caminhosExtra: arena.caminhosExtra, zonas: arena.zonas, zonasAuto: arena.zonasAuto, zonasAutoIgnoradas: arena.zonasAutoIgnoradas, zonasAutoLivres: arena.zonasAutoLivres, liberar: arena.liberar } }));
 });
 
 // ---- pagina de entrada: escolhe o parque ----

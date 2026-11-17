@@ -40,6 +40,11 @@ Satélite com o combate por cima. Ajustes manuais, por parque (botão "Salvar e 
 - Quadro embaixo à direita: fundo do mapa (satélite / mapa colorido com ruas e prédios / topográfico) e camadas ligáveis (prédios, água, ruas de carro e de serviço mapeados, área segura).
 Cada salvamento guarda cópia do que existia em `arena/parques/<slug>/edicoes-anteriores/`. Salvar sorteia pontos e monstros de novo naquele parque.
 
+### Largada livre (sem ponto de partida fixo)
+O jogo não tem mais largada fixa. A página leva a **arena** (piscina de pontos, curas, pedras, bombas e a área segura) e, no 1º sinal de GPS **dentro do contorno do parque**, monta o combate em volta de onde a pessoa está (função `build/combate-dinamico.js`, a mesma regra do build): 1ª base a ~80 m, mais 4 em sequência, 3 zumbis e um chefão por base, chefão final, e itens perto do percurso. Fora do parque o jogo avisa para ir até a área de jogo. Sem GPS (permissão negada) ou com `?teste=1` na página, monta no ponto padrão (L) — para testar de casa.
+- Interruptor: `conteudo/combate-teste.json` → `largadaLivre` (true/false). Combate arrumado à mão no editor (`combate-editado.json`) = percurso fixo naquele parque.
+- Teste: `node build/testar-largada-livre.js` sorteia 300 pontos de partida por parque (nos 5: 100% montaram, sempre com 5 bases, monstros dentro do verde).
+
 ### Inteligência de terreno (arena/regras-terreno.json)
 O gerador lê os sinais do OpenStreetMap e decide o que bloquear. As regras são DADOS (editar o JSON e gerar de novo):
 - **Água** (lagos, lagoas, alagadiço/pântano, represas) e **canais/valas/riachos**: bloqueados com folga.

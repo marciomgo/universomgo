@@ -56,6 +56,7 @@
   <option value="add-pedra">➕ pedra 🪨</option>
   <option value="add-bomba">➕ bomba 🍌</option>
  </select>
+ <div class="dica" style="background:#e8f5e9;padding:6px;border-radius:6px"><b>Largada livre:</b> no jogo o combate é montado onde a pessoa estiver, dentro do parque. O que aparece aqui é só um <b>exemplo</b> a partir da largada padrão (L). Se você mover, apagar ou adicionar itens e salvar, esse parque passa a ter <b>percurso fixo</b> (sem largada livre) até você clicar em “↩ combate automático”.</div>
  <div class="dica">Em “➕”, toque no mapa onde quer colocar. Bases são numeradas pela ordem; apagar uma renumera as seguintes.</div>
  <hr>
  <div class="dica"><b>Toques no mapa:</b> trilha ciano = tirar/devolver · círculo laranja = ignorar parquinho/quadra · <b>L verde</b> = arraste para mudar a largada.</div>
@@ -116,14 +117,15 @@ fetch('dados/'+slug+'.json?'+Date.now()).then(function(r){return r.json();}).the
  (A.agua||[]).forEach(function(r){L.polygon(r.map(ll),{color:'#18ffff',weight:1.5,fillColor:'#18ffff',fillOpacity:.3,interactive:false}).addTo(gAgua);});
  (A.viasCarro||[]).forEach(function(r){L.polyline(r.map(ll),{color:'#ffab00',weight:3,opacity:.9,interactive:false}).addTo(gCarro);});
  (A.viasServico||[]).forEach(function(r){L.polyline(r.map(ll),{color:'#ff9100',weight:2,opacity:.8,dashArray:'3 4',interactive:false}).addTo(gServico);});
- var T=A.terreno||{},gAguaT=L.layerGroup().addTo(m),gMata=L.layerGroup().addTo(m),gRestr=L.layerGroup().addTo(m),gBarr=L.layerGroup(),gLib=L.layerGroup();
+ var T=A.terreno||{},gAguaT=L.layerGroup().addTo(m),gMata=L.layerGroup().addTo(m),gMataF=L.layerGroup().addTo(m),gRestr=L.layerGroup().addTo(m),gBarr=L.layerGroup(),gLib=L.layerGroup();
  (T.agua||[]).forEach(function(r){L.polygon(r.map(ll),{color:'#00b0ff',weight:1.5,fillColor:'#00b0ff',fillOpacity:.35,interactive:false,pane:'zonasAuto'}).addTo(gAguaT);});
  (T.aguaLinhas||[]).forEach(function(r){L.polyline(r.map(ll),{color:'#00b0ff',weight:3,interactive:false,pane:'zonasAuto'}).addTo(gAguaT);});
  (T.mata||[]).forEach(function(g){var polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;polys.forEach(function(p){L.polygon(p.map(function(r){return r.map(ll);}),{color:'#1b5e20',weight:1,fillColor:'#1b5e20',fillOpacity:.45,interactive:false,pane:'zonasAuto'}).addTo(gMata);});});
+ (T.mataFechada||[]).forEach(function(g){var polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;polys.forEach(function(p){L.polygon(p.map(function(r){return r.map(ll);}),{color:'#4e342e',weight:2,fillColor:'#3e2723',fillOpacity:.5,interactive:false,pane:'zonasAuto'}).addTo(gMataF);});});
  (T.restrito||[]).forEach(function(r){L.polygon(r.map(ll),{color:'#d500f9',weight:1.5,fillColor:'#d500f9',fillOpacity:.3,interactive:false,pane:'zonasAuto'}).addTo(gRestr);});
  (T.barreiras||[]).forEach(function(r){L.polyline(r.map(ll),{color:'#ff6d00',weight:3,dashArray:'2 4',interactive:false,pane:'zonasAuto'}).addTo(gBarr);});
  (T.libera||[]).forEach(function(z){L.circle([z.lat,z.lng],{radius:z.r,color:'#ffffff',weight:1.5,fillOpacity:.12,interactive:false,pane:'zonasAuto'}).addTo(gLib);});
- L.control.layers(bases,{'🌳 Mata densa BLOQUEADA (sem trilha / fora do corredor)':gMata,'💧 Água, canais e alagadiço (bloqueados)':gAguaT,'⛔ Áreas restritas (privada, estacionamento, instalações)':gRestr,'🧱 Cercas e muros':gBarr,'🍖 Churrasqueira, piquenique, abrigo, banco (liberam a mata)':gLib,'🧭 Contorno original do OpenStreetMap (rosa pontilhado)':gOrig,'🏠 Prédios mapeados (vermelho)':gPredios,'💧 Água mapeada':gAgua,'🚗 Ruas de carro (bloqueadas)':gCarro,'🅿️ Vias de serviço/estacionamento':gServico},{position:'bottomright',collapsed:false}).addTo(m);
+ L.control.layers(bases,{'🌲 Mata FECHADA (sem trilha): proibida, prioridade total':gMataF,'🌳 Mata com trilha: bloqueada fora do corredor':gMata,'💧 Água, canais e alagadiço (bloqueados)':gAguaT,'⛔ Áreas restritas (privada, estacionamento, instalações)':gRestr,'🧱 Cercas e muros':gBarr,'🍖 Churrasqueira, piquenique, abrigo, banco (liberam a mata)':gLib,'🧭 Contorno original do OpenStreetMap (rosa pontilhado)':gOrig,'🏠 Prédios mapeados (vermelho)':gPredios,'💧 Água mapeada':gAgua,'🚗 Ruas de carro (bloqueadas)':gCarro,'🅿️ Vias de serviço/estacionamento':gServico},{position:'bottomright',collapsed:false}).addTo(m);
 
  // trilhas do mapa (OpenStreetMap): clicar = tirar / devolver
  var removidos={};
@@ -148,6 +150,7 @@ fetch('dados/'+slug+'.json?'+Date.now()).then(function(r){return r.json();}).the
  }
  (A.zonasAuto||[]).forEach(function(z){zonaAuto(z,false);});
  (A.zonasAutoIgnoradas||[]).forEach(function(z){zonaAuto(z,true);});
+ (A.zonasAutoLivres||[]).forEach(function(z){if(z.poligono)L.polygon(z.poligono.map(ll),{color:'#bdbdbd',weight:1.5,fill:false,dashArray:'2 4',interactive:false,pane:'zonasAuto'}).addTo(m).bindTooltip(z.nome+' (liberado: não bloqueia)');});
 
  // o que o Marcio desenha / ajusta (editavel): contorno, area verde, zonas, liberacoes, trilhas novas
  var ed=new L.FeatureGroup().addTo(m);

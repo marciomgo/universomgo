@@ -3,13 +3,32 @@
   "titulo": "Combate — teste com famílias",
   "nota": "CAMADA 1 (Conteudo). Regras do combate de teste, independentes do parque: a arena diz ONDE pode, este arquivo diz O QUE entra. Mudou a regra? Mude aqui e rode o build.",
   "parques": [
-    { "slug": "parcao", "nome": "Parcão" },
-    { "slug": "farroupilha", "nome": "Farroupilha (Redenção)" },
-    { "slug": "marinha-do-brasil", "nome": "Marinha do Brasil" },
-    { "slug": "harmonia", "nome": "Harmonia" },
-    { "slug": "germania", "nome": "Germânia" }
+    {
+      "slug": "parcao",
+      "nome": "Parcão"
+    },
+    {
+      "slug": "farroupilha",
+      "nome": "Farroupilha (Redenção)"
+    },
+    {
+      "slug": "marinha-do-brasil",
+      "nome": "Marinha do Brasil"
+    },
+    {
+      "slug": "harmonia",
+      "nome": "Harmonia"
+    },
+    {
+      "slug": "germania",
+      "nome": "Germânia"
+    }
   ],
-  "armas": { "estilingue": true, "pedraEspecial": false, "galho": true },
+  "armas": {
+    "estilingue": true,
+    "pedraEspecial": false,
+    "galho": true
+  },
   "bases": {
     "quantidade": 5,
     "raioMaxDaLargadaM": 200,
@@ -30,8 +49,16 @@
     "bombas": 5,
     "distMaxDaRotaM": 60,
     "distMaxBombasM": 100,
-    "emojisBomba": ["🍌", "🐝", "🐍", "💩", "🐶"]
+    "emojisBomba": [
+      "🍌",
+      "🐝",
+      "🐍",
+      "💩",
+      "🐶"
+    ]
   },
   "celebraAoLimpar": true,
-  "pesquisaUrl": "https://forms.gle/COLOCAR-O-LINK-DO-FORMS-AQUI"
+  "pesquisaUrl": "https://forms.gle/COLOCAR-O-LINK-DO-FORMS-AQUI",
+  "largadaLivre": true,
+  "_largadaLivre": "true = NAO ha largada fixa: o combate e montado em volta de onde a pessoa esta, dentro do parque. false = percurso fixo a partir da largada padrao."
 }
