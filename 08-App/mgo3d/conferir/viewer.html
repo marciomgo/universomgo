@@ -1,0 +1,266 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Conferir e ajustar o combate</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
+<style>
+ html,body,#m{height:100%;margin:0}
+ body{font-family:Arial,Helvetica,sans-serif}
+ .caixa{position:absolute;z-index:1000;background:#fffffff2;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.35);font-size:13px;line-height:1.45}
+ #parques{right:8px;top:8px;padding:6px;display:flex;gap:6px;flex-wrap:wrap;max-width:62%}
+ #parques button{padding:6px 10px;border:0;border-radius:7px;background:#2f6b3a;color:#fff;font-size:13px;cursor:pointer}
+ #parques button.on{background:#ffd54f;color:#2b2110;font-weight:bold}
+ #painel{left:56px;top:8px;width:300px;padding:10px 12px;max-height:calc(100% - 24px);overflow:auto}
+ #painel h3{margin:0 0 6px;font-size:15px}
+ #painel label{display:block;padding:2px 0;cursor:pointer}
+ #painel .dica{color:#555;font-size:12px;margin:6px 0}
+ #painel select{width:100%;padding:6px;font-size:13px;margin:4px 0}
+ #painel hr{border:0;border-top:1px solid #ddd;margin:8px 0}
+ .peq{padding:5px 8px;border:1px solid #999;border-radius:6px;background:#fff;font-size:12px;cursor:pointer;margin:2px 2px 0 0}
+ #salvar{width:100%;margin-top:6px;padding:11px;border:0;border-radius:8px;background:#1b7a35;color:#fff;font-size:15px;font-weight:bold;cursor:pointer}
+ #salvar:disabled{background:#999}
+ #status{margin-top:6px;font-size:12px;min-height:16px}
+ #status.ok{color:#1b5e20}#status.erro{color:#b71c1c}
+ #legenda{left:8px;bottom:8px;padding:8px 10px;max-width:340px;font-size:12px}
+ #legenda.mini{max-height:22px;overflow:hidden;white-space:nowrap;max-width:200px}
+ .e{font-size:20px;line-height:20px;text-align:center;filter:drop-shadow(0 1px 1px #000)}
+ .n{background:#2979ff;color:#fff;border:2px solid #fff;border-radius:50%;font:bold 13px Arial;width:24px;height:24px;line-height:20px;text-align:center}
+ body:not(.editando) .leaflet-verde-pane path, body:not(.editando) .leaflet-edicao-pane path, body:not(.editando) .leaflet-perimetro-pane path{pointer-events:none !important}
+ body.so-perimetro .leaflet-overlay-pane, body.so-perimetro .leaflet-marker-pane, body.so-perimetro .leaflet-verde-pane, body.so-perimetro .leaflet-edicao-pane, body.so-perimetro .leaflet-zonasAuto-pane{display:none}
+ .sujo{display:none;color:#b26a00;font-weight:bold}
+ body.sujo-on .sujo{display:inline}
+</style></head><body>
+<div id="m"></div>
+<div id="parques" class="caixa"></div>
+<div id="painel" class="caixa">
+ <h3 id="titulo" style="cursor:pointer" title="Clique para recolher/abrir">Conferir e ajustar</h3>
+ <div id="corpoPainel">
+ <label><input type="checkbox" id="soPerim"> 👁 <b>Mostrar só o perímetro</b> (esconde o resto)</label>
+ <hr>
+ <div><b>1 · Desenhar como:</b></div>
+ <label><input type="radio" name="modo" value="verde"> 🟩 Área verde nova (polígono)</label>
+ <label><input type="radio" name="modo" value="proibida" checked> 🔴 Zona proibida (círculo ou polígono)</label>
+ <label><input type="radio" name="modo" value="liberar"> 🟢 Liberar área do mapa (polígono)</label>
+ <label><input type="radio" name="modo" value="caminho"> 🔵 Trilha nova (linha)</label>
+ <div class="dica">Ferramentas de desenho à esquerda do mapa. O lápis ✏️ edita tudo o que é desenhado (inclusive a <b>área verde</b> e o <b>contorno amarelo</b>: puxe os quadradinhos nos cantos e nos meios dos lados); a lixeira 🗑 apaga.</div>
+ <hr>
+ <div><b>2 · Itens do combate:</b></div>
+ <select id="ferr">
+  <option value="nenhuma">— nenhuma (só olhar) —</option>
+  <option value="mover">✋ mover (arraste os itens)</option>
+  <option value="apagar">🗑 apagar (toque no item)</option>
+  <option value="add-base">➕ base (vira a próxima da sequência)</option>
+  <option value="add-zumbi">➕ zumbi 🧟</option>
+  <option value="add-chefao">➕ chefão 👹</option>
+  <option value="add-final">➕ chefão final 👿</option>
+  <option value="add-cura">➕ cura ✚</option>
+  <option value="add-pedra">➕ pedra 🪨</option>
+  <option value="add-bomba">➕ bomba 🍌</option>
+ </select>
+ <div class="dica">Em “➕”, toque no mapa onde quer colocar. Bases são numeradas pela ordem; apagar uma renumera as seguintes.</div>
+ <hr>
+ <div class="dica"><b>Toques no mapa:</b> trilha ciano = tirar/devolver · círculo laranja = ignorar parquinho/quadra · <b>L verde</b> = arraste para mudar a largada.</div>
+ <button class="peq" id="voltaVerde">↩ verde automático</button><button class="peq" id="voltaCombate">↩ combate automático</button>
+ <button id="salvar">💾 Salvar e gerar de novo</button>
+ <div class="dica">O que você arrumar no combate fica guardado: ao salvar o verde, as zonas ou as trilhas, o código regenera só a arena. Pode levar até 1 minuto. <span class="sujo">● alterações não salvas</span></div>
+ <div id="status"></div>
+ </div>
+</div>
+<div id="modoEdicao" class="caixa" style="display:none;left:50%;transform:translateX(-50%);top:56px;background:#fff3cd;padding:8px 14px;font-weight:bold;max-width:60%;text-align:center"></div>
+<div id="legenda" class="caixa" style="cursor:pointer" title="Clique para recolher/abrir">carregando…</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+<script>
+var PARQUES=[['parcao','Parcão'],['farroupilha','Farroupilha'],['marinha-do-brasil','Marinha'],['harmonia','Harmonia'],['germania','Germânia']];
+var q=new URLSearchParams(location.search), slug=q.get('p')||'parcao', sujo=false;
+function marcarSujo(v){sujo=v;document.body.classList.toggle('sujo-on',v);}
+window.addEventListener('beforeunload',function(e){if(sujo){e.preventDefault();e.returnValue='';}});
+document.getElementById('titulo').onclick=function(){var c=document.getElementById('corpoPainel');c.style.display=c.style.display==='none'?'':'none';};
+var tp=document.getElementById('parques');
+PARQUES.forEach(function(p){var b=document.createElement('button');b.textContent=p[1];if(p[0]===slug)b.className='on';
+ b.onclick=function(){if(p[0]===slug)return;if(sujo&&!confirm('Há alterações não salvas neste parque. Trocar mesmo assim?'))return;sujo=false;location.href='?p='+p[0];};tp.appendChild(b);});
+
+var ET=L.drawLocal.edit.toolbar, EH=L.drawLocal.edit.handlers; ET.actions.save.text='Confirmar'; ET.actions.save.title='Confirmar as alterações'; ET.actions.cancel.text='Cancelar'; ET.actions.cancel.title='Descartar as alterações'; ET.actions.clearAll.text='Apagar tudo'; ET.actions.clearAll.title='Apagar todas as formas'; ET.buttons.edit='Editar: puxar os cantos'; ET.buttons.remove='Apagar formas'; EH.edit.tooltip.text='Puxe os quadradinhos para ajustar'; EH.edit.tooltip.subtext='Depois clique em Confirmar'; EH.remove.tooltip.text='Toque numa forma para apagá-la';
+var DA=L.drawLocal.draw.toolbar.actions, DF=L.drawLocal.draw.toolbar.finish, DU=L.drawLocal.draw.toolbar.undo; DA.text='Cancelar'; DA.title='Cancelar o desenho'; DF.text='Terminar'; DF.title='Terminar o desenho'; DU.text='Voltar um ponto'; DU.title='Apagar o último ponto';
+L.drawLocal.draw.toolbar.buttons.polygon='Desenhar polígono';L.drawLocal.draw.toolbar.buttons.circle='Desenhar círculo';L.drawLocal.draw.toolbar.buttons.polyline='Desenhar linha';
+L.drawLocal.draw.handlers.polygon.tooltip.start='Toque para começar o polígono';L.drawLocal.draw.handlers.polygon.tooltip.cont='Toque para o próximo ponto';L.drawLocal.draw.handlers.polygon.tooltip.end='Toque no primeiro ponto para fechar';
+L.drawLocal.draw.handlers.circle.tooltip.start='Toque no centro e arraste até o tamanho';L.drawLocal.draw.handlers.polyline.tooltip.start='Toque para começar a linha';L.drawLocal.draw.handlers.polyline.tooltip.cont='Toque para o próximo ponto';L.drawLocal.draw.handlers.polyline.tooltip.end='Toque no último ponto de novo para terminar';
+
+fetch('dados/'+slug+'.json?'+Date.now()).then(function(r){return r.json();}).then(function(D){
+ var A=D.arena,C=D.dados;
+ document.getElementById('titulo').textContent='Conferir e ajustar · '+C.nomeParque;
+ var m=L.map('m',{maxZoom:21}).setView([C.largada.lat,C.largada.lng],17); /* a vista precisa existir antes de entrar qualquer camada */
+ m.createPane('verde'); m.getPane('verde').style.zIndex=350;
+ m.createPane('edicao'); m.getPane('edicao').style.zIndex=355; /* formas desenhadas (zonas, liberar, trilha nova, contorno) ficam abaixo das trilhas do mapa */
+ m.createPane('zonasAuto'); m.getPane('zonasAuto').style.zIndex=360;
+ m.createPane('perimetro'); m.getPane('perimetro').style.zIndex=365; /* o contorno fica acima de quase tudo */ /* o verde fica abaixo das trilhas e dos itens, para nao atrapalhar o toque */
+ var esri=function(n){return L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/'+n+'/MapServer/tile/{z}/{y}/{x}',{maxZoom:21,maxNativeZoom:19});};
+ var raster=function(u,o){return L.tileLayer(u,Object.assign({maxZoom:21,maxNativeZoom:19},o||{}));};
+ var BASES=[
+  ['sat','🛰️ Satélite Esri',esri('World_Imagery')],
+  ['claro','🛰️ Satélite Esri Clarity (mais nítido)',raster('https://clarity.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxNativeZoom:18})],
+  ['osm','🌍 OpenStreetMap padrão',raster('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'})],
+  ['otm','🏕️ OpenTopoMap (trilhas e relevo)',raster('https://a.tile.opentopomap.org/{z}/{x}/{y}.png',{maxNativeZoom:17,attribution:'© OpenTopoMap'})]
+ ];
+ var bases={},escolhida=q.get('mapa')||'sat';
+ BASES.forEach(function(b){bases[b[1]]=b[2];});
+ (BASES.filter(function(b){return b[0]===escolhida;})[0]||BASES[0])[2].addTo(m);
+ var ll=function(c){return [c[1],c[0]];};
+ var per=C.perimetro.map(ll);
+ var pl=L.polygon(per,{color:'#ffeb3b',weight:4,fill:false,dashArray:'8 5',pane:'perimetro'});
+ var gOrig=L.layerGroup().addTo(m); /* o contorno que o OpenStreetMap tem, para comparar com o seu */
+ if(A.perimetroOriginal)L.polygon(JSON.parse(A.perimetroOriginal).map(ll),{color:'#ff4081',weight:3,fill:false,dashArray:'2 6',interactive:false,pane:'perimetro'}).addTo(gOrig);
+
+ // camadas so para ver (o que o mapa ja tem)
+ var gPredios=L.layerGroup(),gAgua=L.layerGroup(),gCarro=L.layerGroup(),gServico=L.layerGroup();
+ (A.construcoes||[]).forEach(function(r){L.polygon(r.map(ll),{color:'#ff5252',weight:1.5,fillColor:'#ff5252',fillOpacity:.25,interactive:false}).addTo(gPredios);});
+ (A.agua||[]).forEach(function(r){L.polygon(r.map(ll),{color:'#18ffff',weight:1.5,fillColor:'#18ffff',fillOpacity:.3,interactive:false}).addTo(gAgua);});
+ (A.viasCarro||[]).forEach(function(r){L.polyline(r.map(ll),{color:'#ffab00',weight:3,opacity:.9,interactive:false}).addTo(gCarro);});
+ (A.viasServico||[]).forEach(function(r){L.polyline(r.map(ll),{color:'#ff9100',weight:2,opacity:.8,dashArray:'3 4',interactive:false}).addTo(gServico);});
+ var T=A.terreno||{},gAguaT=L.layerGroup().addTo(m),gMata=L.layerGroup().addTo(m),gRestr=L.layerGroup().addTo(m),gBarr=L.layerGroup(),gLib=L.layerGroup();
+ (T.agua||[]).forEach(function(r){L.polygon(r.map(ll),{color:'#00b0ff',weight:1.5,fillColor:'#00b0ff',fillOpacity:.35,interactive:false,pane:'zonasAuto'}).addTo(gAguaT);});
+ (T.aguaLinhas||[]).forEach(function(r){L.polyline(r.map(ll),{color:'#00b0ff',weight:3,interactive:false,pane:'zonasAuto'}).addTo(gAguaT);});
+ (T.mata||[]).forEach(function(g){var polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;polys.forEach(function(p){L.polygon(p.map(function(r){return r.map(ll);}),{color:'#1b5e20',weight:1,fillColor:'#1b5e20',fillOpacity:.45,interactive:false,pane:'zonasAuto'}).addTo(gMata);});});
+ (T.restrito||[]).forEach(function(r){L.polygon(r.map(ll),{color:'#d500f9',weight:1.5,fillColor:'#d500f9',fillOpacity:.3,interactive:false,pane:'zonasAuto'}).addTo(gRestr);});
+ (T.barreiras||[]).forEach(function(r){L.polyline(r.map(ll),{color:'#ff6d00',weight:3,dashArray:'2 4',interactive:false,pane:'zonasAuto'}).addTo(gBarr);});
+ (T.libera||[]).forEach(function(z){L.circle([z.lat,z.lng],{radius:z.r,color:'#ffffff',weight:1.5,fillOpacity:.12,interactive:false,pane:'zonasAuto'}).addTo(gLib);});
+ L.control.layers(bases,{'🌳 Mata densa BLOQUEADA (sem trilha / fora do corredor)':gMata,'💧 Água, canais e alagadiço (bloqueados)':gAguaT,'⛔ Áreas restritas (privada, estacionamento, instalações)':gRestr,'🧱 Cercas e muros':gBarr,'🍖 Churrasqueira, piquenique, abrigo, banco (liberam a mata)':gLib,'🧭 Contorno original do OpenStreetMap (rosa pontilhado)':gOrig,'🏠 Prédios mapeados (vermelho)':gPredios,'💧 Água mapeada':gAgua,'🚗 Ruas de carro (bloqueadas)':gCarro,'🅿️ Vias de serviço/estacionamento':gServico},{position:'bottomright',collapsed:false}).addTo(m);
+
+ // trilhas do mapa (OpenStreetMap): clicar = tirar / devolver
+ var removidos={};
+ function trilha(c,id,tirada){
+  var vis=L.polyline(c.map(ll),{color:tirada?'#9e9e9e':'#00e5ff',weight:2.5,opacity:tirada?.7:.8,dashArray:tirada?'5 5':null,interactive:false}).addTo(m);
+  var hit=L.polyline(c.map(ll),{color:'#000',weight:16,opacity:0}).addTo(m);
+  if(tirada)removidos[id]=true;
+  hit.on('click',function(){ if(removidos[id]){delete removidos[id];vis.setStyle({color:'#00e5ff',opacity:.8,dashArray:null});}else{removidos[id]=true;vis.setStyle({color:'#9e9e9e',opacity:.7,dashArray:'5 5'});} marcarSujo(true);});
+ }
+ (A.caminhos||[]).forEach(function(c,i){trilha(c,A.caminhosIds[i],false);});
+ (A.caminhosRemovidos||[]).forEach(function(o){trilha(o.c,o.id,true);});
+
+ // parquinhos/quadras achados no mapa: clicar = ignorar / devolver
+ var ignoradas={};
+ function zonaAuto(z,ign){
+  var pts=z.poligono?z.poligono.map(ll):null;
+  var forma=function(o){return pts?L.polygon(pts,o):L.circle([z.lat,z.lng],Object.assign({radius:18},o));};
+  var vis=forma({color:ign?'#9e9e9e':'#ff9100',weight:3,fill:false,dashArray:'4 3',interactive:false,pane:'zonasAuto'}).addTo(m);
+  var hit=forma({color:'#000',weight:14,fill:false,opacity:0,pane:'zonasAuto'}).addTo(m).bindTooltip(z.nome+(ign?' (ignorado)':' (achado no mapa)')+' — toque na borda para ignorar/devolver');
+  var chave=z.lat+','+z.lng; if(ign)ignoradas[chave]=[z.lat,z.lng];
+  hit.on('click',function(){ if(ignoradas[chave]){delete ignoradas[chave];vis.setStyle({color:'#ff9100'});}else{ignoradas[chave]=[z.lat,z.lng];vis.setStyle({color:'#9e9e9e'});} marcarSujo(true);});
+ }
+ (A.zonasAuto||[]).forEach(function(z){zonaAuto(z,false);});
+ (A.zonasAutoIgnoradas||[]).forEach(function(z){zonaAuto(z,true);});
+
+ // o que o Marcio desenha / ajusta (editavel): contorno, area verde, zonas, liberacoes, trilhas novas
+ var ed=new L.FeatureGroup().addTo(m);
+ var ESTILO={perimetro:{color:'#ffeb3b',weight:4,fill:false,dashArray:'8 5'},segura:{color:'#76ff03',weight:2,fillColor:'#76ff03',fillOpacity:.18},proibida:{color:'#ff1744',weight:2,fillColor:'#ff1744',fillOpacity:.22},liberar:{color:'#00e676',weight:2,fillColor:'#00e676',fillOpacity:.25},caminho:{color:'#2979ff',weight:4,opacity:.95}};
+ function adiciona(layer,tipo){layer._tipo=tipo;layer.setStyle(ESTILO[tipo]);ed.addLayer(layer);return layer;}
+ var perimetroMexido=false,seguraMexida=false,voltarVerdeAuto=false,combateMexido=false,voltarCombateAuto=false;
+ adiciona(pl,'perimetro');
+ function verde(latlngs){var p=L.polygon(latlngs,{pane:'verde'});return adiciona(p,'segura');}
+ if(A.segura){var gg=A.segura.type==='Polygon'?[A.segura.coordinates]:A.segura.coordinates;gg.forEach(function(poly){verde(poly.map(function(r){return r.map(ll);}));});}
+ (A.zonas||[]).forEach(function(z){ adiciona(z.poligono?L.polygon(z.poligono.map(ll),{pane:'edicao'}):L.circle([z.lat,z.lng],{radius:z.r,pane:'edicao'}),'proibida'); });
+ (A.liberar||[]).forEach(function(p){ adiciona(L.polygon(p.map(ll),{pane:'edicao'}),'liberar'); });
+ (A.caminhosExtra||[]).forEach(function(c){ adiciona(L.polyline(c.map(ll),{pane:'edicao'}),'caminho'); });
+ var assinatura=function(l){return JSON.stringify(l.getLatLngs());};
+ var segSig=function(){var a=[];ed.eachLayer(function(l){if(l._tipo==='segura')a.push(assinatura(l));});return a.sort().join('|');};
+ var origPer=assinatura(pl),origSeg=segSig();
+ var ctl=new L.Control.Draw({position:'topleft',draw:{polygon:{allowIntersection:false,shapeOptions:Object.assign({pane:'edicao'},ESTILO.proibida)},circle:{shapeOptions:Object.assign({pane:'edicao'},ESTILO.proibida)},polyline:{shapeOptions:Object.assign({pane:'edicao'},ESTILO.caminho)},rectangle:false,marker:false,circlemarker:false},edit:{featureGroup:ed}});
+ m.addControl(ctl);
+ var modo=function(){return document.querySelector('input[name=modo]:checked').value;};
+ var NOMES={verde:'Área verde nova',proibida:'Zona proibida',liberar:'Liberar área do mapa',caminho:'Trilha nova'};
+ m.on(L.Draw.Event.CREATED,function(e){
+  var t=modo(),k=e.layerType;
+  var ok=(k==='polygon'&&(t==='verde'||t==='proibida'||t==='liberar'))||(k==='circle'&&t==='proibida')||(k==='polyline'&&t==='caminho');
+  if(!ok){alert('Esse desenho não combina com "'+NOMES[t]+'".\n\nÁrea verde e Liberar área: polígono.\nZona proibida: círculo ou polígono.\nTrilha nova: linha.\n\nTroque a opção em "Desenhar como" ou use outra ferramenta.');return;}
+  if(t==='verde'){verde(e.layer.getLatLngs());seguraMexida=true;voltarVerdeAuto=false;}else adiciona(e.layer,t);
+  marcarSujo(true);
+ });
+ function tocou(layers){ if(!layers)return; layers.eachLayer(function(l){ if(l===pl)perimetroMexido=true; if(l._tipo==='segura'){seguraMexida=true;voltarVerdeAuto=false;} }); }
+ m.on(L.Draw.Event.EDITED,function(e){tocou(e.layers);marcarSujo(true);});
+ m.on(L.Draw.Event.DELETED,function(e){ if(e.layers&&e.layers.hasLayer(pl)){ed.addLayer(pl);alert('O contorno amarelo não pode ser apagado: só ajustado (lápis ✏️ e puxe os pontos).');} tocou(e.layers);marcarSujo(true);});
+
+ // ---- itens do combate (bases, monstros, curas, pedras, bombas) ----
+ var ferrSel=document.getElementById('ferr');
+ var ferr=function(){return ferrSel.value;};
+ var EMOJIS=['🍌','🐝','🐍','💩','🐶'];
+ var itens={pontos:C.pontos.map(function(p){return {lat:p.lat,lng:p.lng};}),zumbis:C.zumbis.map(function(p){return {lat:p.lat,lng:p.lng};}),chefoes:C.chefoes.map(function(p){return {lat:p.lat,lng:p.lng,final:!!p.final};}),curas:C.curas.map(function(p){return {lat:p.lat,lng:p.lng};}),pedras:C.pedras.map(function(p){return {lat:p.lat,lng:p.lng};}),bombas:C.bombas.map(function(p){return {lat:p.lat,lng:p.lng,e:p.e};})};
+ var camadaItens=L.layerGroup().addTo(m),linhaRota=null;
+ function emo(kind,it){return kind==='zumbis'?'🧟':kind==='chefoes'?(it.final?'👿':'👹'):kind==='curas'?'✚':kind==='pedras'?'🪨':it.e;}
+ function icone(kind,it,i){return kind==='pontos'?L.divIcon({className:'',html:'<div class="n">'+(i+1)+'</div>',iconSize:[24,24],iconAnchor:[12,12]}):L.divIcon({className:'',html:'<div class="e">'+emo(kind,it)+'</div>',iconSize:[22,22],iconAnchor:[11,11]});}
+ function desenhaRota(){ if(linhaRota)m.removeLayer(linhaRota); var pts=[[C.largada.lat,C.largada.lng]].concat(itens.pontos.map(function(p){return [p.lat,p.lng];})); linhaRota=L.polyline(pts,{color:'#2979ff',weight:3,dashArray:'8 6',interactive:false}).addTo(m); }
+ function desenhaItens(){
+  camadaItens.clearLayers();
+  ['curas','pedras','bombas','zumbis','chefoes','pontos'].forEach(function(kind){
+   itens[kind].forEach(function(it,i){
+    var mk=L.marker([it.lat,it.lng],{icon:icone(kind,it,i),draggable:ferr()==='mover',interactive:ferr()!=='nenhuma',zIndexOffset:kind==='pontos'?500:200}).addTo(camadaItens);
+    mk.on('dragend',function(){var p=mk.getLatLng();it.lat=+p.lat.toFixed(7);it.lng=+p.lng.toFixed(7);combateMexido=true;voltarCombateAuto=false;marcarSujo(true);desenhaRota();});
+    mk.on('click',function(){ if(ferr()!=='apagar')return; itens[kind].splice(itens[kind].indexOf(it),1); combateMexido=true;voltarCombateAuto=false;marcarSujo(true);desenhaItens(); });
+   });
+  });
+  desenhaRota();
+ }
+ ferrSel.onchange=desenhaItens;
+ m.on(L.Draw.Event.DRAWSTART,function(){ferrSel.value='nenhuma';desenhaItens();});
+ var barra=document.getElementById('modoEdicao');
+ function avisoModo(txt){barra.style.display=txt?'block':'none';barra.textContent=txt||'';document.body.classList.toggle('editando',!!txt);}
+ m.on(L.Draw.Event.EDITSTART,function(){avisoModo('✏️ Editando: puxe os quadradinhos dos cantos e depois clique em CONFIRMAR (ao lado do lápis, à esquerda).');});
+ m.on(L.Draw.Event.EDITSTOP,function(){avisoModo('');});
+ m.on(L.Draw.Event.DELETESTART,function(){avisoModo('🗑 Apagando: toque na forma que quer apagar e depois clique em CONFIRMAR (ao lado da lixeira, à esquerda).');});
+ m.on(L.Draw.Event.DELETESTOP,function(){avisoModo('');});
+ function confirmarModo(){var as=document.querySelectorAll('.leaflet-draw-actions a');for(var i=0;i<as.length;i++){var tx=(as[i].textContent||'').trim();if(/^(Confirmar|Save)/i.test(tx)&&as[i].offsetParent){as[i].click();return true;}}return false;}
+ m.on('click',function(e){
+  var f=ferr(); if(f.indexOf('add-')!==0)return;
+  var p={lat:+e.latlng.lat.toFixed(7),lng:+e.latlng.lng.toFixed(7)};
+  if(f==='add-base')itens.pontos.push(p);
+  else if(f==='add-zumbi')itens.zumbis.push(p);
+  else if(f==='add-chefao'){p.final=false;itens.chefoes.push(p);}
+  else if(f==='add-final'){p.final=true;itens.chefoes.push(p);}
+  else if(f==='add-cura')itens.curas.push(p);
+  else if(f==='add-pedra')itens.pedras.push(p);
+  else if(f==='add-bomba'){p.e=EMOJIS[itens.bombas.length%EMOJIS.length];itens.bombas.push(p);}
+  combateMexido=true;voltarCombateAuto=false;marcarSujo(true);desenhaItens();
+ });
+ desenhaItens();
+
+ // largada
+ var largadaMovida=false;
+ var largada=L.marker([C.largada.lat,C.largada.lng],{draggable:true,zIndexOffset:1000,icon:L.divIcon({className:'',html:'<div class="n" style="background:#00c853;width:28px;height:28px;line-height:24px">L</div>',iconSize:[28,28],iconAnchor:[14,14]})}).addTo(m).bindTooltip('largada (arraste para mudar)');
+ largada.on('dragend',function(){largadaMovida=true;C.largada={lat:largada.getLatLng().lat,lng:largada.getLatLng().lng};marcarSujo(true);desenhaRota();});
+
+ m.fitBounds(L.latLngBounds([[C.largada.lat,C.largada.lng]].concat(itens.pontos.map(function(p){return [p.lat,p.lng];}))).pad(.4)); if(q.get('todo'))m.fitBounds(pl.getBounds().pad(.05));
+ var lg=document.getElementById('legenda');lg.onclick=function(e){if(e.target.tagName==='A')return;lg.classList.toggle('mini');};
+ if(window.innerHeight<560){document.getElementById('corpoPainel').style.display='none';lg.classList.add('mini');}
+ lg.innerHTML='<b>'+C.nomeParque+'</b> · L largada · números = bases na ordem · 🧟 zumbi · 👹 chefão · 👿 chefão final · ✚ cura · 🪨 pedra<br>tracejado azul = percurso · ciano = trilhas do mapa · <span style="color:#33691e">verde = área do jogo (editável)</span> · <span style="color:#d50000">vermelho = proibida</span> · <span style="color:#1565c0">azul grosso = trilha nova</span><br>'+(A.seguraEditada?'<b>O verde foi editado por você.</b> ':'')+(D.combateEditado?'<b>O combate foi arrumado por você.</b> ':'')+'<a href="?p='+slug+'&todo=1">ver o parque inteiro</a>';
+
+ var cb=document.getElementById('soPerim');cb.onchange=function(){document.body.classList.toggle('so-perimetro',cb.checked);};if(q.get('so')==='perimetro'){cb.checked=true;document.body.classList.add('so-perimetro');}
+ var st=document.getElementById('status'),bs=document.getElementById('salvar');
+ document.getElementById('voltaVerde').onclick=function(){if(!confirm('Voltar o verde ao que o código gera sozinho? Os ajustes do verde serão descartados ao salvar.'))return;voltarVerdeAuto=true;seguraMexida=false;marcarSujo(true);st.className='';st.textContent='O verde voltará ao automático quando você salvar.';};
+ document.getElementById('voltaCombate').onclick=function(){if(!confirm('Voltar o combate ao que o código monta sozinho? Os itens que você arrumou serão descartados ao salvar.'))return;voltarCombateAuto=true;combateMexido=false;marcarSujo(true);st.className='';st.textContent='O combate voltará ao automático quando você salvar.';};
+ var fechar=function(r){return (r.length&&(r[0][0]!==r[r.length-1][0]||r[0][1]!==r[r.length-1][1]))?r.concat([r[0]]):r;};
+ var par=function(pts){return pts.map(function(p){return [+p.lng.toFixed(7),+p.lat.toFixed(7)];});};
+ bs.onclick=function(){
+  confirmarModo(); /* se ainda estava editando/apagando, confirma antes de salvar */
+  if(assinatura(pl)!==origPer)perimetroMexido=true;
+  if(segSig()!==origSeg){seguraMexida=true;voltarVerdeAuto=false;}
+  var zonas=[],liberar=[],extra=[],seg=[];
+  ed.eachLayer(function(l){
+   if(l._tipo==='proibida'){ if(l instanceof L.Circle){var c=l.getLatLng();zonas.push({nome:'Zona proibida',lat:+c.lat.toFixed(7),lng:+c.lng.toFixed(7),r:Math.round(l.getRadius()*10)/10});}
+    else zonas.push({nome:'Zona proibida',poligono:par(l.getLatLngs()[0])}); }
+   else if(l._tipo==='liberar'){liberar.push(par(l.getLatLngs()[0]));}
+   else if(l._tipo==='caminho'){extra.push(par(l.getLatLngs()));}
+   else if(l._tipo==='segura'){var rs=l.getLatLngs();if(rs.length&&!Array.isArray(rs[0]))rs=[rs];seg.push(rs.map(function(r){return fechar(par(r));}));}
+  });
+  var corpo={zonas:zonas,liberar:liberar,caminhosExtra:extra,caminhosRemovidos:Object.keys(removidos).map(Number),ignorarZonasAuto:Object.keys(ignoradas).map(function(k){return ignoradas[k];})};
+  if(seguraMexida&&seg.length)corpo.segura=seg;
+  if(voltarVerdeAuto)corpo.voltarVerdeAuto=true;
+  if(perimetroMexido){var ring=par(pl.getLatLngs()[0]);if(ring.length>=3)corpo.perimetro=ring;}
+  if(largadaMovida){var p=largada.getLatLng();corpo.largada={lat:+p.lat.toFixed(7),lng:+p.lng.toFixed(7)};}
+  if(combateMexido)corpo.combate={pontos:itens.pontos,zumbis:itens.zumbis,chefoes:itens.chefoes,curas:itens.curas,pedras:itens.pedras,bombas:itens.bombas};
+  if(voltarCombateAuto)corpo.voltarCombateAuto=true;
+  bs.disabled=true;st.className='';st.textContent='Salvando e gerando de novo… pode levar até 1 minuto.';
+  fetch('/salvar/'+slug,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(corpo)}).then(function(r){return r.json();}).then(function(j){
+   if(!j.ok){bs.disabled=false;st.className='erro';st.textContent='Não deu certo: '+j.erro;return;}
+   marcarSujo(false);st.className='ok';st.textContent='Pronto! '+(j.avisos&&j.avisos!=='sem avisos'?'Avisos: '+j.avisos:'Sem avisos.')+' Recarregando…';setTimeout(function(){location.reload();},1800);
+  }).catch(function(e){bs.disabled=false;st.className='erro';st.textContent='Erro de conexão com o servidor local. Ele ainda está rodando? ('+e.message+')';});
+ };
+}).catch(function(e){var l=document.getElementById('legenda');l.classList.remove('mini');l.innerHTML='<b style="color:#b71c1c">Erro ao montar o mapa:</b> '+e.message+'<br><small>'+String(e.stack||'').split(String.fromCharCode(10)).slice(0,4).join('<br>')+'</small>';console.error(e.stack);});
+</script></body></html>

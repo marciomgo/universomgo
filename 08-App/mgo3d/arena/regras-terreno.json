@@ -1,0 +1,131 @@
+{
+  "_nota": "REGRAS DE TERRENO (dados, nao codigo). O gerador le este arquivo e decide o que bloquear usando os sinais que o OpenStreetMap ja traz. Mudou de ideia? Edite aqui e gere de novo. 'buffer_m' = folga ao redor, em metros.",
+  "agua": {
+    "_o_que_e": "Lagos, lagoas, represas, alagadicos/pantanos e margens: nunca entra ponto nem monstro.",
+    "poligonos": {
+      "natural": [
+        "water",
+        "wetland",
+        "bay"
+      ],
+      "landuse": [
+        "basin",
+        "reservoir"
+      ],
+      "waterway": [
+        "riverbank",
+        "dock",
+        "boatyard"
+      ],
+      "water": "*"
+    },
+    "buffer_m": 5
+  },
+  "aguaLinhas": {
+    "_o_que_e": "Canais, valas, riachos e vertedouros (linhas): perigo de queda.",
+    "waterway": [
+      "canal",
+      "ditch",
+      "drain",
+      "stream",
+      "river",
+      "weir",
+      "dam",
+      "brook"
+    ],
+    "buffer_m": 4
+  },
+  "mataDensa": {
+    "_o_que_e": "Verde escuro (mata/mato). Se passa trilha dentro dela, so vale um corredor em volta da trilha. Se nao passa nenhuma trilha, a mata inteira fica proibida.",
+    "natural": [
+      "wood",
+      "scrub"
+    ],
+    "landuse": [
+      "forest"
+    ],
+    "corredor_da_trilha_m": 8
+  },
+  "libera": {
+    "_o_que_e": "Sinais de que da para ir ate la mesmo debaixo das arvores: churrasqueira, mesa de piquenique, abrigo, banco. Abrem um circulo dentro da mata densa.",
+    "sinais": [
+      {
+        "amenity": "bbq",
+        "raio_m": 25
+      },
+      {
+        "leisure": "picnic_table",
+        "raio_m": 25
+      },
+      {
+        "tourism": "picnic_site",
+        "raio_m": 25
+      },
+      {
+        "leisure": "firepit",
+        "raio_m": 25
+      },
+      {
+        "amenity": "shelter",
+        "raio_m": 20
+      },
+      {
+        "amenity": "bench",
+        "raio_m": 10
+      }
+    ]
+  },
+  "restrito": {
+    "_o_que_e": "Areas fechadas ou com uso que nao serve para o jogo: privadas, estacionamentos, instalacoes tecnicas, comercio, obra, aterro, centros esportivos.",
+    "access": [
+      "private",
+      "no",
+      "customers"
+    ],
+    "landuse": [
+      "commercial",
+      "industrial",
+      "retail",
+      "construction",
+      "landfill",
+      "railway",
+      "military",
+      "quarry",
+      "brownfield"
+    ],
+    "amenity": [
+      "parking",
+      "school",
+      "hospital",
+      "university",
+      "college",
+      "kindergarten",
+      "fuel"
+    ],
+    "man_made": [
+      "pumping_station",
+      "water_works",
+      "wastewater_plant",
+      "storage_tank",
+      "works",
+      "tower"
+    ],
+    "leisure": [
+      "sports_centre",
+      "stadium",
+      "golf_course"
+    ],
+    "buffer_m": 2
+  },
+  "barreiras": {
+    "_o_que_e": "Cercas e muros. A linha em si e bloqueada. Cerca que fecha uma area pequena (menos da metade do parque) bloqueia o miolo; cerca que e o proprio parque nao bloqueia nada.",
+    "barrier": [
+      "fence",
+      "wall",
+      "retaining_wall",
+      "city_wall"
+    ],
+    "buffer_m": 2.5,
+    "area_fechada_max_fracao_do_parque": 0.5
+  }
+}

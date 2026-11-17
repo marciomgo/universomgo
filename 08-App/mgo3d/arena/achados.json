@@ -1,0 +1,115 @@
+{
+ "version": 0.6,
+ "generator": "Overpass API 0.7.62.11 87bfad18",
+ "osm3s": {
+  "timestamp_osm_base": "2026-11-16T20:42:51Z",
+  "timestamp_areas_base": "2026-11-16T17:50:04Z",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+ },
+ "elements": [
+  {
+   "type": "way",
+   "id": 184335914,
+   "center": {
+    "lat": -30.0255127,
+    "lon": -51.1575972
+   },
+   "tags": {
+    "leisure": "park",
+    "name": "Parque Germânia",
+    "old_name": "Parque Alemanha",
+    "opening_hours": "Su-Sa 07:30-20:00",
+    "operator": "PMPA",
+    "start_date": "2006",
+    "wikidata": "Q10345124",
+    "wikipedia": "pt:Parque Germânia"
+   }
+  },
+  {
+   "type": "way",
+   "id": 244052811,
+   "center": {
+    "lat": -30.0305497,
+    "lon": -51.1503802
+   },
+   "tags": {
+    "leisure": "park",
+    "name": "Praça Farroupilha",
+    "source": "LABGEO/UFRGS"
+   }
+  },
+  {
+   "type": "relation",
+   "id": 3190439,
+   "center": {
+    "lat": -30.0555669,
+    "lon": -51.2333565
+   },
+   "tags": {
+    "artist_name": "Ivan Mizoguchi; Rogério Malinsky",
+    "leisure": "park",
+    "loc_name": "Parque Marinha",
+    "name": "Parque Marinha do Brasil",
+    "operator": "PMPA",
+    "source": "LABGEO/UFRGS",
+    "start_date": "1978",
+    "tourism": "attraction",
+    "type": "multipolygon",
+    "website": "https://www2.portoalegre.rs.gov.br/smam/default.php?p_secao=198",
+    "wikidata": "Q1583896",
+    "wikipedia": "pt:Parque Marinha do Brasil"
+   }
+  },
+  {
+   "type": "relation",
+   "id": 3190472,
+   "center": {
+    "lat": -30.036445,
+    "lon": -51.2157699
+   },
+   "tags": {
+    "alt_name": "Parque da Redenção",
+    "alt_name:fr": "Parc da Redenção",
+    "artist_name": "Alfred Agache",
+    "leisure": "park",
+    "listed_status": "Grade II",
+    "loc_name": "Redenção",
+    "name": "Parque Farroupilha",
+    "name:fr": "Parc Farroupilha",
+    "old_name": "Campo da Redenção;Varzea do Portão",
+    "source": "LABGEO/UFRGS",
+    "start_date": "1935",
+    "tourism": "attraction",
+    "type": "multipolygon",
+    "website": "http://www.parqueredencao.com.br",
+    "wikidata": "Q2743869",
+    "wikipedia": "pt:Parque Farroupilha"
+   }
+  },
+  {
+   "type": "relation",
+   "id": 7894456,
+   "center": {
+    "lat": -30.0266244,
+    "lon": -51.1999541
+   },
+   "tags": {
+    "access": "yes",
+    "animal": "birds",
+    "bicycle_parking": "stands",
+    "leisure": "park",
+    "loc_name": "Parcão",
+    "name": "Parque Moinhos de Vento",
+    "name:en": "Moinhos de Vento Park",
+    "natural": "grassland",
+    "sidewalk": "both",
+    "start_date": "1972",
+    "surface": "gravel",
+    "tourism": "attraction",
+    "type": "multipolygon",
+    "wikidata": "Q6894667",
+    "wikipedia": "pt:Parque Moinhos de Vento"
+   }
+  }
+ ]
+}

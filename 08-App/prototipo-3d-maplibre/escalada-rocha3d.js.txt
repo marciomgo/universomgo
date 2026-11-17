@@ -1,0 +1,63 @@
+// ---------- a rocha em 3D de verdade: blocos empilhados (camada de extrusão do mapa), com a sarabatana em cima ----------
+var ROCHA_TOPO_M = 12.5, ROCHA_NIVEIS = 10, rochaChave = '', rochaOp = -1;
+function ruidoR(sem, i) { var x = Math.sin(sem * 12.9898 + i * 78.233) * 43758.5453; return x - Math.floor(x); }
+function anelM(lat0, lng0, cx, cy, r, n, sem) { /* polígono irregular (em metros) em volta de um centro */
+  var pts = [], cl = Math.cos(lat0 * rad);
+  for (var i = 0; i <= n; i++) {
+    var k = i % n, a = (k / n) * 2 * Math.PI, rr = r * (0.82 + 0.36 * ruidoR(sem, k)), x = cx + rr * Math.cos(a), y = cy + rr * Math.sin(a);
+    pts.push([lng0 + x / (111320 * cl), lat0 + y / 111320]);
+  }
+  return pts;
+}
+function caixaM(lat0, lng0, cx, cy, comp, larg, ang) { /* retângulo girado (em metros) */
+  var cl = Math.cos(lat0 * rad), c = Math.cos(ang * rad), s = Math.sin(ang * rad), pts = [];
+  [[-comp / 2, -larg / 2], [comp / 2, -larg / 2], [comp / 2, larg / 2], [-comp / 2, larg / 2], [-comp / 2, -larg / 2]].forEach(function (p) {
+    var x = cx + p[0] * c - p[1] * s, y = cy + p[0] * s + p[1] * c; pts.push([lng0 + x / (111320 * cl), lat0 + y / 111320]);
+  });
+  return pts;
+}
+function feicao(anel, b, h, cor) { return { type: 'Feature', properties: { b: b, h: h, cor: cor }, geometry: { type: 'Polygon', coordinates: [anel] } }; }
+function geoRocha(lat, lng, comArma) {
+  var F = [];
+  /* ROCHA_NIVEIS blocos empilhados que vão afinando (raio de 6,2 m na base a 2,9 m no topo); o de cima é o musgo onde fica a arma */
+  for (var k = 0; k < ROCHA_NIVEIS; k++) {
+    var f = k / (ROCHA_NIVEIS - 1), alt = ROCHA_TOPO_M / ROCHA_NIVEIS, raio = 6.2 - 3.3 * f;
+    var dx = (ruidoR(20, k) - 0.5) * 0.9, dy = (ruidoR(21, k) - 0.5) * 0.9; /* cada degrau fica um pouco torto, como pedra de verdade */
+    var tom = Math.round(163 - 52 * f), cor = (k === ROCHA_NIVEIS - 1) ? '#6f9a4a' : ('rgb(' + tom + ',' + (tom + 4) + ',' + (tom + 9) + ')');
+    F.push(feicao(anelM(lat, lng, dx, dy, raio, 11, 30 + k), k * alt, (k + 1) * alt, cor));
+  }
+  /* pedras caídas em volta */
+  [[7.6, 2.2, 1.7, 3.0, 5, '#9a9fa5'], [-6.6, -4.2, 1.4, 2.2, 6, '#8a8f95'], [-2.2, 7.9, 1.2, 1.7, 7, '#a0a5ab'], [5.4, -6.2, 1.6, 2.6, 8, '#858a90']].forEach(function (q) {
+    F.push(feicao(anelM(lat, lng, q[0], q[1], q[2], 8, q[4]), 0, q[3], q[5]));
+  });
+  if (comArma) { /* a sarabatana deitada no musgo: um tubo marrom com a ponta clara */
+    F.push(feicao(caixaM(lat, lng, 0.2, -0.2, 3.4, 0.6, 35), ROCHA_TOPO_M, ROCHA_TOPO_M + 0.5, '#8d5a2b'));
+    F.push(feicao(caixaM(lat, lng, 0.2 + 1.85 * Math.cos(35 * rad), -0.2 + 1.85 * Math.sin(35 * rad), 0.9, 0.85, 35), ROCHA_TOPO_M, ROCHA_TOPO_M + 0.55, '#e0c08f'));
+  }
+  return { type: 'FeatureCollection', features: F };
+}
+function brilhoRocha(lat, lng) { return { type: 'FeatureCollection', features: [feicao(anelM(lat, lng, 0.2, -0.2, 2.5, 20, 9), ROCHA_TOPO_M, ROCHA_TOPO_M + 0.06, '#ffd54f')] }; }
+function garantirCamadasRocha() {
+  if (mapa.getSource('rocha3d')) return;
+  mapa.addSource('rocha3d', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+  mapa.addSource('rocha3d-brilho', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+  mapa.addLayer({ id: 'rocha3d', type: 'fill-extrusion', source: 'rocha3d', paint: { 'fill-extrusion-color': ['get', 'cor'], 'fill-extrusion-height': ['get', 'h'], 'fill-extrusion-base': ['get', 'b'], 'fill-extrusion-opacity': 0.98, 'fill-extrusion-vertical-gradient': true } });
+  mapa.addLayer({ id: 'rocha3d-brilho', type: 'fill-extrusion', source: 'rocha3d-brilho', paint: { 'fill-extrusion-color': '#ffd54f', 'fill-extrusion-height': ['get', 'h'], 'fill-extrusion-base': ['get', 'b'], 'fill-extrusion-opacity': 0.7 } });
+}
+function atualizarRocha3D() {
+  var r = DADOS.rocha; if (!r) return;
+  try { garantirCamadasRocha(); } catch (e) { return; }
+  var chave = r.lat.toFixed(6) + ',' + r.lng.toFixed(6) + ',' + (temSar ? 1 : 0);
+  if (chave !== rochaChave) {
+    rochaChave = chave;
+    mapa.getSource('rocha3d').setData(geoRocha(r.lat, r.lng, !temSar));
+    mapa.getSource('rocha3d-brilho').setData(temSar ? { type: 'FeatureCollection', features: [] } : brilhoRocha(r.lat, r.lng));
+  }
+  var op = INSIG.escalada ? 0.98 : 0.38; /* sem a habilidade: a rocha é só uma silhueta apagada */
+  if (op !== rochaOp) { rochaOp = op; mapa.setPaintProperty('rocha3d', 'fill-extrusion-opacity', op); mapa.setPaintProperty('rocha3d-brilho', 'fill-extrusion-opacity', INSIG.escalada ? 0.7 : 0.2); }
+}
+function alturaTopoPx() { /* quantos pixels o topo da rocha sobe na tela com o zoom e a inclinação de agora */
+  var mpp = 78271.517 * Math.cos(POS.lat * rad) / Math.pow(2, mapa.getZoom());
+  return (ROCHA_TOPO_M / mpp) * Math.sin(mapa.getPitch() * rad);
+}
+var altoSubida = 0;

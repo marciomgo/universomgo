@@ -1,0 +1,37 @@
+{
+  "id": "combate-teste-v1",
+  "titulo": "Combate — teste com famílias",
+  "nota": "CAMADA 1 (Conteudo). Regras do combate de teste, independentes do parque: a arena diz ONDE pode, este arquivo diz O QUE entra. Mudou a regra? Mude aqui e rode o build.",
+  "parques": [
+    { "slug": "parcao", "nome": "Parcão" },
+    { "slug": "farroupilha", "nome": "Farroupilha (Redenção)" },
+    { "slug": "marinha-do-brasil", "nome": "Marinha do Brasil" },
+    { "slug": "harmonia", "nome": "Harmonia" },
+    { "slug": "germania", "nome": "Germânia" }
+  ],
+  "armas": { "estilingue": true, "pedraEspecial": false, "galho": true },
+  "bases": {
+    "quantidade": 5,
+    "raioMaxDaLargadaM": 200,
+    "distMinDaLargadaM": 55,
+    "alvoDaPrimeiraM": 80,
+    "distMinEntreBasesM": 35
+  },
+  "monstros": {
+    "zumbisPorBase": 3,
+    "zumbiDistDaBaseM": 8,
+    "chefaoEmCadaBase": true,
+    "chefaoDistDaBaseM": 12,
+    "chefaoFinalDistDaBaseM": 20
+  },
+  "itens": {
+    "curas": 5,
+    "pedras": 11,
+    "bombas": 5,
+    "distMaxDaRotaM": 60,
+    "distMaxBombasM": 100,
+    "emojisBomba": ["🍌", "🐝", "🐍", "💩", "🐶"]
+  },
+  "celebraAoLimpar": true,
+  "pesquisaUrl": "https://forms.gle/COLOCAR-O-LINK-DO-FORMS-AQUI"
+}

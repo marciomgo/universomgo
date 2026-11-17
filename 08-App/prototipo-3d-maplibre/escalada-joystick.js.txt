@@ -1,0 +1,15 @@
+// ---------- joystick na tela: cima/baixo anda, esquerda/direita gira (as mesmas teclas do teclado) ----------
+(function joystick() {
+  var joy = document.getElementById('joy'), bola = document.getElementById('joyBola'), ativo = null, R = 52;
+  function soltar() { ativo = null; bola.style.transform = 'translate(0,0)'; tecla.esq = tecla.dir = tecla.anda = tecla.volta = false; }
+  function mover(e) {
+    var b = joy.getBoundingClientRect(), dx = (e.clientX - (b.left + b.width / 2)) / R, dy = (e.clientY - (b.top + b.height / 2)) / R, m = Math.hypot(dx, dy);
+    if (m > 1) { dx /= m; dy /= m; }
+    bola.style.transform = 'translate(' + (dx * R * 0.7) + 'px,' + (dy * R * 0.7) + 'px)';
+    tecla.esq = dx < -0.3; tecla.dir = dx > 0.3; tecla.anda = dy < -0.3; tecla.volta = dy > 0.3;
+  }
+  joy.addEventListener('pointerdown', function (e) { ativo = e.pointerId; try { joy.setPointerCapture(e.pointerId); } catch (x) {} mover(e); e.preventDefault(); });
+  joy.addEventListener('pointermove', function (e) { if (ativo === e.pointerId) mover(e); });
+  ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function (n) { joy.addEventListener(n, function (e) { if (ativo === e.pointerId) soltar(); }); });
+  setInterval(function () { joy.style.display = modoReal ? 'none' : 'block'; }, 500);
+})();
