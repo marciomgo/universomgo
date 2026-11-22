@@ -126,6 +126,7 @@
   .statsP span{font-size:12px;color:#7a6a45}
   #bDeNovo{font-size:18px;font-weight:bold;padding:14px 26px;border:0;border-radius:999px;background:#ffd54f;color:#2b2110;box-shadow:0 4px 0 #c99a00;cursor:pointer;touch-action:manipulation}
   #bDeNovo:active{transform:translateY(2px);box-shadow:0 2px 0 #c99a00}
+  #bPesquisaFim{display:block;width:100%;margin-top:12px;font-size:15px;font-weight:bold;padding:12px 16px;border:2px solid #2e7d32;border-radius:999px;background:#fff;color:#1b5e20;cursor:pointer;touch-action:manipulation}
   #btnTrocaPedra img{height:38px;width:auto;display:block}
   .pedra-reserva img{height:22px;width:auto;display:block}
   .fantasma .em{opacity:.6}
@@ -163,6 +164,7 @@
 <script>
 const DADOS = {"largada":{"lat":-30.0261175,"lng":-51.200454},"perimetro":[[-51.1999892,-30.0255489],[-51.2008371,-30.0247011],[-51.2016572,-30.0253623],[-51.201634,-30.0253845],[-51.2009167,-30.0260767],[-51.2007667,-30.0262104],[-51.2012933,-30.0266529],[-51.2014499,-30.026511],[-51.2014768,-30.0264866],[-51.2016956,-30.0266908],[-51.2018709,-30.0269375],[-51.2019329,-30.027215],[-51.2018809,-30.0285181],[-51.2018493,-30.0285477],[-51.2014932,-30.0285273],[-51.2013887,-30.028398],[-51.2007809,-30.0283764],[-51.2006255,-30.0284845],[-51.2004594,-30.0284771],[-51.2003659,-30.0284729],[-51.2002689,-30.0284269],[-51.1997857,-30.0278279],[-51.1996524,-30.0275882],[-51.1995294,-30.0270603],[-51.1995257,-30.0265639],[-51.1997038,-30.0260055],[-51.1999892,-30.0255489]],"pontos":[{"n":1,"lat":-30.0254112,"lng":-51.2004072},{"n":2,"lat":-30.0256294,"lng":-51.2007359},{"n":3,"lat":-30.0257,"lng":-51.2001409},{"n":4,"lat":-30.0250412,"lng":-51.2007344},{"n":5,"lat":-30.0253648,"lng":-51.2012556}],"curas":[],"pedras":[],"bombas":[],"chefoes":[{"lat":-30.02539552405168,"lng":-51.20135309740268,"final":true}],"zumbis":[{"lat":-30.025343669089416,"lng":-51.20037881106472},{"lat":-30.025478730910585,"lng":-51.20043558893528},{"lat":-30.025593467553,"lng":-51.20066401653427},{"lat":-30.025665332446998,"lng":-51.20080778346573},{"lat":-30.025712479207883,"lng":-51.2000591570806},{"lat":-30.02568752079212,"lng":-51.2002226429194},{"lat":-30.025096251702703,"lng":-51.200681046453134},{"lat":-30.024986148297298,"lng":-51.20078775354687},{"lat":-30.025436664894,"lng":-51.2012556},{"lat":-30.025292935106,"lng":-51.2012556}]};
 
+
 var rad = Math.PI / 180;
 var MOSTRAR_ZONAS = false; // círculos/nuvens de alcance dos monstros: desligados; só o círculo do Mineu aparece (true = volta a mostrar)
 
@@ -178,20 +180,20 @@ var ESTILO = {
   sources: { omt: { type: 'vector', url: 'https://tiles.openfreemap.org/planet' }, sat: { type: 'raster', tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'], tileSize: 256, maxzoom: 19, attribution: 'Imagens © Esri' } },
   sky: { 'sky-color': '#bfe6ff', 'horizon-color': '#fff3d1', 'fog-color': '#f1f6dd', 'sky-horizon-blend': 0.6, 'horizon-fog-blend': 0.85, 'fog-ground-blend': 0.55 },
   layers: [
-    { id: 'bg', type: 'background', paint: { 'background-color': '#e1f1c9' } },
+    { id: 'bg', type: 'background', paint: { 'background-color': '#f3e2b8' } },
     { id: 'sat', type: 'raster', source: 'sat', layout: { visibility: 'none' }, paint: { 'raster-fade-duration': 0 } },
-    { id: 'grama', type: 'fill', source: 'omt', 'source-layer': 'landcover', filter: ['==', ['get', 'class'], 'grass'], paint: { 'fill-color': '#cbe9a6' } },
-    { id: 'mata', type: 'fill', source: 'omt', 'source-layer': 'landcover', filter: ['==', ['get', 'class'], 'wood'], paint: { 'fill-color': '#b4dd8d' } },
-    { id: 'parque', type: 'fill', source: 'omt', 'source-layer': 'park', paint: { 'fill-color': '#b9e29c', 'fill-opacity': 0.9 } },
-    { id: 'quadra', type: 'fill', source: 'omt', 'source-layer': 'landuse', filter: ['in', ['get', 'class'], ['literal', ['pitch', 'playground']]], paint: { 'fill-color': '#f3dba5' } },
-    { id: 'agua', type: 'fill', source: 'omt', 'source-layer': 'water', paint: { 'fill-color': '#80cfee' } },
-    { id: 'rio', type: 'line', source: 'omt', 'source-layer': 'waterway', paint: { 'line-color': '#80cfee', 'line-width': largura } },
-    { id: 'rua-borda', type: 'line', source: 'omt', 'source-layer': 'transportation', filter: ['in', ['get', 'class'], ['literal', ['minor', 'service', 'tertiary', 'secondary', 'primary', 'trunk']]], layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#e0cfb0', 'line-width': larguraRua(1.6) } },
-    { id: 'rua', type: 'line', source: 'omt', 'source-layer': 'transportation', filter: ['in', ['get', 'class'], ['literal', ['minor', 'service', 'tertiary', 'secondary', 'primary', 'trunk']]], layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#fffaf0', 'line-width': largura } },
-    { id: 'trilha', type: 'line', source: 'omt', 'source-layer': 'transportation', filter: ['in', ['get', 'class'], ['literal', ['path', 'track', 'pedestrian']]], layout: { 'line-cap': 'round' }, paint: { 'line-color': '#f2c27a', 'line-width': ['interpolate', ['linear'], ['zoom'], 15, 1, 19, 3.5], 'line-dasharray': [2, 1.4] } },
+    { id: 'grama', type: 'fill', source: 'omt', 'source-layer': 'landcover', filter: ['==', ['get', 'class'], 'grass'], paint: { 'fill-color': '#cfe39a' } },
+    { id: 'mata', type: 'fill', source: 'omt', 'source-layer': 'landcover', filter: ['==', ['get', 'class'], 'wood'], paint: { 'fill-color': '#8fbf5e' } },
+    { id: 'parque', type: 'fill', source: 'omt', 'source-layer': 'park', paint: { 'fill-color': '#a7d36d', 'fill-opacity': 0.9 } },
+    { id: 'quadra', type: 'fill', source: 'omt', 'source-layer': 'landuse', filter: ['in', ['get', 'class'], ['literal', ['pitch', 'playground']]], paint: { 'fill-color': '#ecd6a0' } },
+    { id: 'agua', type: 'fill', source: 'omt', 'source-layer': 'water', paint: { 'fill-color': '#62bdd8' } },
+    { id: 'rio', type: 'line', source: 'omt', 'source-layer': 'waterway', paint: { 'line-color': '#62bdd8', 'line-width': largura } },
+    { id: 'rua-borda', type: 'line', source: 'omt', 'source-layer': 'transportation', filter: ['in', ['get', 'class'], ['literal', ['minor', 'service', 'tertiary', 'secondary', 'primary', 'trunk']]], layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#e3c88f', 'line-width': larguraRua(1.6) } },
+    { id: 'rua', type: 'line', source: 'omt', 'source-layer': 'transportation', filter: ['in', ['get', 'class'], ['literal', ['minor', 'service', 'tertiary', 'secondary', 'primary', 'trunk']]], layout: { 'line-cap': 'round', 'line-join': 'round' }, paint: { 'line-color': '#fff8e0', 'line-width': largura } },
+    { id: 'trilha', type: 'line', source: 'omt', 'source-layer': 'transportation', filter: ['in', ['get', 'class'], ['literal', ['path', 'track', 'pedestrian']]], layout: { 'line-cap': 'round' }, paint: { 'line-color': '#b5551d', 'line-width': ['interpolate', ['linear'], ['zoom'], 15, 1, 19, 3.5], 'line-dasharray': [2, 1.4] } },
     // construções planas, só marcadas no chão (sem 3D); o desenho vem do OpenStreetMap
-    { id: 'predio', type: 'fill', source: 'omt', 'source-layer': 'building', minzoom: 14, paint: { 'fill-color': '#e9d2b0', 'fill-opacity': 0.95 } },
-    { id: 'predio-borda', type: 'line', source: 'omt', 'source-layer': 'building', minzoom: 14, paint: { 'line-color': '#b98f62', 'line-width': ['interpolate', ['linear'], ['zoom'], 15, 0.6, 20, 2] } },
+    { id: 'predio', type: 'fill', source: 'omt', 'source-layer': 'building', minzoom: 14, paint: { 'fill-color': '#e6bf86', 'fill-opacity': 0.95 } },
+    { id: 'predio-borda', type: 'line', source: 'omt', 'source-layer': 'building', minzoom: 14, paint: { 'line-color': '#a9772f', 'line-width': ['interpolate', ['linear'], ['zoom'], 15, 0.6, 20, 2] } },
     // perímetro do jogo: fora da área fica escurecido (preto translúcido); a linha preta marca o limite
     { id: 'area-fora', type: 'fill', source: 'area-fora', paint: { 'fill-color': '#000000', 'fill-opacity': 0.5 } },
     { id: 'area-linha', type: 'line', source: 'area-linha', layout: { 'line-join': 'round' }, paint: { 'line-color': '#000000', 'line-width': 4 } },
@@ -388,7 +390,9 @@ function mordida(agora) {
   }
 }
 var CHEFAO_PARA_LIVRE_M = 25, CHEFAO_AGGRO_LIVRE_M = 300, CHEFAO_AGGRO_M = ALCANCE_TIRO_M, CHEFAO_PARA_M = CHEFAO_PARA_LIVRE_M, CHEFAO_VEL = 0.5, CHEFAO_FINAL_VEL = 0.5;
-var GRACA_PRIMEIRO_FOGO_MS = 4000, RECARGA_FOGO_MS = 9000, TEMPO_VOO_FOGO_MS = 12000, FOGO_VEL_MS = 2.9, FOGO_ALCANCE_M = 35, RAIO_ACERTO_FOGO_M = 3, DANO_FOGO = 10, DANO_FOGO_FINAL = 20;
+var GRACA_PRIMEIRO_FOGO_MS = 4000, RECARGA_FOGO_MS = 9000, TEMPO_VOO_FOGO_MS = 12000, FOGO_VEL_MS = 2.9, FOGO_ALCANCE_M = 35, RAIO_ACERTO_FOGO_M = 3, DANO_FOGO = 10, DANO_FOGO_FINAL = 20, ATRASO_FOGO_MS = 500;
+/* Golpes de perto dos chefões (sem fogo no chefão comum; o final também golpeia se o Mineu chegar perto). Dano = o mesmo da bola de fogo do chefão comum. */
+var DANO_GOLPE_CHEFAO = DANO_FOGO, CONTATO_CHEFAO_M = 3, INTERVALO_GOLPE_CHEFAO = 2500;
 function tocarSomTiroChefao(final) {
   var g = final ? 0.75 : 1;
   tocarTom(150 * g, 45 * g, final ? 520 : 380, 'sawtooth', 0.22);
@@ -408,20 +412,23 @@ function levarDano(v) {
 /* O fogo do chefão sai na direção de quem ele mirou e segue reto, a 2,9 m/s, até o limite do alcance dele (35 m, 12 s): não para no lugar do alvo e some só no fim do alcance.
    Quem estiver a menos de 3 m do fogo, em qualquer ponto do caminho, leva o dano. */
 function dispararFogo(i) {
-  i.balaEmVoo = true;
+  i.balaEmVoo = true; i.tCabecada = performance.now(); // o dragão dá UMA cabeçada (bloco monstros-3d) e o fogo sai no meio do gesto
+  setTimeout(function () { if (i.vivo) soltarFogo(i); else i.balaEmVoo = false; }, ATRASO_FOGO_MS);
+}
+function soltarFogo(i) {
   tocarSomTiroChefao(i.final);
   var cl = Math.cos(i.lat * rad), dl = (POS.lat - i.lat) * 111320, dn = (POS.lng - i.lng) * 111320 * cl, dd = Math.hypot(dl, dn) || 1;
   var de = { lat: i.lat, lng: i.lng }, fim = { lat: i.lat + (dl / dd * FOGO_ALCANCE_M) / 111320, lng: i.lng + (dn / dd * FOGO_ALCANCE_M) / (111320 * cl) };
   var dur = (FOGO_ALCANCE_M / FOGO_VEL_MS) * 1000;
   var fora = document.createElement('div'); fora.style.zIndex = 99990;
-  var el = document.createElement('div'); el.className = 'fogo' + (i.final ? ' roxo' : ''); el.textContent = '🔥'; fora.appendChild(el);
+  var el = document.createElement('div'); el.className = 'fogo'; el.textContent = '🔥'; fora.appendChild(el); // fogo sempre laranja
   var mk = new maplibregl.Marker({ element: fora, anchor: 'center', pitchAlignment: 'viewport', rotationAlignment: 'viewport' }).setLngLat([de.lng, de.lat]).addTo(mapa);
   var t0 = performance.now(), ultRastro = 0;
   (function voo(agora) {
     var t = Math.min(1, (agora - t0) / dur), plat = de.lat + (fim.lat - de.lat) * t, plng = de.lng + (fim.lng - de.lng) * t;
     mk.setLngLat([plng, plat]);
     el.style.transform = 'translateY(' + (-(34 - 22 * t)) + 'px)';
-    if (agora - ultRastro > 90) { ultRastro = agora; rastro(el, false, i.final ? 'roxo' : 'fogo'); }
+    if (agora - ultRastro > 90) { ultRastro = agora; rastro(el, false, 'fogo'); }
     var ex = (plat - POS.lat) * 111320, ey = (plng - POS.lng) * 111320 * Math.cos(POS.lat * rad);
     if (Math.sqrt(ex * ex + ey * ey) <= RAIO_ACERTO_FOGO_M) { mk.remove(); i.balaEmVoo = false; tocarSomAtingido(); levarDano(i.final ? DANO_FOGO_FINAL : DANO_FOGO); return; }
     if (t < 1) { requestAnimationFrame(voo); return; }
@@ -453,7 +460,7 @@ function moverInimigos(dt, agora) {
     var naArea = m.d <= GALHO_ALCANCE_M && Math.abs(difAng(heading, m.ang)) <= GALHO_CONE;
     if (naArea && !i.naArea) i.tEntrada = agora;
     i.naArea = naArea;
-    var aggro = i.chefao ? (DADOS.livre ? CHEFAO_AGGRO_LIVRE_M : CHEFAO_AGGRO_M) : (DADOS.livre ? CHEFAO_AGGRO_LIVRE_M : ZUMBI_AGGRO_M), para = i.chefao ? (DADOS.livre ? CHEFAO_PARA_LIVRE_M : CHEFAO_PARA_M) : ZUMBI_PARA_M;
+    var aggro = i.chefao ? (DADOS.livre ? CHEFAO_AGGRO_LIVRE_M : CHEFAO_AGGRO_M) : (DADOS.livre ? CHEFAO_AGGRO_LIVRE_M : ZUMBI_AGGRO_M), para = (i.chefao && i.final) ? (DADOS.livre ? CHEFAO_PARA_LIVRE_M : CHEFAO_PARA_M) : ZUMBI_PARA_M; // só o chefão final fica à distância (solta fogo); o comum vem até você para golpear
     var vel = i.chefao ? (i.final ? CHEFAO_FINAL_VEL : CHEFAO_VEL) : ZUMBI_VEL;
     // destravar: se ele deveria estar andando e não saiu do lugar em 3 s (preso atrás de parede ou dentro de construção), vira "fantasma" por 8 s e vai reto até o jogador
     if (m.d <= aggro && m.d > para + 0.5) {
@@ -499,9 +506,12 @@ function moverInimigos(dt, agora) {
     i.el.firstChild.classList.toggle('anda-z', anda);
     if (!i.chefao) {
       if (m.d <= CONTATO_M && agora - ultimaMordida > INTERVALO_MORDIDA) mordida(agora);
-    } else if (m.d <= CHEFAO_AGGRO_M) {
-      if (!i.proximoFogo) i.proximoFogo = agora + GRACA_PRIMEIRO_FOGO_MS;
-      if (agora >= i.proximoFogo && !i.balaEmVoo) { i.proximoFogo = agora + RECARGA_FOGO_MS; dispararFogo(i); }
+    } else {
+      if (m.d <= CONTATO_CHEFAO_M && agora - (i.ultGolpe || 0) > INTERVALO_GOLPE_CHEFAO) { i.ultGolpe = agora; tocarSomAtingido(); levarDano(DANO_GOLPE_CHEFAO); }
+      if (i.final && m.d <= CHEFAO_AGGRO_M && m.d > CONTATO_CHEFAO_M) { // só o chefão final solta fogo (e não enquanto você está colado nele)
+        if (!i.proximoFogo) i.proximoFogo = agora + GRACA_PRIMEIRO_FOGO_MS;
+        if (agora >= i.proximoFogo && !i.balaEmVoo) { i.proximoFogo = agora + RECARGA_FOGO_MS; dispararFogo(i); }
+      }
     }
   });
 }
@@ -513,7 +523,8 @@ function ordenarProfundidade() {
 }
 var estat = { zumbis: 0, monstros: 0, t0: performance.now() }, celebrou = false;
 function verificarFim() {
-  if (!DADOS.livre || celebrou) return;
+  /* modo livre: sempre celebra ao limpar. Missão de parque: só se a missão pedir (DADOS.celebraAoLimpar, usado no teste de combate) */
+  if ((!DADOS.livre && !DADOS.celebraAoLimpar) || celebrou) return;
   if (inimigos.length && inimigos.every(function (i) { return !i.vivo; })) celebrar();
 }
 function confete() {
@@ -747,7 +758,9 @@ function quandoMapaPronto(cb) {
   var tentativas = 0;
   (function espera() {
     tentativas++;
-    if ((mapa.areTilesLoaded() && tentativas > 2) || tentativas > 25) cb(); else setTimeout(espera, 300);
+    // so vale 'sem tiles carregando' DEPOIS que o estilo do mapa existe (na 1a abertura, com a rede lenta, antes disso tambem nao ha tiles e o codigo desenhava a area antes do mapa existir)
+    var estiloPronto = !!mapa.getSource('area-fora');
+    if ((estiloPronto && ((mapa.areTilesLoaded() && tentativas > 2) || tentativas > 25)) || tentativas > 100) cb(); else setTimeout(espera, 300);
   })();
 }
 function ajustarInimigosFixos() {
@@ -767,8 +780,10 @@ function pintarArea() {
   if (!AREA) return;
   quandoMapaPronto(function () {
     var anel = anelDaArea(), mundo = [[-180, -85], [180, -85], [180, 85], [-180, 85], [-180, -85]];
-    mapa.getSource('area-fora').setData({ type: 'Feature', geometry: { type: 'Polygon', coordinates: [mundo, anel] } });
-    mapa.getSource('area-linha').setData({ type: 'Feature', geometry: { type: 'LineString', coordinates: anel } });
+    var extras = AREA.extras || []; /* parques com mais de uma parte (ex.: Parcao): cada parte e um buraco no "fora da area" e uma linha de borda */
+    if (!mapa.getSource('area-fora') || !mapa.getSource('area-linha')) return; /* estilo ainda nao carregou (rede muito lenta): sem a area escurecida, mas sem erro */
+    mapa.getSource('area-fora').setData({ type: 'Feature', geometry: { type: 'Polygon', coordinates: [mundo, anel].concat(extras) } });
+    mapa.getSource('area-linha').setData(extras.length ? { type: 'Feature', geometry: { type: 'MultiLineString', coordinates: [anel].concat(extras) } } : { type: 'Feature', geometry: { type: 'LineString', coordinates: anel } });
   });
 }
 function definirAreaLivre(lat, lng) { // modo livre/dupla: círculo de 150 m em volta de onde o jogo começa
@@ -778,7 +793,10 @@ function definirAreaLivre(lat, lng) { // modo livre/dupla: círculo de 150 m em 
 function dentroDaArea(lat, lng) {
   if (!AREA) return true;
   if (AREA.raio) return Math.hypot((lat - AREA.lat) * 111320, (lng - AREA.lng) * 111320 * Math.cos(AREA.lat * rad)) <= AREA.raio;
-  var a = AREA.anel, dentro = false;
+  return dentroDoAnel(AREA.anel, lat, lng) || (AREA.extras || []).some(function (r) { return dentroDoAnel(r, lat, lng); });
+}
+function dentroDoAnel(a, lat, lng) {
+  var dentro = false;
   for (var i = 0, j = a.length - 1; i < a.length; j = i++) { if (((a[i][1] > lat) !== (a[j][1] > lat)) && (lng < (a[j][0] - a[i][0]) * (lat - a[i][1]) / (a[j][1] - a[i][1]) + a[i][0])) dentro = !dentro; }
   return dentro;
 }
@@ -788,7 +806,7 @@ function checarArea() {
   foraDaArea = fora; document.body.classList.toggle('fora-area', fora);
   if (fora && navigator.vibrate) navigator.vibrate([120, 80, 120]);
 }
-if (DADOS.perimetro) { AREA = { anel: DADOS.perimetro }; pintarArea(); }
+if (DADOS.perimetro) { AREA = { anel: DADOS.perimetro, extras: DADOS.perimetroExtra || [] }; pintarArea(); }
 function spawnAoRedor(lat, lng) {
   if (DADOS.livre) definirAreaLivre(lat, lng);
   quandoMapaPronto(function () { if (carregarObstaculos(lat, lng)) construirGrade(lat, lng); spawnBase(lat, lng); });
@@ -829,15 +847,33 @@ function spawnBase(lat, lng) {
   atualizarZonas(chefoes);
 }
 
+/* LARGADA LIVRE (DADOS.dinamico): nao ha ponto de largada fixo. O combate e montado em volta de onde a pessoa esta, a partir do 1o sinal de GPS dentro do parque. */
+var combateMontado = false, popularMissao = null, missaoPendente = null;
+function montarCombateAqui(lat, lng, semGps) {
+  if (combateMontado) return true;
+  if (!semGps && !dentroDaArea(lat, lng)) { aviso('Você ainda não está dentro do parque. Vá até a área de jogo para começar.'); return false; }
+  var c = null;
+  try { c = gerarCombateDinamico({ lat: lat, lng: lng }, DADOS.arena, DADOS.regrasDinamicas); } catch (e) { c = null; }
+  if (!c || !c.pontos.length) { aviso('Não achei onde montar as bases perto de você. Vá para uma parte mais aberta do parque.'); return false; }
+  combateMontado = true; aviso('');
+  if (popularMissao) { popularMissao(c); quandoMapaPronto(ajustarInimigosFixos); } else missaoPendente = c;
+  return true;
+}
 mapa.on('load', function () {
   if (DADOS.livre) spawnAoRedor(POS.lat, POS.lng);
   var ICONES_NUMERADOS = ["https://static.wixstatic.com/media/f02643_48f7c1d977754b23977fd2e7f58c6c27~mv2.png","https://static.wixstatic.com/media/f02643_f14858e9c66d43feae48eff43148759e~mv2.png","https://static.wixstatic.com/media/f02643_cba7ab04f17845d98a60cbdb48466302~mv2.png","https://static.wixstatic.com/media/f02643_ea984cd4c0fc44aead08ba7a5af6b383~mv2.png","https://static.wixstatic.com/media/f02643_6a69d7baa0794d37848b3948fed51e44~mv2.png","https://static.wixstatic.com/media/f02643_801dffdc2e554552a5c134e097d91ea6~mv2.png","https://static.wixstatic.com/media/f02643_cd0ee07d3fcd40fb9a33810c88f2d851~mv2.png","https://static.wixstatic.com/media/f02643_91b88885a5c44c8c833417bc1190b7b5~mv2.png","https://static.wixstatic.com/media/f02643_1b89172049664af79ec14bce19a83033~mv2.png","https://static.wixstatic.com/media/f02643_033f68da0d1044bcbd9a97da09181820~mv2.png","https://static.wixstatic.com/media/f02643_193c340555f24225b4d92d767d84255a~mv2.png","https://static.wixstatic.com/media/f02643_1ff212affeb84c9584f484f04ba0535e~mv2.png","https://static.wixstatic.com/media/f02643_741fb6aae44744de8ed6e009fb318faf~mv2.png","https://static.wixstatic.com/media/f02643_b1b9ad3701be4696815636ec5dc6cedc~mv2.png","https://static.wixstatic.com/media/f02643_ed5489163f5f4182b136c62a8f93eb33~mv2.png","https://static.wixstatic.com/media/f02643_7ccdf03c1f824bea8af5c7f17a999e96~mv2.png","https://static.wixstatic.com/media/f02643_c8fe0d4b091b49f7aba79ef064ecfbae~mv2.png","https://static.wixstatic.com/media/f02643_77ea1b50292947b7adb0c8eac523973d~mv2.png","https://static.wixstatic.com/media/f02643_4695d3ce6947477ca8a54cf26fda87c6~mv2.png","https://static.wixstatic.com/media/f02643_5bc20c9e31a9428980ffd69a42beb7bb~mv2.png","https://static.wixstatic.com/media/f02643_514f5fbaf6134390b721277b01a65366~mv2.png","https://static.wixstatic.com/media/f02643_4c05aa018fc8463393cd0d9f0d63e102~mv2.png","https://static.wixstatic.com/media/f02643_8530ccc59ad743e78a7ad6977226335e~mv2.png","https://static.wixstatic.com/media/f02643_e692002f886449efb41c97bf50166f45~mv2.png","https://static.wixstatic.com/media/f02643_81eaeefadf2744878569f4cb8b6d73f1~mv2.png","https://static.wixstatic.com/media/f02643_c2baf60987ef4598af4bdc0d73e2fbd9~mv2.png","https://static.wixstatic.com/media/f02643_845aec3fa20e4ff595646def8a93b08c~mv2.png","https://static.wixstatic.com/media/f02643_009e01b80a6e4289adcbe915449e9652~mv2.png","https://static.wixstatic.com/media/f02643_37e8e810d5c248b5893ee19c8bceeba5~mv2.png","https://static.wixstatic.com/media/f02643_d2909286d264450c9c8321282b3e2c9e~mv2.png"]; // desenhos oficiais do jogo, 1 a 30
-  DADOS.pontos.forEach(function (p, i) { var u = ICONES_NUMERADOS[i]; pino('p-ponto', u ? '<img src="' + u + '" alt="' + (i + 1) + '">' : (i + 1), p.lat, p.lng); }); /* o desenho segue a ORDEM do ponto no percurso, nao o codigo */
-  DADOS.curas.forEach(function (c) { pino('p-cura', '✚', c.lat, c.lng); });
-  DADOS.pedras.forEach(function (p) { pino('p-pedra' + (p.esp ? ' esp' : ''), (p.esp ? '<span class="pe-amarela">🪨</span>' : '🪨'), p.lat, p.lng); });
-  DADOS.bombas.forEach(function (b) { pino('p-bomba', b.e, b.lat, b.lng); });
-  DADOS.zumbis.forEach(function (z) { novoInimigo(z.lat, z.lng, 'p-zumbi', '🧟', 5); });
-  (DADOS.chefoes || []).forEach(function (c) { novoInimigo(c.lat, c.lng, 'p-chefao', c.final ? '👿' : '👹', c.final ? 200 : 25); });
+  popularMissao = function (d) {
+    d.pontos.forEach(function (p, i) { var u = ICONES_NUMERADOS[i]; pino('p-ponto', u ? '<img src="' + u + '" alt="' + (i + 1) + '">' : (i + 1), p.lat, p.lng); }); /* o desenho segue a ORDEM do ponto no percurso, nao o codigo */
+    d.curas.forEach(function (c) { pino('p-cura', '✚', c.lat, c.lng); });
+    d.pedras.forEach(function (p) { pino('p-pedra' + (p.esp ? ' esp' : ''), (p.esp ? '<span class="pe-amarela">🪨</span>' : '🪨'), p.lat, p.lng); });
+    d.bombas.forEach(function (b) { pino('p-bomba', b.e, b.lat, b.lng); });
+    d.zumbis.forEach(function (z) { novoInimigo(z.lat, z.lng, 'p-zumbi', '🧟', 5); });
+    (d.chefoes || []).forEach(function (c) { novoInimigo(c.lat, c.lng, 'p-chefao', c.final ? '👿' : '👹', c.final ? 200 : 25); });
+  
+  };
+  popularMissao(DADOS);
+  if (missaoPendente) { popularMissao(missaoPendente); missaoPendente = null; quandoMapaPronto(ajustarInimigosFixos); }
+  if (DADOS.dinamico && location.search.indexOf('teste=1') >= 0) montarCombateAqui(DADOS.largada.lat, DADOS.largada.lng, true); /* ?teste=1: testar de casa, monta no ponto padrao do parque */
 });
 
 // o Mineu (cartaz em pé, sempre virado pra câmera)
@@ -943,10 +979,12 @@ document.getElementById('bInc').onclick = function () { if (satelite) return; /*
 pintaInc();
 
 // ---------- botões de combate (só visual, igual ao jogo; sem inimigo de verdade ainda) ----------
-var municao = { normal: 150, esp: 24 }, ativa = "normal";
+/* DADOS.semEspecial (teste de combate): só o estilingue com pedra normal e o galho; a pedra amarela nem aparece na troca de arma */
+var ESP_INICIAL = DADOS.semEspecial ? 0 : 24;
+var municao = { normal: 150, esp: ESP_INICIAL }, ativa = "normal";
 // jogar de novo: tudo volta ao padrão do começo do jogo (pedras normais e amarelas, vida e arma na mão = pedra normal)
-function reiniciarEstoques() { municao.normal = 150; municao.esp = 24; vidaMineu = 100; ativa = "normal"; pintaVidaMineu(); pintaMunicao(); }
-var ORDEM_ARMAS = ["normal", "esp", "galho"];
+function reiniciarEstoques() { municao.normal = 150; municao.esp = ESP_INICIAL; vidaMineu = 100; ativa = "normal"; pintaVidaMineu(); pintaMunicao(); }
+var ORDEM_ARMAS = DADOS.semEspecial ? ["normal", "galho"] : ["normal", "esp", "galho"];
 var ESTILINGUE_HTML = document.getElementById("btnAtirar").innerHTML;
 var elGalho = document.getElementById("galhoMineu"), elTroca = document.getElementById("btnTrocaPedra"), elReserva = document.getElementById("pedraReserva"), elReserva2 = document.getElementById("pedraReserva2");
 var ICONE_PAU = '<img src="icone-pau.png" alt="Pau">';
@@ -961,6 +999,7 @@ function pintaMunicao() {
   elReserva.innerHTML = iconeArma(prox); elReserva._arma = prox;
   elReserva2.className = "pedra-reserva" + (prox2 === "esp" ? " esp" : "") + (prox2 === "galho" ? " galho" : "");
   elReserva2.innerHTML = iconeArma(prox2); elReserva2._arma = prox2;
+  elReserva2.style.display = ORDEM_ARMAS.length > 2 ? "" : "none"; /* com só 2 armas não há segunda bolinha de reserva */
   document.getElementById("btnAtirar").innerHTML = ativa === "galho" ? ICONE_PAU : ESTILINGUE_HTML;
   document.getElementById("btnAtirar").setAttribute("aria-label", ativa === "galho" ? "Bater com o galho" : "Atirar");
   elGalho.style.display = ativa === "galho" ? "block" : "none";
@@ -989,10 +1028,19 @@ pintaMunicao();
 // ---------- GPS e bússola de verdade (no celular) ----------
 var modoReal = false;
 document.getElementById('bDeNovo').onclick = function () { // nova rodada em volta de onde você está
+  if (!DADOS.livre) { location.reload(); return; } /* missão de parque: recomeça a missão inteira, com os monstros nos lugares de origem */
   document.getElementById('parabens').style.display = 'none'; reiniciarEstoques(); spawnAoRedor(POS.lat, POS.lng);
 };
+/* pesquisa rápida (teste com famílias): botão no menu e na tela de fim, abre o formulário em outra aba sem sair do jogo */
+if (DADOS.pesquisaUrl) {
+  var abrirPesquisa = function () { try { window.open(DADOS.pesquisaUrl, '_blank', 'noopener'); } catch (e) { location.href = DADOS.pesquisaUrl; } };
+  var bPesq = document.createElement('button'); bPesq.id = 'bPesquisa'; bPesq.title = 'Pesquisa rápida'; bPesq.innerHTML = '📝'; bPesq.onclick = abrirPesquisa;
+  document.getElementById('painel').appendChild(bPesq);
+  var bPesq2 = document.createElement('button'); bPesq2.id = 'bPesquisaFim'; bPesq2.textContent = '📝 Responder a pesquisa rápida'; bPesq2.onclick = abrirPesquisa;
+  document.querySelector('#parabens .caixaP').appendChild(bPesq2);
+}
 document.getElementById('bInicio').onclick = function () {
-  jogoIniciado = true;
+  jogoIniciado = true; estat.t0 = performance.now(); /* o tempo da partida conta a partir do toque em "Ativar GPS", não de quando a página abriu */
   document.getElementById('inicio').style.display = 'none';
   document.getElementById('bGps').click(); // liga GPS e bússola (precisa ser dentro do toque)
 };
@@ -1003,9 +1051,10 @@ document.getElementById('bGps').onclick = function () {
   aviso('Procurando o GPS... (permita a localização)');
   if (navigator.geolocation) {
     navigator.geolocation.watchPosition(function (p) {
-      ALVO.lat = p.coords.latitude; ALVO.lng = p.coords.longitude; aviso('');
+      ALVO.lat = p.coords.latitude; ALVO.lng = p.coords.longitude; ALVO.prec = p.coords.accuracy; aviso('');
       if (!ALVO.visto) { ALVO.visto = true; POS.lat = ALVO.lat; POS.lng = ALVO.lng; if (DADOS.livre) spawnAoRedor(POS.lat, POS.lng); }
-    }, function () { aviso('Sem GPS. Verifique se a localização está ligada e permitida.'); modoReal = false; }, { enableHighAccuracy: true });
+      if (DADOS.dinamico && !combateMontado) montarCombateAqui(ALVO.lat, ALVO.lng);
+    }, function () { aviso('Sem GPS. Verifique se a localização está ligada e permitida.'); modoReal = false; if (DADOS.dinamico && !combateMontado) montarCombateAqui(DADOS.largada.lat, DADOS.largada.lng, true); }, { enableHighAccuracy: true });
   }
   ligarBussola();
 };
@@ -1278,14 +1327,16 @@ if (DADOS.livre && MUSICA_NO_JOGO) {
 // ---------- jogar sem internet ----------
 (function offline() {
   var ARM_APP = 'mgo-app-v1', ARM_MAPA = 'mgo-tiles-v1', TJ = 'https://tiles.openfreemap.org/planet';
-  var CHAVE = 'mgo-offline-' + (DADOS.livre ? 'livre' : 'parque');
+  var CHAVE = 'mgo-offline-' + (DADOS.livre ? 'livre' : 'parque' + (DADOS.slug ? '-' + DADOS.slug : '')); /* cada parque guarda o seu "já baixei" (antes todos dividiam o mesmo) */
   if ('serviceWorker' in navigator) { window.addEventListener('load', function () { navigator.serviceWorker.register('sw-mgo.js').catch(function () {}); }); }
   window.testeOffline = function (v) { // só pra teste: finge que está sem internet
     if (navigator.serviceWorker && navigator.serviceWorker.controller) navigator.serviceWorker.controller.postMessage({ t: 'offline-teste', v: !!v });
   };
   window.addEventListener('offline', function () { if (typeof aviso === 'function') { aviso('Sem internet: jogando com o mapa baixado.'); setTimeout(function () { aviso(''); }, 4000); } });
   var btn = document.getElementById('bOffline'), msg = document.getElementById('msgOff');
+  function ativosDosBlocos() { return window.MGO_ATIVOS || { proprios: [], externos: [], modulos: [] }; } // lida NA HORA (os blocos declaram a lista depois deste codigo): o que o 3D etc. precisam ter guardado
   if (!btn) return; // páginas sem o botão (ex.: dupla) só ganham o service worker
+  function prog(pct, txt) { msg.textContent = txt; try { document.dispatchEvent(new CustomEvent('mgo:offline', { detail: { pct: pct, texto: txt } })); } catch (e) {} }
   function lerRegistro() { try { return JSON.parse(localStorage.getItem(CHAVE) || 'null'); } catch (e) { return null; } }
   function mostrarRegistro() {
     var rg = lerRegistro();
@@ -1300,8 +1351,8 @@ if (DADOS.livre && MUSICA_NO_JOGO) {
     return out;
   }
   async function baixar() {
-    if (!('caches' in window)) { msg.textContent = 'Este navegador não deixa guardar o parque.'; return; }
-    if (!navigator.onLine) { msg.textContent = 'Sem internet agora. Conecte pra baixar o parque.'; return; }
+    if (!('caches' in window)) { msg.textContent = 'Este navegador não deixa guardar o parque.'; return { ok: false, motivo: 'sem-cache' }; }
+    if (!navigator.onLine) { msg.textContent = 'Sem internet agora. Conecte pra baixar o parque.'; return { ok: false, motivo: 'sem-internet' }; }
     btn.disabled = true; msg.textContent = 'Baixando...';
     try {
       if (navigator.storage && navigator.storage.persist) navigator.storage.persist();
@@ -1312,24 +1363,53 @@ if (DADOS.livre && MUSICA_NO_JOGO) {
       for (var i = 0; i < lista.length; i++) {
         var u = modelo.replace('{z}', lista[i][0]).replace('{x}', lista[i][1]).replace('{y}', lista[i][2]);
         try { var rr = await fetch(u); if (rr.ok) { bytes += (await rr.clone().blob()).size; await cT.put(u, rr); } } catch (e) {}
-        feitos++; msg.textContent = 'Baixando o mapa... ' + feitos + '/' + lista.length;
+        feitos++; prog(Math.round(70 * feitos / lista.length), 'Baixando o mapa... ' + feitos + '/' + lista.length);
       }
       // arquivos do jogo: a página, imagens e as bibliotecas que ela usa
       var arquivos = ['mineu-costas.png', 'mineu-golpe-1.png', 'mineu-golpe-2.png', 'mineu-golpe-3.png', 'mineu-estilingue-1.png', 'mineu-estilingue-2.png', 'mineu-andar-1.png', 'mineu-andar-2.png', 'mineu-andar-3.png', 'mineu-comemora.png', 'icone-pau.png', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'].concat(typeof ICONES_NUMERADOS !== 'undefined' ? ICONES_NUMERADOS : []).concat([location.pathname.split('/').pop() || 'index.html']);
       var man = document.querySelector('link[rel=manifest]'); if (man) arquivos.push(man.getAttribute('href'));
       document.querySelectorAll('script[src], link[rel=stylesheet], img[src]').forEach(function (el) { var s = el.src || el.href; if (s && arquivos.indexOf(s) < 0) arquivos.push(s); });
-      msg.textContent = 'Guardando o jogo no celular...';
+      var ATIVOS = ativosDosBlocos(), falhas = [], total2 = arquivos.length + ATIVOS.proprios.length + ATIVOS.externos.length + ATIVOS.modulos.length, feitos2 = 0, bytes2 = 0;
+      function passo2(txt) { feitos2++; prog(70 + Math.round(30 * feitos2 / Math.max(1, total2)), txt); }
       for (var k = 0; k < arquivos.length; k++) {
         var a = arquivos[k], externo = /^https?:\/\//.test(a) && a.indexOf(location.origin) !== 0;
         try { var r2 = await fetch(a, externo ? { mode: 'no-cors' } : { cache: 'reload' }); await cA.put(a, r2); } catch (e) {}
+        passo2('Guardando o jogo no celular...');
       }
-      localStorage.setItem(CHAVE, JSON.stringify({ t: Date.now(), mb: Math.round(bytes / 1e5) / 10, n: lista.length }));
+      for (var p = 0; p < ATIVOS.proprios.length; p++) { // peças dos blocos (monstros 3D, modelos...): guardadas inteiras
+        try { var r3 = await fetch(ATIVOS.proprios[p], { cache: 'reload' }); if (!r3.ok) throw 0; bytes2 += (await r3.clone().blob()).size; await cA.put(ATIVOS.proprios[p], r3); } catch (e) { falhas.push(ATIVOS.proprios[p]); }
+        passo2('Guardando os monstros 3D...');
+      }
+      for (var q = 0; q < ATIVOS.externos.length; q++) { // bibliotecas externas dos blocos (three.js)
+        try { var r4 = await fetch(ATIVOS.externos[q]); if (!r4.ok) throw 0; bytes2 += (await r4.clone().blob()).size; await cA.put(ATIVOS.externos[q], r4); } catch (e) { falhas.push(ATIVOS.externos[q]); }
+        passo2('Guardando a biblioteca 3D...');
+      }
+      for (var w = 0; w < ATIVOS.modulos.length; w++) { try { await import(ATIVOS.modulos[w]); } catch (e) {} passo2('Preparando o 3D...'); } // aquece os módulos
+      localStorage.setItem(CHAVE, JSON.stringify({ t: Date.now(), mb: Math.round(bytes / 1e5) / 10, mbTotal: Math.round((bytes + bytes2) / 1e5) / 10, n: lista.length, falhou: falhas.length }));
+      prog(100, 'Pronto!');
+      if (falhas.length) { msg.textContent = 'Baixado, mas faltaram ' + falhas.length + ' arquivo(s). Tente baixar de novo.'; }
       mostrarRegistro();
-    } catch (e) { msg.textContent = 'Não consegui baixar agora. Tente de novo com internet.'; }
-    btn.disabled = false;
+      btn.disabled = false;
+      var rg2 = lerRegistro(); return { ok: !!rg2 && !rg2.falhou };
+    } catch (e) { msg.textContent = 'Não consegui baixar agora. Tente de novo com internet.'; btn.disabled = false; return { ok: false, motivo: 'erro' }; }
   }
+  // O pacote ainda esta inteiro? (o iPhone apaga dados de sites que ficam dias sem uso)
+  async function verificar() {
+    var ATIVOS = ativosDosBlocos(), rg = lerRegistro(); if (!rg) return { ok: false, motivo: 'nao-baixado' };
+    if (rg.falhou) return { ok: false, motivo: 'incompleto' };
+    if (!('caches' in window)) return { ok: false, motivo: 'sem-cache' };
+    if (Date.now() - rg.t > 30 * 86400000) return { ok: false, motivo: 'antigo' };
+    try {
+      var cT = await caches.open(ARM_MAPA), ks = await cT.keys(); if (ks.length < 5) return { ok: false, motivo: 'mapa-apagado' };
+      var lista = ATIVOS.proprios.concat(ATIVOS.externos), falta = [];
+      for (var i = 0; i < lista.length; i++) { if (!(await caches.match(lista[i], { ignoreSearch: true }))) falta.push(lista[i]); }
+      return falta.length ? { ok: false, motivo: 'arquivos-apagados', falta: falta } : { ok: true, registro: rg };
+    } catch (e) { return { ok: false, motivo: 'erro' }; }
+  }
+  window.MGO_OFFLINE = { baixar: baixar, verificar: verificar, registro: lerRegistro }; // usado pelos blocos (ex.: pacoteObrigatorio)
   btn.onclick = baixar;
 })();
 </script>
+
 </body>
 </html>

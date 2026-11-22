@@ -1,7 +1,7 @@
 {
- "name": "MGO · Combate · Marinha do Brasil",
+ "name": "MGO · Combate · Harmonia",
  "short_name": "MGO",
- "start_url": "./combate-marinha-do-brasil.html",
+ "start_url": "./jogo-harmonia.html",
  "scope": "./",
  "display": "standalone",
  "orientation": "portrait",

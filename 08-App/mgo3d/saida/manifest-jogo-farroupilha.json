@@ -1,7 +1,7 @@
 {
  "name": "MGO · Combate · Farroupilha (Redenção)",
  "short_name": "MGO",
- "start_url": "./combate-farroupilha.html",
+ "start_url": "./jogo-farroupilha.html",
  "scope": "./",
  "display": "standalone",
  "orientation": "portrait",

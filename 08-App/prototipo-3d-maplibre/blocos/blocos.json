@@ -6,7 +6,7 @@
   },
   "blocos": {
     "monstros3d": {
-      "descricao": "Monstros em 3D de verdade (zumbi = Orc_Skull; chefao = Demon vermelho; chefao final = Demon lilas). Segue cada inimigo do jogo: anda, ataca, leva dano e morre.",
+      "descricao": "Monstros em 3D de verdade (zumbi = Orc com bastao; chefao = BlueDemon (so golpes); chefao final = Dragon_Evolved (fogo laranja)). Segue cada inimigo do jogo: anda, ataca, leva dano e morre.",
       "js": "monstros-3d.js",
       "modulo": true,
       "usaBibliotecas": [
@@ -15,12 +15,16 @@
       ],
       "ativos": [
         {
-          "de": "../mgo3d/modelos-3d/ultimate-monsters/Demon.gltf",
-          "para": "modelos/Demon.gltf"
+          "de": "../mgo3d/modelos-3d/ultimate-monsters/pacote/Big/BlueDemon.gltf",
+          "para": "modelos/BlueDemon.gltf"
         },
         {
-          "de": "../mgo3d/modelos-3d/ultimate-monsters/Orc_Skull.gltf",
-          "para": "modelos/Orc_Skull.gltf"
+          "de": "../mgo3d/modelos-3d/ultimate-monsters/pacote/Flying/Dragon_Evolved.gltf",
+          "para": "modelos/Dragon_Evolved.gltf"
+        },
+        {
+          "de": "../mgo3d/modelos-3d/ultimate-monsters/pacote/Big/Orc.gltf",
+          "para": "modelos/Orc.gltf"
         }
       ],
       "offline": [

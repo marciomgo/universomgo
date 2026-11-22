@@ -1,15 +1,18 @@
 // BLOCO monstros3d (ver blocos/blocos.json): os monstros do jogo aparecem em 3D de verdade (Quaternius, CC0) no lugar dos bonecos planos. Dando a volta, aparece o lado e as costas.
-// Zumbi = Orc_Skull; chefao = Demon (o chefao FINAL e um Demon maior). A logica do jogo NAO muda: cada inimigo do jogo (lista `inimigos`) ganha um corpo 3D
+// Zumbi = Orc (golpeia com o bastao); chefao = BlueDemon (sem fogo, golpes fortes de perto); chefao FINAL = Dragon_Evolved (da UMA cabecada ao soltar o fogo laranja; golpeia de perto se voce chegar). A logica do jogo NAO muda: cada inimigo do jogo (lista `inimigos`) ganha um corpo 3D
 // que segue a posicao dele, vira para onde ele anda (ou para o jogador), e toca a animacao certa: parado, andando, atacando, levando dano e morrendo.
 // Roda como modulo DEPOIS do script do jogo (usa as variaveis do jogo: mapa, POS, inimigos, CONTATO_M, ZUMBI_VEL, CHEFAO_VEL...). So acrescenta uma camada.
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as SkeletonUtils from 'three/addons/utils/SkeletonUtils.js';
 
+// VIVO: mesma cor do modelo (matiz 0), so mais saturada. Sem isso as cores originais ficam apagadas sob a luz do jogo. Ajuste: sat (1 = original), luz (1 = original)
+const VIVO = { matiz: 0, luz: 1, sat: 1.5 };
+// anim: nomes das animacoes de cada modelo quando diferem do padrao (Idle, Walk, golpe=Punch). O dragao nao tem Idle/Walk: usa Flying_Idle/Fast_Flying.
 const TIPOS = {
-  zumbi: { arquivo: 'modelos/Orc_Skull.gltf', altura: 1.7, fonte: 36 },
-  chefao: { arquivo: 'modelos/Demon.gltf', altura: 3.0, fonte: 68, cor: { matiz: 0, luz: 1.65, sat: 1.1 } }, // vermelho vivo (o original e um carmim muito escuro)
-  final: { arquivo: 'modelos/Demon.gltf', altura: 4.2, fonte: 90, cor: { matiz: 280, luz: 1.9, sat: 1.15 } } // lilas, igual ao fogo roxo do chefao final. cor: matiz = gira a cor (graus); luz/sat = multiplicam claridade e saturacao
+  zumbi: { arquivo: 'modelos/Orc.gltf', altura: 1.7, fonte: 36, anim: { golpe: 'Weapon' }, cor: VIVO },
+  chefao: { arquivo: 'modelos/BlueDemon.gltf', altura: 3.0, fonte: 68, anim: { golpe: 'Weapon' }, cor: VIVO },
+  final: { arquivo: 'modelos/Dragon_Evolved.gltf', altura: 3.6, fonte: 90, anim: { Idle: 'Flying_Idle', Walk: 'Fast_Flying', golpe: 'Punch' }, cor: VIVO }
 };
 const rad = Math.PI / 180;
 const cena = new THREE.Scene();
@@ -60,7 +63,7 @@ function criar(i) {
   const mixer = new THREE.AnimationMixer(corpo), acoes = {};
   m.animacoes.forEach((c) => { acoes[c.name] = mixer.clipAction(c); });
   const em = i.el.querySelector('.em'); if (em) { em.style.visibility = 'hidden'; em.style.fontSize = tipo.fonte + 'px'; } // o boneco plano some; o espaco fica para a barra de vida ficar acima da cabeca
-  const c = { i, grupo, mixer, acoes, atual: null, nome: '', theta: Math.PI, lat: i.lat, lng: i.lng, vidaAnt: i.vida, tHit: -1e9, tMorte: 0, altura: tipo.altura, vida: i.el.querySelector('.vida'), hCaixa: i.el.offsetHeight || tipo.fonte, topoAnt: null };
+  const c = { tipo, i, grupo, mixer, acoes, atual: null, nome: '', theta: Math.PI, lat: i.lat, lng: i.lng, vidaAnt: i.vida, tHit: -1e9, tMorte: 0, altura: tipo.altura, vida: i.el.querySelector('.vida'), hCaixa: i.el.offsetHeight || tipo.fonte, topoAnt: null };
   tocar(c, 'Idle');
   // MEDE o corpo de verdade (animado): a caixa do modelo parado, usada para dimensionar, fica na METADE da altura real (o esqueleto estica a malha).
   // Assim a barra de energia sabe onde esta a cabeca, e os pes encostam no chao. O tamanho que se ve na tela NAO muda.
@@ -70,11 +73,12 @@ function criar(i) {
   return c;
 }
 function tocar(c, nome, vel) {
-  const a = c.acoes[nome] || c.acoes.Idle; if (!a) return;
+  const mapa_ = (c.tipo && c.tipo.anim) || {}, real = (n) => mapa_[n] || (n === 'golpe' ? 'Punch' : n);
+  const a = c.acoes[real(nome)] || c.acoes[real('Idle')]; if (!a) return;
   if (c.nome !== nome) {
     if (c.atual) c.atual.fadeOut(0.2);
     a.reset().fadeIn(0.2).play(); c.atual = a; c.nome = nome;
-    a.setLoop(nome === 'Death' || nome === 'HitReact' ? THREE.LoopOnce : THREE.LoopRepeat, Infinity); a.clampWhenFinished = true;
+    a.setLoop(nome === 'Death' || nome === 'HitReact' || nome === 'Headbutt' ? THREE.LoopOnce : THREE.LoopRepeat, Infinity); a.clampWhenFinished = true;
   }
   a.timeScale = vel || 1;
 }
@@ -103,7 +107,8 @@ function atualizar(c, dt, agora) {
   if (i.vida < c.vidaAnt) c.tHit = agora; c.vidaAnt = i.vida;
   const vel = i.chefao ? (i.final ? CHEFAO_FINAL_VEL : CHEFAO_VEL) : ZUMBI_VEL;
   if (agora - c.tHit < 450) tocar(c, 'HitReact');
-  else if (i.chefao ? !!i.balaEmVoo : dist <= CONTATO_M + 0.6) tocar(c, 'Punch');
+  else if (i.final && i.tCabecada && agora - i.tCabecada < 1500) tocar(c, 'Headbutt'); // UMA cabecada ao soltar o fogo (1,5 s); depois volta a voar parado enquanto o fogo viaja
+  else if (dist <= (i.chefao ? CONTATO_CHEFAO_M : CONTATO_M) + 0.6) tocar(c, 'golpe');
   else if (andando) tocar(c, 'Walk', Math.max(0.4, Math.min(1.3, vel / 1.1)));
   else tocar(c, 'Idle');
 }

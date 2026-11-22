@@ -1,0 +1,569 @@
+[
+ {
+  "nome": "Alien",
+  "grupo": "Grandes (Big)",
+  "url": "ultimate-monsters/pacote/Big/Alien.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.116"
+  ],
+  "animacoes": 14,
+  "kb": 1266
+ },
+ {
+  "nome": "Birb",
+  "grupo": "Grandes (Big)",
+  "url": "ultimate-monsters/pacote/Big/Birb.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.183"
+  ],
+  "animacoes": 14,
+  "kb": 1194
+ },
+ {
+  "nome": "BlueDemon",
+  "grupo": "Grandes (Big)",
+  "url": "ultimate-monsters/pacote/Big/BlueDemon.gltf",
+  "uso": "No jogo: chefao (sem fogo, golpes fortes).",
+  "partes": [
+   "Cube.017"
+  ],
+  "animacoes": 14,
+  "kb": 1162
+ },
+ {
+  "nome": "Bunny",
+  "grupo": "Grandes (Big)",
+  "url": "ultimate-monsters/pacote/Big/Bunny.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.074",
+   "Cube.077"
+  ],
+  "animacoes": 14,
+  "kb": 1419
+ },
+ {
+  "nome": "Cactoro",
+  "grupo": "Grandes (Big)",
+  "url": "ultimate-monsters/pacote/Big/Cactoro.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.120"
+  ],
+  "animacoes": 14,
+  "kb": 1232
+ },
+ {
+  "nome": "Demon",
+  "grupo": "Grandes (Big)",
+  "url": "ultimate-monsters/pacote/Big/Demon.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.098",
+   "Cylinder.005"
+  ],
+  "animacoes": 14,
+  "kb": 1235
+ },
+ {
+  "nome": "Dino",
+  "grupo": "Grandes (Big)",
+  "url": "ultimate-monsters/pacote/Big/Dino.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.081"
+  ],
+  "animacoes": 14,
+  "kb": 1183
+ },
+ {
+  "nome": "Fish",
+  "grupo": "Grandes (Big)",
+  "url": "ultimate-monsters/pacote/Big/Fish.gltf",
+  "uso": "",
+  "partes": [
+   "Sphere.026"
+  ],
+  "animacoes": 14,
+  "kb": 1232
+ },
+ {
+  "nome": "Frog",
+  "grupo": "Grandes (Big)",
+  "url": "ultimate-monsters/pacote/Big/Frog.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.057"
+  ],
+  "animacoes": 14,
+  "kb": 1146
+ },
+ {
+  "nome": "Monkroose",
+  "grupo": "Grandes (Big)",
+  "url": "ultimate-monsters/pacote/Big/Monkroose.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.110"
+  ],
+  "animacoes": 14,
+  "kb": 1202
+ },
+ {
+  "nome": "MushroomKing",
+  "grupo": "Grandes (Big)",
+  "url": "ultimate-monsters/pacote/Big/MushroomKing.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.056",
+   "Cube.047"
+  ],
+  "animacoes": 14,
+  "kb": 1191
+ },
+ {
+  "nome": "Ninja",
+  "grupo": "Grandes (Big)",
+  "url": "ultimate-monsters/pacote/Big/Ninja.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.092"
+  ],
+  "animacoes": 14,
+  "kb": 1198
+ },
+ {
+  "nome": "Orc",
+  "grupo": "Grandes (Big)",
+  "url": "ultimate-monsters/pacote/Big/Orc.gltf",
+  "uso": "No jogo: zumbi (golpeia com o bastao).",
+  "partes": [
+   "Cube.026",
+   "Cylinder.008"
+  ],
+  "animacoes": 14,
+  "kb": 1250
+ },
+ {
+  "nome": "Orc_Skull",
+  "grupo": "Grandes (Big)",
+  "url": "ultimate-monsters/pacote/Big/Orc_Skull.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.038",
+   "Cylinder.004"
+  ],
+  "animacoes": 14,
+  "kb": 1256
+ },
+ {
+  "nome": "Tribal",
+  "grupo": "Grandes (Big)",
+  "url": "ultimate-monsters/pacote/Big/Tribal.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.102"
+  ],
+  "animacoes": 14,
+  "kb": 1296
+ },
+ {
+  "nome": "Yeti",
+  "grupo": "Grandes (Big)",
+  "url": "ultimate-monsters/pacote/Big/Yeti.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.059"
+  ],
+  "animacoes": 14,
+  "kb": 1199
+ },
+ {
+  "nome": "Alien",
+  "grupo": "Gosmas (Blob)",
+  "url": "ultimate-monsters/pacote/Blob/Alien.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.144",
+   "Cube.000"
+  ],
+  "animacoes": 9,
+  "kb": 194
+ },
+ {
+  "nome": "Birb",
+  "grupo": "Gosmas (Blob)",
+  "url": "ultimate-monsters/pacote/Blob/Birb.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.172"
+  ],
+  "animacoes": 9,
+  "kb": 244
+ },
+ {
+  "nome": "Cactoro",
+  "grupo": "Gosmas (Blob)",
+  "url": "ultimate-monsters/pacote/Blob/Cactoro.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.146",
+   "Cube.000"
+  ],
+  "animacoes": 9,
+  "kb": 205
+ },
+ {
+  "nome": "Cat",
+  "grupo": "Gosmas (Blob)",
+  "url": "ultimate-monsters/pacote/Blob/Cat.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.187"
+  ],
+  "animacoes": 9,
+  "kb": 172
+ },
+ {
+  "nome": "Chicken",
+  "grupo": "Gosmas (Blob)",
+  "url": "ultimate-monsters/pacote/Blob/Chicken.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.211"
+  ],
+  "animacoes": 9,
+  "kb": 208
+ },
+ {
+  "nome": "Dog",
+  "grupo": "Gosmas (Blob)",
+  "url": "ultimate-monsters/pacote/Blob/Dog.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.015"
+  ],
+  "animacoes": 9,
+  "kb": 139
+ },
+ {
+  "nome": "Fish",
+  "grupo": "Gosmas (Blob)",
+  "url": "ultimate-monsters/pacote/Blob/Fish.gltf",
+  "uso": "",
+  "partes": [
+   "Sphere.039",
+   "Sphere.000",
+   "Sphere.001"
+  ],
+  "animacoes": 9,
+  "kb": 234
+ },
+ {
+  "nome": "GreenBlob",
+  "grupo": "Gosmas (Blob)",
+  "url": "ultimate-monsters/pacote/Blob/GreenBlob.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.016",
+   "Cube.000"
+  ],
+  "animacoes": 9,
+  "kb": 145
+ },
+ {
+  "nome": "GreenSpikyBlob",
+  "grupo": "Gosmas (Blob)",
+  "url": "ultimate-monsters/pacote/Blob/GreenSpikyBlob.gltf",
+  "uso": "",
+  "partes": [
+   "Sphere.000",
+   "Sphere.001"
+  ],
+  "animacoes": 9,
+  "kb": 305
+ },
+ {
+  "nome": "Mushnub",
+  "grupo": "Gosmas (Blob)",
+  "url": "ultimate-monsters/pacote/Blob/Mushnub.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.034"
+  ],
+  "animacoes": 9,
+  "kb": 129
+ },
+ {
+  "nome": "Mushnub_Evolved",
+  "grupo": "Gosmas (Blob)",
+  "url": "ultimate-monsters/pacote/Blob/Mushnub_Evolved.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.035",
+   "Cube.000",
+   "Cube.001"
+  ],
+  "animacoes": 9,
+  "kb": 240
+ },
+ {
+  "nome": "Ninja",
+  "grupo": "Gosmas (Blob)",
+  "url": "ultimate-monsters/pacote/Blob/Ninja.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.000"
+  ],
+  "animacoes": 9,
+  "kb": 178
+ },
+ {
+  "nome": "Orc",
+  "grupo": "Gosmas (Blob)",
+  "url": "ultimate-monsters/pacote/Blob/Orc.gltf",
+  "uso": "",
+  "partes": [
+   "Sphere.016"
+  ],
+  "animacoes": 9,
+  "kb": 209
+ },
+ {
+  "nome": "Pigeon",
+  "grupo": "Gosmas (Blob)",
+  "url": "ultimate-monsters/pacote/Blob/Pigeon.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.228"
+  ],
+  "animacoes": 9,
+  "kb": 174
+ },
+ {
+  "nome": "PinkBlob",
+  "grupo": "Gosmas (Blob)",
+  "url": "ultimate-monsters/pacote/Blob/PinkBlob.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.010",
+   "Cube.000"
+  ],
+  "animacoes": 9,
+  "kb": 121
+ },
+ {
+  "nome": "Wizard",
+  "grupo": "Gosmas (Blob)",
+  "url": "ultimate-monsters/pacote/Blob/Wizard.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.196",
+   "Cube.000"
+  ],
+  "animacoes": 9,
+  "kb": 159
+ },
+ {
+  "nome": "Yeti",
+  "grupo": "Gosmas (Blob)",
+  "url": "ultimate-monsters/pacote/Blob/Yeti.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.000"
+  ],
+  "animacoes": 9,
+  "kb": 187
+ },
+ {
+  "nome": "Alpaking",
+  "grupo": "Voadores (Flying)",
+  "url": "ultimate-monsters/pacote/Flying/Alpaking.gltf",
+  "uso": "",
+  "partes": [
+   "Sphere.052"
+  ],
+  "animacoes": 8,
+  "kb": 297
+ },
+ {
+  "nome": "Alpaking_Evolved",
+  "grupo": "Voadores (Flying)",
+  "url": "ultimate-monsters/pacote/Flying/Alpaking_Evolved.gltf",
+  "uso": "",
+  "partes": [
+   "Sphere.001"
+  ],
+  "animacoes": 8,
+  "kb": 435
+ },
+ {
+  "nome": "Armabee",
+  "grupo": "Voadores (Flying)",
+  "url": "ultimate-monsters/pacote/Flying/Armabee.gltf",
+  "uso": "",
+  "partes": [
+   "Sphere.018"
+  ],
+  "animacoes": 8,
+  "kb": 290
+ },
+ {
+  "nome": "Armabee_Evolved",
+  "grupo": "Voadores (Flying)",
+  "url": "ultimate-monsters/pacote/Flying/Armabee_Evolved.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.001"
+  ],
+  "animacoes": 8,
+  "kb": 349
+ },
+ {
+  "nome": "Demon",
+  "grupo": "Voadores (Flying)",
+  "url": "ultimate-monsters/pacote/Flying/Demon.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.125",
+   "Cube.000",
+   "Cube.001"
+  ],
+  "animacoes": 1,
+  "kb": 335
+ },
+ {
+  "nome": "Dragon",
+  "grupo": "Voadores (Flying)",
+  "url": "ultimate-monsters/pacote/Flying/Dragon.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.222"
+  ],
+  "animacoes": 8,
+  "kb": 417
+ },
+ {
+  "nome": "Dragon_Evolved",
+  "grupo": "Voadores (Flying)",
+  "url": "ultimate-monsters/pacote/Flying/Dragon_Evolved.gltf",
+  "uso": "No jogo: chefao final (fogo laranja).",
+  "partes": [
+   "Cube.221"
+  ],
+  "animacoes": 8,
+  "kb": 968
+ },
+ {
+  "nome": "Ghost",
+  "grupo": "Voadores (Flying)",
+  "url": "ultimate-monsters/pacote/Flying/Ghost.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.001"
+  ],
+  "animacoes": 8,
+  "kb": 628
+ },
+ {
+  "nome": "Ghost_Skull",
+  "grupo": "Voadores (Flying)",
+  "url": "ultimate-monsters/pacote/Flying/Ghost_Skull.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.001"
+  ],
+  "animacoes": 8,
+  "kb": 666
+ },
+ {
+  "nome": "Glub",
+  "grupo": "Voadores (Flying)",
+  "url": "ultimate-monsters/pacote/Flying/Glub.gltf",
+  "uso": "",
+  "partes": [
+   "Sphere.051"
+  ],
+  "animacoes": 8,
+  "kb": 301
+ },
+ {
+  "nome": "Glub_Evolved",
+  "grupo": "Voadores (Flying)",
+  "url": "ultimate-monsters/pacote/Flying/Glub_Evolved.gltf",
+  "uso": "",
+  "partes": [
+   "Sphere.043"
+  ],
+  "animacoes": 8,
+  "kb": 386
+ },
+ {
+  "nome": "Goleling",
+  "grupo": "Voadores (Flying)",
+  "url": "ultimate-monsters/pacote/Flying/Goleling.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.009"
+  ],
+  "animacoes": 8,
+  "kb": 376
+ },
+ {
+  "nome": "Goleling_Evolved",
+  "grupo": "Voadores (Flying)",
+  "url": "ultimate-monsters/pacote/Flying/Goleling_Evolved.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.020"
+  ],
+  "animacoes": 8,
+  "kb": 483
+ },
+ {
+  "nome": "Hywirl",
+  "grupo": "Voadores (Flying)",
+  "url": "ultimate-monsters/pacote/Flying/Hywirl.gltf",
+  "uso": "",
+  "partes": [
+   "Sphere"
+  ],
+  "animacoes": 8,
+  "kb": 624
+ },
+ {
+  "nome": "Pigeon",
+  "grupo": "Voadores (Flying)",
+  "url": "ultimate-monsters/pacote/Flying/Pigeon.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.000"
+  ],
+  "animacoes": 8,
+  "kb": 360
+ },
+ {
+  "nome": "Squidle",
+  "grupo": "Voadores (Flying)",
+  "url": "ultimate-monsters/pacote/Flying/Squidle.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.001"
+  ],
+  "animacoes": 8,
+  "kb": 787
+ },
+ {
+  "nome": "Tribal",
+  "grupo": "Voadores (Flying)",
+  "url": "ultimate-monsters/pacote/Flying/Tribal.gltf",
+  "uso": "",
+  "partes": [
+   "Cube.000"
+  ],
+  "animacoes": 8,
+  "kb": 759
+ }
+]

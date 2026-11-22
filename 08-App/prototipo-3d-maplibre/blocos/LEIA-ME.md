@@ -14,7 +14,7 @@ O jogo é **um só**: `proto-modelo.html` (o modelo). Tudo o que é opcional vir
 
 | Bloco | O que faz | Arquivo |
 |---|---|---|
-| `monstros3d` | Monstros 3D (zumbi Orc_Skull, chefão Demon vermelho, final lilás); anda, ataca, leva dano, morre | `monstros-3d.js` |
+| `monstros3d` | Monstros 3D (zumbi Orc com bastão, chefão BlueDemon sem fogo, final Dragon_Evolved com fogo laranja); anda, ataca, leva dano, morre | `monstros-3d.js` |
 | `pedraDireita` | Botões da pedra à direita do estilingue | `layout-pedra-direita.css` |
 | `joystick` | Joystick na tela (anda/gira sem GPS), embaixo à esquerda | `joystick.js` |
 | `pacoteObrigatorio` | Antes de jogar, o parque precisa estar baixado (mapa + jogo + 3D; ~8 MB). Conferido toda vez que a página abre; saída: "Jogar assim mesmo" | `pacote-obrigatorio.js` |
