@@ -1,5 +1,5 @@
 // BLOCO pesquisa (ver blocos/blocos.json): pesquisa rapida DENTRO do jogo (sem Forms, sem sair da pagina) + envio automatico dos dados tecnicos (bloco telemetria).
-// - Ao terminar a missao: os dados tecnicos ja seguem sozinhos; depois abre 5 perguntinhas (pode pular). O botao 📝 do menu abre a mesma tela durante o jogo.
+// - Ao terminar a missao: os dados tecnicos ja seguem sozinhos; depois abre 5 perguntinhas (pode pular). SO NO FINAL: nada de pesquisa no meio do jogo (decisao do Marcio, 22/11). Na tela de parabens fica um botao para reabrir, caso a crianca feche sem querer.
 // - Ao desistir (aviso do botao voltar) ou sair da pagina no meio: segue um resumo "em-andamento"/"desistiu".
 // - Envio ao Wix (funcao /pesquisa). Sem internet ou com o servidor fora do ar: fica numa FILA no celular e segue depois. Mesma partida = mesmo partidaId (o servidor atualiza, nao duplica).
 // - Anonimo: sem nome, sem posicao. O comentario livre pede para nao escrever nomes.
@@ -7,7 +7,7 @@
   var ENDPOINT = 'https://www.meuguiaoutdoor.com.br/_functions/pesquisa', CHAVE_FILA = 'mgo-fila-pesquisa', CHAVE_ANON = 'mgo-anon', MAX_FILA = 30;
   var tel = window.MGO_TELEMETRIA;
   function uuid() { try { return crypto.randomUUID(); } catch (e) { return 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10); } }
-  var partidaId = uuid(), anonId = null, iniciou = false, terminou = false, respondeu = false, aberto = false, jogoAntes = false;
+  var partidaId = uuid(), anonId = null, iniciou = false, terminou = false, respondeu = false, aberto = false;
   try { anonId = localStorage.getItem(CHAVE_ANON) || (localStorage.setItem(CHAVE_ANON, uuid()), localStorage.getItem(CHAVE_ANON)); } catch (e) { anonId = null; }
 
   // ---------- fila e envio ----------
@@ -43,7 +43,7 @@
     if (!iniciou && typeof jogoIniciado !== 'undefined' && jogoIniciado) iniciou = true;
     if (!terminou && typeof celebrou !== 'undefined' && celebrou) {
       terminou = true; enviar('concluiu', null); // os dados tecnicos seguem mesmo que a pesquisa seja pulada
-      setTimeout(function () { if (!respondeu) abrir(true); }, 3500);
+      setTimeout(function () { if (!respondeu) abrir(); }, 3500);
     }
   }, 500);
   document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden' && iniciou && !terminou) enviar('em-andamento', null, true); else if (document.visibilityState === 'visible') esvaziar(); });
@@ -57,9 +57,8 @@
   var CARAS = { gostou: [['1', '😞', 'Não'], ['2', '😐', 'Mais ou menos'], ['3', '😍', 'Sim!']], dificuldade: [['1', '😴', 'Fácil'], ['2', '🙂', 'Médio'], ['3', '😰', 'Difícil']] };
   var caixa = null, resp = {};
   function caras(chave) { return '<div class="pq-linha" data-chave="' + chave + '">' + CARAS[chave].map(function (c) { return '<button type="button" class="pq-cara" data-v="' + c[0] + '"><span>' + c[1] + '</span><small>' + c[2] + '</small></button>'; }).join('') + '</div>'; }
-  function abrir(automatico) {
+  function abrir() {
     if (aberto) return; aberto = true; resp = { problemas: [] };
-    jogoAntes = (typeof jogoIniciado !== 'undefined') ? jogoIniciado : false; if (!automatico && typeof jogoIniciado !== 'undefined') jogoIniciado = false; // no meio do jogo: pausa os monstros
     caixa = document.createElement('div'); caixa.id = 'pesquisaJogo'; caixa.setAttribute('role', 'dialog'); caixa.setAttribute('aria-modal', 'true');
     caixa.innerHTML = '<div class="pq-card">' +
       '<h2>Conta pra gente! 💚</h2><p class="pq-sub">É rapidinho e ajuda a melhorar o jogo.</p>' +
@@ -89,10 +88,10 @@
       caixa.querySelector('.pq-card').innerHTML = '<div class="pq-obrigado">Obrigado! 💚</div>'; setTimeout(fechar, 1400);
     };
   }
-  function fechar() { aberto = false; if (caixa && caixa.parentNode) caixa.parentNode.removeChild(caixa); caixa = null; if (typeof jogoIniciado !== 'undefined' && !terminou) jogoIniciado = jogoAntes; }
+  function fechar() { aberto = false; if (caixa && caixa.parentNode) caixa.parentNode.removeChild(caixa); caixa = null; }
 
-  // botao 📝 no menu (durante o jogo)
-  var painel = document.getElementById('painel');
-  if (painel && !document.getElementById('bPesquisa')) { var b = document.createElement('button'); b.id = 'bPesquisa'; b.title = 'Pesquisa rápida'; b.innerHTML = '📝'; b.onclick = function () { abrir(false); }; painel.appendChild(b); }
-  window.MGO_PESQUISA = { abrir: function () { abrir(true); }, fila: lerFila, esvaziar: esvaziar, partidaId: function () { return partidaId; }, endpoint: ENDPOINT };
+  // tela de parabens: botao para reabrir a pesquisa (so aparece no fim)
+  function botaoNoFim() { var cx = document.querySelector('#parabens .caixaP'); if (!cx || document.getElementById('bPesquisaFim')) return; var b = document.createElement('button'); b.id = 'bPesquisaFim'; b.type = 'button'; b.textContent = '📝 Contar como foi'; b.onclick = function () { if (!respondeu) abrir(); }; cx.appendChild(b); }
+  setInterval(function () { if (terminou) botaoNoFim(); }, 800);
+  window.MGO_PESQUISA = { abrir: function () { abrir(); }, fila: lerFila, esvaziar: esvaziar, partidaId: function () { return partidaId; }, endpoint: ENDPOINT };
 })();

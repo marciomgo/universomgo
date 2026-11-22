@@ -19,7 +19,7 @@ O jogo é **um só**: `proto-modelo.html` (o modelo). Tudo o que é opcional vir
 | `joystick` | Joystick na tela (anda/gira sem GPS), embaixo à esquerda | `joystick.js` |
 | `pacoteObrigatorio` | Antes de jogar, o parque precisa estar baixado (mapa + jogo + 3D; ~8 MB). Conferido toda vez que a página abre; saída: "Jogar assim mesmo" | `pacote-obrigatorio.js` |
 | `telemetria` | Mede sem perguntar: quadros por segundo, travadas, erros, aparelho, GPS, se o parque estava baixado (anônimo) | `telemetria.js` |
-| `pesquisa` | Pesquisa rápida dentro do jogo (5 perguntas) + envio automático ao Wix (`/_functions/pesquisa`), com fila se estiver sem internet | `pesquisa.js` |
+| `pesquisa` | Pesquisa rápida dentro do jogo, só no final (5 perguntas) + envio automático ao Wix (`/_functions/pesquisa`), com fila se estiver sem internet | `pesquisa.js` |
 | `travaVoltar` | Botão voltar do navegador: avisa "Sair do jogo? O jogo atual será perdido" (Continuar / Sair) | `trava-voltar.js` |
 
 ## Modos
@@ -57,6 +57,6 @@ Ficam no topo de `monstros-3d.js` (`TIPOS`: matiz, claridade, saturação; e a l
 
 ## Pesquisa e telemetria
 
-- Ao terminar a missão, os dados técnicos seguem **sozinhos** e a pesquisa abre (pode pular). O botão 📝 abre durante o jogo. Quem desiste (aviso do voltar) ou sai no meio também é registrado.
+- Ao terminar a missão, os dados técnicos seguem **sozinhos** e a pesquisa abre (pode pular). Só no final: não há pesquisa no meio do jogo. Na tela de parabéns há um botão "Contar como foi" para reabrir. Quem desiste (aviso do voltar) ou sai no meio também é registrado.
 - Anônimo: sem nome, sem posição. O mesmo `partidaId` atualiza a mesma linha no servidor.
 - Envio para `https://www.meuguiaoutdoor.com.br/_functions/pesquisa` (função `post_pesquisa` em `novositemeuguiaoutdoor/src/backend/http-functions.js`, grava na coleção `PesquisasJogo`). Se o servidor não responder, o jogo guarda uma **fila** no celular e envia depois.
