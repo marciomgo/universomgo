@@ -1,20 +1,27 @@
 {
   "_o_que_e": "CATALOGO DE BLOCOS do jogo. Um bloco e uma peca que se liga ou desliga por MODO, sem mexer no codigo do jogo. O unico que le este arquivo e o montar-blocos.js (chamado pelos dois builds: gerar-proto.js e mgo3d/build/gerar-teste-combate.js). Para ligar algo num modo, edite 'modos'. Para criar um bloco novo, ponha o arquivo em blocos/ e acrescente aqui.",
-
   "bibliotecas": {
     "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
     "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
   },
-
   "blocos": {
     "monstros3d": {
       "descricao": "Monstros em 3D de verdade (zumbi = Orc_Skull; chefao = Demon vermelho; chefao final = Demon lilas). Segue cada inimigo do jogo: anda, ataca, leva dano e morre.",
       "js": "monstros-3d.js",
       "modulo": true,
-      "usaBibliotecas": ["three", "three/addons/"],
+      "usaBibliotecas": [
+        "three",
+        "three/addons/"
+      ],
       "ativos": [
-        { "de": "../mgo3d/modelos-3d/ultimate-monsters/Demon.gltf", "para": "modelos/Demon.gltf" },
-        { "de": "../mgo3d/modelos-3d/ultimate-monsters/Orc_Skull.gltf", "para": "modelos/Orc_Skull.gltf" }
+        {
+          "de": "../mgo3d/modelos-3d/ultimate-monsters/Demon.gltf",
+          "para": "modelos/Demon.gltf"
+        },
+        {
+          "de": "../mgo3d/modelos-3d/ultimate-monsters/Orc_Skull.gltf",
+          "para": "modelos/Orc_Skull.gltf"
+        }
       ]
     },
     "pedraDireita": {
@@ -24,13 +31,25 @@
     "joystick": {
       "descricao": "Joystick na tela (anda/gira sem GPS). Aparece so com o jogo iniciado e sem GPS real. Fica embaixo a ESQUERDA.",
       "js": "joystick.js"
+    },
+    "travaVoltar": {
+      "descricao": "Botao voltar do navegador: avisa \"Sair do jogo? O jogo atual sera perdido\" (Continuar / Sair). 4 entradas de reserva no historico, arma no 1o toque (tecnica testada no iPhone).",
+      "js": "trava-voltar.js"
     }
   },
-
   "modos": {
     "_comentario": "combate = jogo nos parques; livre = treino de mira (joga de qualquer lugar); legado = paginas antigas, sem nenhum bloco.",
-    "combate": ["monstros3d", "pedraDireita"],
-    "livre": ["monstros3d", "pedraDireita", "joystick"],
+    "combate": [
+      "monstros3d",
+      "pedraDireita",
+      "travaVoltar"
+    ],
+    "livre": [
+      "monstros3d",
+      "pedraDireita",
+      "joystick",
+      "travaVoltar"
+    ],
     "legado": []
   }
 }

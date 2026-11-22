@@ -17,13 +17,14 @@ O jogo é **um só**: `proto-modelo.html` (o modelo). Tudo o que é opcional vir
 | `monstros3d` | Monstros 3D (zumbi Orc_Skull, chefão Demon vermelho, final lilás); anda, ataca, leva dano, morre | `monstros-3d.js` |
 | `pedraDireita` | Botões da pedra à direita do estilingue | `layout-pedra-direita.css` |
 | `joystick` | Joystick na tela (anda/gira sem GPS), embaixo à esquerda | `joystick.js` |
+| `travaVoltar` | Botão voltar do navegador: avisa "Sair do jogo? O jogo atual será perdido" (Continuar / Sair) | `trava-voltar.js` |
 
 ## Modos
 
 | Modo | Blocos | Para quê |
 |---|---|---|
-| `combate` | monstros3d, pedraDireita | O jogo nos parques |
-| `livre` | monstros3d, pedraDireita, joystick | Treino de mira: joga de qualquer lugar |
+| `combate` | monstros3d, pedraDireita, travaVoltar | O jogo nos parques |
+| `livre` | monstros3d, pedraDireita, joystick, travaVoltar | Treino de mira: joga de qualquer lugar |
 | `legado` | (nenhum) | Páginas antigas |
 
 ## Para mudar algo
@@ -36,3 +37,10 @@ O jogo é **um só**: `proto-modelo.html` (o modelo). Tudo o que é opcional vir
 ## Cores dos chefões e luz
 
 Ficam no topo de `monstros-3d.js` (`TIPOS`: matiz, claridade, saturação; e a luz da cena).
+
+## Botão voltar (travaVoltar)
+
+- Só arma depois do primeiro toque (regra dos navegadores) e empilha 4 entradas de reserva no histórico, repostas a cada voltar (técnica testada no iPhone, a mesma de `docs/trava-voltar-elemento.js`).
+- Ao voltar: aviso **"Sair do jogo? O jogo atual será perdido"** com **Continuar jogando** (fica) e **Sair e perder o jogo** (sai). Os monstros ficam pausados enquanto o aviso está aberto.
+- Sem aviso quando não há o que perder: jogo ainda não começou, ou já terminou (tela de parabéns).
+- **Para onde sai:** volta no histórico até a página de onde o jogador veio (ex.: a escolha de parques). Se abriu por link ou QR, vai para o endereço do parâmetro `?volta=https://...` ou, na falta dele, para `combate.html`.
