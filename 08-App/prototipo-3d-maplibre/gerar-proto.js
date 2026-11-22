@@ -80,5 +80,6 @@ const modelo = fs.readFileSync(__dirname + '/proto-modelo.html', 'utf8');
 [['mapa3d.html', parcao()], ['mapa3d-casa.html', casa()], ['mapa3d-livre.html', livre()], ['mapa3d-combate-1.html', combate(1)], ['mapa3d-combate-2.html', combate(2)]].forEach(([arq, dados]) => {
   fs.writeFileSync(__dirname + '/saida/' + arq, modelo.replace('/*DADOS*/', () => 'const DADOS = ' + JSON.stringify(dados) + ';').replace('__MANIFESTO__', 'manifest-' + arq.replace('.html', '') + '.json'));
   escreverManifest(arq);
+  if (arq === 'mapa3d-livre.html') require('./camada3d-instalar.js')(); // monstros 3D so no modo livre
   console.log(arq, 'pontos', dados.pontos.length, 'zumbis', dados.zumbis.length, 'chefoes', dados.chefoes.length, 'bombas', dados.bombas.length);
 });
