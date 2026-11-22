@@ -1,5 +1,5 @@
 {
-  "_o_que_e": "CATALOGO DE BLOCOS do jogo. Um bloco e uma peca que se liga ou desliga por MODO, sem mexer no codigo do jogo. O unico que le este arquivo e o montar-blocos.js (chamado pelos dois builds: gerar-proto.js e mgo3d/build/gerar-teste-combate.js). Para ligar algo num modo, edite 'modos'. Para criar um bloco novo, ponha o arquivo em blocos/ e acrescente aqui.",
+  "_o_que_e": "CATALOGO DE BLOCOS do jogo. Um bloco e uma peca que se liga ou desliga por MODO, sem mexer no codigo do jogo. O unico que le este arquivo e o montar-blocos.js (chamado pelos dois builds: gerar-proto.js e mgo3d/build/gerar-teste-combate.js). Para ligar algo num modo, edite 'modos'. Para criar um bloco novo, ponha o arquivo em blocos/ e acrescente aqui. Cada bloco pode listar 'offline' (URLs externas que o 'Baixar o parque' tambem guarda) e 'modulosParaAquecer'. 'nucleo' = arquivos copiados em todo modo (service worker).",
   "bibliotecas": {
     "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
     "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
@@ -22,6 +22,17 @@
           "de": "../mgo3d/modelos-3d/ultimate-monsters/Orc_Skull.gltf",
           "para": "modelos/Orc_Skull.gltf"
         }
+      ],
+      "offline": [
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js",
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/utils/BufferGeometryUtils.js",
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/utils/SkeletonUtils.js"
+      ],
+      "modulosParaAquecer": [
+        "three",
+        "three/addons/loaders/GLTFLoader.js",
+        "three/addons/utils/SkeletonUtils.js"
       ]
     },
     "pedraDireita": {
@@ -35,6 +46,20 @@
     "travaVoltar": {
       "descricao": "Botao voltar do navegador: avisa \"Sair do jogo? O jogo atual sera perdido\" (Continuar / Sair). 4 entradas de reserva no historico, arma no 1o toque (tecnica testada no iPhone).",
       "js": "trava-voltar.js"
+    },
+    "pacoteObrigatorio": {
+      "descricao": "Antes de jogar, o parque precisa estar BAIXADO (mapa + jogo + 3D). O botao de comecar so libera com o pacote inteiro (conferido toda vez); saida: Jogar assim mesmo.",
+      "css": "pacote-obrigatorio.css",
+      "js": "pacote-obrigatorio.js"
+    },
+    "telemetria": {
+      "descricao": "Mede sem perguntar: quadros por segundo, travadas, erros, aparelho, GPS, se o parque estava baixado. Anonimo.",
+      "js": "telemetria.js"
+    },
+    "pesquisa": {
+      "descricao": "Pesquisa rapida DENTRO do jogo (5 perguntas) + envio automatico dos dados da telemetria ao Wix (funcao /pesquisa), com fila se estiver sem internet.",
+      "css": "pesquisa.css",
+      "js": "pesquisa.js"
     }
   },
   "modos": {
@@ -42,14 +67,22 @@
     "combate": [
       "monstros3d",
       "pedraDireita",
-      "travaVoltar"
+      "travaVoltar",
+      "telemetria",
+      "pesquisa",
+      "pacoteObrigatorio"
     ],
     "livre": [
       "monstros3d",
       "pedraDireita",
       "joystick",
-      "travaVoltar"
+      "travaVoltar",
+      "telemetria",
+      "pesquisa"
     ],
     "legado": []
-  }
+  },
+  "nucleo": [
+    "sw-mgo.js"
+  ]
 }
