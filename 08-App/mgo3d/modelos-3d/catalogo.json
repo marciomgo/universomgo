@@ -565,5 +565,3533 @@
   ],
   "animacoes": 8,
   "kb": 759
+ },
+ {
+  "nome": "Cleric",
+  "grupo": "Personagens de aventura (RPG)",
+  "url": "rpg-personagens/Cleric.gltf",
+  "uso": "",
+  "kb": 2915
+ },
+ {
+  "nome": "Monk",
+  "grupo": "Personagens de aventura (RPG)",
+  "url": "rpg-personagens/Monk.gltf",
+  "uso": "",
+  "kb": 2593
+ },
+ {
+  "nome": "Ranger",
+  "grupo": "Personagens de aventura (RPG)",
+  "url": "rpg-personagens/Ranger.gltf",
+  "uso": "",
+  "kb": 2918
+ },
+ {
+  "nome": "Rogue",
+  "grupo": "Personagens de aventura (RPG)",
+  "url": "rpg-personagens/Rogue.gltf",
+  "uso": "",
+  "kb": 2508
+ },
+ {
+  "nome": "Warrior",
+  "grupo": "Personagens de aventura (RPG)",
+  "url": "rpg-personagens/Warrior.gltf",
+  "uso": "",
+  "kb": 2964
+ },
+ {
+  "nome": "Wizard",
+  "grupo": "Personagens de aventura (RPG)",
+  "url": "rpg-personagens/Wizard.gltf",
+  "uso": "",
+  "kb": 3220
+ },
+ {
+  "nome": "Anvil",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Anvil.gltf",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "Anvil_Log",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Anvil_Log.gltf",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "Axe_Bronze",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Axe_Bronze.gltf",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "Bag",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Bag.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Banner_1",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Banner_1.gltf",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "Banner_1_Cloth",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Banner_1_Cloth.gltf",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "Banner_2",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Banner_2.gltf",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "Banner_2_Cloth",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Banner_2_Cloth.gltf",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "Barrel",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Barrel.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Barrel_Apples",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Barrel_Apples.gltf",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "Barrel_Holder",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Barrel_Holder.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Bed_Twin1",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Bed_Twin1.gltf",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "Bed_Twin2",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Bed_Twin2.gltf",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "Bench",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Bench.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "BookGroup_Medium_1",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/BookGroup_Medium_1.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "BookGroup_Medium_2",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/BookGroup_Medium_2.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "BookGroup_Medium_3",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/BookGroup_Medium_3.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "BookGroup_Small_1",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/BookGroup_Small_1.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "BookGroup_Small_2",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/BookGroup_Small_2.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "BookGroup_Small_3",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/BookGroup_Small_3.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "BookStand",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/BookStand.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Book_5",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Book_5.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Book_7",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Book_7.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Book_Simplified_Single",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Book_Simplified_Single.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Book_Stack_1",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Book_Stack_1.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Book_Stack_2",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Book_Stack_2.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Bookcase_2",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Bookcase_2.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Bottle_1",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Bottle_1.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Bucket_Metal",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Bucket_Metal.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Bucket_Wooden_1",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Bucket_Wooden_1.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Cabinet",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Cabinet.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Cage_Small",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Cage_Small.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "CandleStick",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/CandleStick.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "CandleStick_Stand",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/CandleStick_Stand.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "CandleStick_Triple",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/CandleStick_Triple.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Candle_1",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Candle_1.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Candle_2",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Candle_2.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Carrot",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Carrot.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Cauldron",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Cauldron.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Chain_Coil",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Chain_Coil.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Chair_1",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Chair_1.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Chalice",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Chalice.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Chandelier",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Chandelier.gltf",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "Chest_Wood",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Chest_Wood.gltf",
+  "uso": "Item de aventureiro",
+  "kb": 21
+ },
+ {
+  "nome": "Coin",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Coin.gltf",
+  "uso": "Item de aventureiro",
+  "kb": 2
+ },
+ {
+  "nome": "Coin_Pile",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Coin_Pile.gltf",
+  "uso": "Item de aventureiro",
+  "kb": 2
+ },
+ {
+  "nome": "Coin_Pile_2",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Coin_Pile_2.gltf",
+  "uso": "Item de aventureiro",
+  "kb": 2
+ },
+ {
+  "nome": "Crate_Metal",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Crate_Metal.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Crate_Wooden",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Crate_Wooden.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Dummy",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Dummy.gltf",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "FarmCrate_Apple",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/FarmCrate_Apple.gltf",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "FarmCrate_Carrot",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/FarmCrate_Carrot.gltf",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "FarmCrate_Empty",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/FarmCrate_Empty.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Key_Gold",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Key_Gold.gltf",
+  "uso": "Item de aventureiro",
+  "kb": 2
+ },
+ {
+  "nome": "Key_Metal",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Key_Metal.gltf",
+  "uso": "Item de aventureiro",
+  "kb": 2
+ },
+ {
+  "nome": "Lantern_Wall",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Lantern_Wall.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Mug",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Mug.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Nightstand_Shelf",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Nightstand_Shelf.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Peg_Rack",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Peg_Rack.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Pickaxe_Bronze",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Pickaxe_Bronze.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Pot_1",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Pot_1.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Pot_1_Lid",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Pot_1_Lid.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Potion_1",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Potion_1.gltf",
+  "uso": "Item de aventureiro",
+  "kb": 2
+ },
+ {
+  "nome": "Potion_2",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Potion_2.gltf",
+  "uso": "Item de aventureiro",
+  "kb": 2
+ },
+ {
+  "nome": "Potion_4",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Potion_4.gltf",
+  "uso": "Item de aventureiro",
+  "kb": 2
+ },
+ {
+  "nome": "Pouch_Large",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Pouch_Large.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Rope_1",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Rope_1.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Rope_2",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Rope_2.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Rope_3",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Rope_3.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Scroll_1",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Scroll_1.gltf",
+  "uso": "Item de aventureiro",
+  "kb": 4
+ },
+ {
+  "nome": "Scroll_2",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Scroll_2.gltf",
+  "uso": "Item de aventureiro",
+  "kb": 4
+ },
+ {
+  "nome": "Shelf_Arch",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Shelf_Arch.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Shelf_Simple",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Shelf_Simple.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Shelf_Small_Bottles",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Shelf_Small_Bottles.gltf",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "Shield_Wooden",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Shield_Wooden.gltf",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "SmallBottle",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/SmallBottle.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "SmallBottles_1",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/SmallBottles_1.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Stall_Cart_Empty",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Stall_Cart_Empty.gltf",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "Stall_Empty",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Stall_Empty.gltf",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "Stool",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Stool.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Sword_Bronze",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Sword_Bronze.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Table_Fork",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Table_Fork.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Table_Knife",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Table_Knife.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Table_Large",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Table_Large.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Table_Plate",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Table_Plate.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Table_Spoon",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Table_Spoon.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Torch_Metal",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Torch_Metal.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Vase_2",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Vase_2.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Vase_4",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Vase_4.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "Vase_Rubble_Medium",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Vase_Rubble_Medium.gltf",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "WeaponStand",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/WeaponStand.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Whetstone",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Whetstone.gltf",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "Workbench",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Workbench.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "Workbench_Drawers",
+  "grupo": "Itens e cenário de fantasia (Fantasy Props)",
+  "url": "fantasy-props/Workbench_Drawers.gltf",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "chest-1",
+  "grupo": "Baús (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/chests/chest-1.fbx",
+  "uso": "",
+  "kb": 34
+ },
+ {
+  "nome": "chest-2",
+  "grupo": "Baús (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/chests/chest-2.fbx",
+  "uso": "",
+  "kb": 38
+ },
+ {
+  "nome": "chest-3",
+  "grupo": "Baús (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/chests/chest-3.fbx",
+  "uso": "",
+  "kb": 32
+ },
+ {
+  "nome": "chest-4",
+  "grupo": "Baús (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/chests/chest-4.fbx",
+  "uso": "",
+  "kb": 33
+ },
+ {
+  "nome": "chest-5",
+  "grupo": "Baús (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/chests/chest-5.fbx",
+  "uso": "",
+  "kb": 30
+ },
+ {
+  "nome": "chest-6",
+  "grupo": "Baús (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/chests/chest-6.fbx",
+  "uso": "",
+  "kb": 30
+ },
+ {
+  "nome": "coin-4",
+  "grupo": "Moedas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/coins/coin-4.fbx",
+  "uso": "",
+  "kb": 24
+ },
+ {
+  "nome": "coin-8",
+  "grupo": "Moedas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/coins/coin-8.fbx",
+  "uso": "",
+  "kb": 25
+ },
+ {
+  "nome": "coin-bar",
+  "grupo": "Moedas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/coins/coin-bar.fbx",
+  "uso": "",
+  "kb": 24
+ },
+ {
+  "nome": "coin-blank",
+  "grupo": "Moedas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/coins/coin-blank.fbx",
+  "uso": "",
+  "kb": 24
+ },
+ {
+  "nome": "coin-crown",
+  "grupo": "Moedas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/coins/coin-crown.fbx",
+  "uso": "",
+  "kb": 24
+ },
+ {
+  "nome": "coin-diamond",
+  "grupo": "Moedas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/coins/coin-diamond.fbx",
+  "uso": "",
+  "kb": 24
+ },
+ {
+  "nome": "coin-dollar",
+  "grupo": "Moedas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/coins/coin-dollar.fbx",
+  "uso": "",
+  "kb": 26
+ },
+ {
+  "nome": "coin-plus",
+  "grupo": "Moedas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/coins/coin-plus.fbx",
+  "uso": "",
+  "kb": 25
+ },
+ {
+  "nome": "coin-point",
+  "grupo": "Moedas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/coins/coin-point.fbx",
+  "uso": "",
+  "kb": 24
+ },
+ {
+  "nome": "coin-quad",
+  "grupo": "Moedas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/coins/coin-quad.fbx",
+  "uso": "",
+  "kb": 24
+ },
+ {
+  "nome": "coin-star",
+  "grupo": "Moedas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/coins/coin-star.fbx",
+  "uso": "",
+  "kb": 25
+ },
+ {
+  "nome": "gem-3-cut",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-3-cut.fbx",
+  "uso": "",
+  "kb": 22
+ },
+ {
+  "nome": "gem-3",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-3.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "gem-4-flat-long",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-4-flat-long.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "gem-4-flat",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-4-flat.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "gem-4-long",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-4-long.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "gem-4-skew-long",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-4-skew-long.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "gem-4",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-4.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "gem-5-cut",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-5-cut.fbx",
+  "uso": "",
+  "kb": 26
+ },
+ {
+  "nome": "gem-5-long",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-5-long.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "gem-5",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-5.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "gem-6-cut",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-6-cut.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "gem-6-long",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-6-long.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "gem-6",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-6.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "gem-7",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-7.fbx",
+  "uso": "",
+  "kb": 27
+ },
+ {
+  "nome": "gem-8-long",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-8-long.fbx",
+  "uso": "",
+  "kb": 24
+ },
+ {
+  "nome": "gem-8",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-8.fbx",
+  "uso": "",
+  "kb": 24
+ },
+ {
+  "nome": "gem-heart",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-heart.fbx",
+  "uso": "",
+  "kb": 24
+ },
+ {
+  "nome": "gem-tear",
+  "grupo": "Gemas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems/gem-tear.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "3-old-single-cut",
+  "grupo": "Gemas lapidadas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems - cut/3-old-single-cut.fbx",
+  "uso": "",
+  "kb": 22
+ },
+ {
+  "nome": "3-point-cut",
+  "grupo": "Gemas lapidadas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems - cut/3-point-cut.fbx",
+  "uso": "",
+  "kb": 22
+ },
+ {
+  "nome": "3-table-cut",
+  "grupo": "Gemas lapidadas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems - cut/3-table-cut.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "4-mazarin-cut",
+  "grupo": "Gemas lapidadas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems - cut/4-mazarin-cut.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "4-old-single-cut",
+  "grupo": "Gemas lapidadas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems - cut/4-old-single-cut.fbx",
+  "uso": "",
+  "kb": 22
+ },
+ {
+  "nome": "4-point-cut",
+  "grupo": "Gemas lapidadas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems - cut/4-point-cut.fbx",
+  "uso": "",
+  "kb": 22
+ },
+ {
+  "nome": "4-table-cut",
+  "grupo": "Gemas lapidadas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems - cut/4-table-cut.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "5-old-single-cut",
+  "grupo": "Gemas lapidadas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems - cut/5-old-single-cut.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "5-point-cut",
+  "grupo": "Gemas lapidadas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems - cut/5-point-cut.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "5-table-cut",
+  "grupo": "Gemas lapidadas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems - cut/5-table-cut.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "6-old-single-cut",
+  "grupo": "Gemas lapidadas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems - cut/6-old-single-cut.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "6-point-cut",
+  "grupo": "Gemas lapidadas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems - cut/6-point-cut.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "6-table-cut",
+  "grupo": "Gemas lapidadas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/gems - cut/6-table-cut.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "key-1",
+  "grupo": "Chaves (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/keys/key-1.fbx",
+  "uso": "",
+  "kb": 27
+ },
+ {
+  "nome": "key-2",
+  "grupo": "Chaves (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/keys/key-2.fbx",
+  "uso": "",
+  "kb": 27
+ },
+ {
+  "nome": "key-3",
+  "grupo": "Chaves (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/keys/key-3.fbx",
+  "uso": "",
+  "kb": 28
+ },
+ {
+  "nome": "key-4",
+  "grupo": "Chaves (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/keys/key-4.fbx",
+  "uso": "",
+  "kb": 26
+ },
+ {
+  "nome": "key-5",
+  "grupo": "Chaves (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/keys/key-5.fbx",
+  "uso": "",
+  "kb": 27
+ },
+ {
+  "nome": "key-6",
+  "grupo": "Chaves (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/keys/key-6.fbx",
+  "uso": "",
+  "kb": 27
+ },
+ {
+  "nome": "key-7",
+  "grupo": "Chaves (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/keys/key-7.fbx",
+  "uso": "",
+  "kb": 28
+ },
+ {
+  "nome": "medal-1",
+  "grupo": "Medalhas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/medals/medal-1.fbx",
+  "uso": "",
+  "kb": 24
+ },
+ {
+  "nome": "medal-2",
+  "grupo": "Medalhas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/medals/medal-2.fbx",
+  "uso": "",
+  "kb": 25
+ },
+ {
+  "nome": "medal-3",
+  "grupo": "Medalhas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/medals/medal-3.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "medal-4",
+  "grupo": "Medalhas (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/medals/medal-4.fbx",
+  "uso": "",
+  "kb": 24
+ },
+ {
+  "nome": "brick",
+  "grupo": "Tesouros diversos (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/others/brick.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "crown",
+  "grupo": "Tesouros diversos (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/others/crown.fbx",
+  "uso": "",
+  "kb": 27
+ },
+ {
+  "nome": "ruin-base",
+  "grupo": "Tesouros diversos (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/others/ruin-base.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "ruin-earth",
+  "grupo": "Tesouros diversos (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/others/ruin-earth.fbx",
+  "uso": "",
+  "kb": 24
+ },
+ {
+  "nome": "ruin-fire",
+  "grupo": "Tesouros diversos (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/others/ruin-fire.fbx",
+  "uso": "",
+  "kb": 24
+ },
+ {
+  "nome": "ruin-water",
+  "grupo": "Tesouros diversos (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/others/ruin-water.fbx",
+  "uso": "",
+  "kb": 23
+ },
+ {
+  "nome": "ruin-wind",
+  "grupo": "Tesouros diversos (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/others/ruin-wind.fbx",
+  "uso": "",
+  "kb": 24
+ },
+ {
+  "nome": "scroll-tied",
+  "grupo": "Tesouros diversos (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/others/scroll-tied.fbx",
+  "uso": "",
+  "kb": 27
+ },
+ {
+  "nome": "scroll",
+  "grupo": "Tesouros diversos (Treasure Pack)",
+  "url": "baus-treasure-pack/dist/fbx/others/scroll.fbx",
+  "uso": "",
+  "kb": 25
+ },
+ {
+  "nome": "log",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/log.glb",
+  "uso": "",
+  "kb": 14
+ },
+ {
+  "nome": "log_large",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/log_large.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "log_stack",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/log_stack.glb",
+  "uso": "",
+  "kb": 11
+ },
+ {
+  "nome": "log_stackLarge",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/log_stackLarge.glb",
+  "uso": "",
+  "kb": 17
+ },
+ {
+  "nome": "stump_old",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stump_old.glb",
+  "uso": "",
+  "kb": 9
+ },
+ {
+  "nome": "stump_oldTall",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stump_oldTall.glb",
+  "uso": "",
+  "kb": 9
+ },
+ {
+  "nome": "stump_round",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stump_round.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "stump_roundDetailed",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stump_roundDetailed.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "stump_square",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stump_square.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "stump_squareDetailed",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stump_squareDetailed.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "stump_squareDetailedWide",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stump_squareDetailedWide.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "tree_blocks",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_blocks.glb",
+  "uso": "",
+  "kb": 10
+ },
+ {
+  "nome": "tree_blocks_dark",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_blocks_dark.glb",
+  "uso": "",
+  "kb": 10
+ },
+ {
+  "nome": "tree_blocks_fall",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_blocks_fall.glb",
+  "uso": "",
+  "kb": 18
+ },
+ {
+  "nome": "tree_cone",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_cone.glb",
+  "uso": "",
+  "kb": 11
+ },
+ {
+  "nome": "tree_cone_dark",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_cone_dark.glb",
+  "uso": "",
+  "kb": 19
+ },
+ {
+  "nome": "tree_cone_fall",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_cone_fall.glb",
+  "uso": "",
+  "kb": 11
+ },
+ {
+  "nome": "tree_default",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_default.glb",
+  "uso": "",
+  "kb": 9
+ },
+ {
+  "nome": "tree_default_dark",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_default_dark.glb",
+  "uso": "",
+  "kb": 9
+ },
+ {
+  "nome": "tree_default_fall",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_default_fall.glb",
+  "uso": "",
+  "kb": 17
+ },
+ {
+  "nome": "tree_detailed",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_detailed.glb",
+  "uso": "",
+  "kb": 31
+ },
+ {
+  "nome": "tree_detailed_dark",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_detailed_dark.glb",
+  "uso": "",
+  "kb": 31
+ },
+ {
+  "nome": "tree_detailed_fall",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_detailed_fall.glb",
+  "uso": "",
+  "kb": 31
+ },
+ {
+  "nome": "tree_fat",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_fat.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "tree_fat_darkh",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_fat_darkh.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "tree_fat_fall",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_fat_fall.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "tree_oak",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_oak.glb",
+  "uso": "",
+  "kb": 14
+ },
+ {
+  "nome": "tree_oak_dark",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_oak_dark.glb",
+  "uso": "",
+  "kb": 14
+ },
+ {
+  "nome": "tree_oak_fall",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_oak_fall.glb",
+  "uso": "",
+  "kb": 14
+ },
+ {
+  "nome": "tree_palm",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_palm.glb",
+  "uso": "",
+  "kb": 13
+ },
+ {
+  "nome": "tree_palmBend",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_palmBend.glb",
+  "uso": "",
+  "kb": 14
+ },
+ {
+  "nome": "tree_palmDetailedShort",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_palmDetailedShort.glb",
+  "uso": "",
+  "kb": 28
+ },
+ {
+  "nome": "tree_palmDetailedTall",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_palmDetailedTall.glb",
+  "uso": "",
+  "kb": 28
+ },
+ {
+  "nome": "tree_palmShort",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_palmShort.glb",
+  "uso": "",
+  "kb": 15
+ },
+ {
+  "nome": "tree_palmTall",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_palmTall.glb",
+  "uso": "",
+  "kb": 15
+ },
+ {
+  "nome": "tree_pineDefaultA",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineDefaultA.glb",
+  "uso": "",
+  "kb": 17
+ },
+ {
+  "nome": "tree_pineDefaultB",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineDefaultB.glb",
+  "uso": "",
+  "kb": 18
+ },
+ {
+  "nome": "tree_pineGroundA",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineGroundA.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "tree_pineGroundB",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineGroundB.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "tree_pineRoundA",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineRoundA.glb",
+  "uso": "",
+  "kb": 14
+ },
+ {
+  "nome": "tree_pineRoundB",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineRoundB.glb",
+  "uso": "",
+  "kb": 18
+ },
+ {
+  "nome": "tree_pineRoundC",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineRoundC.glb",
+  "uso": "",
+  "kb": 15
+ },
+ {
+  "nome": "tree_pineRoundD",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineRoundD.glb",
+  "uso": "",
+  "kb": 13
+ },
+ {
+  "nome": "tree_pineRoundE",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineRoundE.glb",
+  "uso": "",
+  "kb": 15
+ },
+ {
+  "nome": "tree_pineRoundF",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineRoundF.glb",
+  "uso": "",
+  "kb": 16
+ },
+ {
+  "nome": "tree_pineSmallA",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineSmallA.glb",
+  "uso": "",
+  "kb": 13
+ },
+ {
+  "nome": "tree_pineSmallB",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineSmallB.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "tree_pineSmallC",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineSmallC.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "tree_pineSmallD",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineSmallD.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "tree_pineTallA",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineTallA.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "tree_pineTallA_detailed",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineTallA_detailed.glb",
+  "uso": "",
+  "kb": 10
+ },
+ {
+  "nome": "tree_pineTallB",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineTallB.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "tree_pineTallB_detailed",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineTallB_detailed.glb",
+  "uso": "",
+  "kb": 12
+ },
+ {
+  "nome": "tree_pineTallC",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineTallC.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "tree_pineTallC_detailed",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineTallC_detailed.glb",
+  "uso": "",
+  "kb": 11
+ },
+ {
+  "nome": "tree_pineTallD",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineTallD.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "tree_pineTallD_detailed",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_pineTallD_detailed.glb",
+  "uso": "",
+  "kb": 12
+ },
+ {
+  "nome": "tree_plateau",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_plateau.glb",
+  "uso": "",
+  "kb": 16
+ },
+ {
+  "nome": "tree_plateau_dark",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_plateau_dark.glb",
+  "uso": "",
+  "kb": 16
+ },
+ {
+  "nome": "tree_plateau_fall",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_plateau_fall.glb",
+  "uso": "",
+  "kb": 16
+ },
+ {
+  "nome": "tree_simple",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_simple.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "tree_simple_dark",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_simple_dark.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "tree_simple_fall",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_simple_fall.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "tree_small",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_small.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "tree_small_dark",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_small_dark.glb",
+  "uso": "",
+  "kb": 11
+ },
+ {
+  "nome": "tree_small_fall",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_small_fall.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "tree_tall",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_tall.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "tree_tall_dark",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_tall_dark.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "tree_tall_fall",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_tall_fall.glb",
+  "uso": "",
+  "kb": 12
+ },
+ {
+  "nome": "tree_thin",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_thin.glb",
+  "uso": "",
+  "kb": 17
+ },
+ {
+  "nome": "tree_thin_dark",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_thin_dark.glb",
+  "uso": "",
+  "kb": 32
+ },
+ {
+  "nome": "tree_thin_fall",
+  "grupo": "Árvores, troncos e tocos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tree_thin_fall.glb",
+  "uso": "",
+  "kb": 17
+ },
+ {
+  "nome": "cactus_short",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cactus_short.glb",
+  "uso": "",
+  "kb": 9
+ },
+ {
+  "nome": "cactus_tall",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cactus_tall.glb",
+  "uso": "",
+  "kb": 9
+ },
+ {
+  "nome": "crop_carrot",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crop_carrot.glb",
+  "uso": "",
+  "kb": 12
+ },
+ {
+  "nome": "crop_melon",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crop_melon.glb",
+  "uso": "",
+  "kb": 13
+ },
+ {
+  "nome": "crop_pumpkin",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crop_pumpkin.glb",
+  "uso": "",
+  "kb": 11
+ },
+ {
+  "nome": "crop_turnip",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crop_turnip.glb",
+  "uso": "",
+  "kb": 14
+ },
+ {
+  "nome": "crops_bambooStageA",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crops_bambooStageA.glb",
+  "uso": "",
+  "kb": 22
+ },
+ {
+  "nome": "crops_bambooStageB",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crops_bambooStageB.glb",
+  "uso": "",
+  "kb": 39
+ },
+ {
+  "nome": "crops_cornStageA",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crops_cornStageA.glb",
+  "uso": "",
+  "kb": 9
+ },
+ {
+  "nome": "crops_cornStageB",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crops_cornStageB.glb",
+  "uso": "",
+  "kb": 10
+ },
+ {
+  "nome": "crops_cornStageC",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crops_cornStageC.glb",
+  "uso": "",
+  "kb": 12
+ },
+ {
+  "nome": "crops_cornStageD",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crops_cornStageD.glb",
+  "uso": "",
+  "kb": 29
+ },
+ {
+  "nome": "crops_dirtDoubleRow",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crops_dirtDoubleRow.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "crops_dirtDoubleRowCorner",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crops_dirtDoubleRowCorner.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "crops_dirtDoubleRowEnd",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crops_dirtDoubleRowEnd.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "crops_dirtRow",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crops_dirtRow.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "crops_dirtRowCorner",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crops_dirtRowCorner.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "crops_dirtRowEnd",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crops_dirtRowEnd.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "crops_dirtSingle",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crops_dirtSingle.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "crops_leafsStageA",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crops_leafsStageA.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "crops_leafsStageB",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crops_leafsStageB.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "crops_wheatStageA",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crops_wheatStageA.glb",
+  "uso": "",
+  "kb": 55
+ },
+ {
+  "nome": "crops_wheatStageB",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/crops_wheatStageB.glb",
+  "uso": "",
+  "kb": 29
+ },
+ {
+  "nome": "flower_purpleA",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/flower_purpleA.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "flower_purpleB",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/flower_purpleB.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "flower_purpleC",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/flower_purpleC.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "flower_redA",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/flower_redA.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "flower_redB",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/flower_redB.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "flower_redC",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/flower_redC.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "flower_yellowA",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/flower_yellowA.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "flower_yellowB",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/flower_yellowB.glb",
+  "uso": "",
+  "kb": 11
+ },
+ {
+  "nome": "flower_yellowC",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/flower_yellowC.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "grass",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/grass.glb",
+  "uso": "",
+  "kb": 11
+ },
+ {
+  "nome": "grass_large",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/grass_large.glb",
+  "uso": "",
+  "kb": 18
+ },
+ {
+  "nome": "grass_leafs",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/grass_leafs.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "grass_leafsLarge",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/grass_leafsLarge.glb",
+  "uso": "",
+  "kb": 14
+ },
+ {
+  "nome": "lily_large",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/lily_large.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "lily_small",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/lily_small.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "mushroom_red",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/mushroom_red.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "mushroom_redGroup",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/mushroom_redGroup.glb",
+  "uso": "",
+  "kb": 15
+ },
+ {
+  "nome": "mushroom_redTall",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/mushroom_redTall.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "mushroom_tan",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/mushroom_tan.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "mushroom_tanGroup",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/mushroom_tanGroup.glb",
+  "uso": "",
+  "kb": 15
+ },
+ {
+  "nome": "mushroom_tanTall",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/mushroom_tanTall.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "plant_bush",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/plant_bush.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "plant_bushDetailed",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/plant_bushDetailed.glb",
+  "uso": "",
+  "kb": 10
+ },
+ {
+  "nome": "plant_bushLarge",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/plant_bushLarge.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "plant_bushLargeTriangle",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/plant_bushLargeTriangle.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "plant_bushSmall",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/plant_bushSmall.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "plant_bushTriangle",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/plant_bushTriangle.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "plant_flatShort",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/plant_flatShort.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "plant_flatTall",
+  "grupo": "Plantas, flores e cogumelos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/plant_flatTall.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_blockCave_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_blockCave_rock.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "cliff_blockCave_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_blockCave_stone.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "cliff_blockDiagonal_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_blockDiagonal_rock.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_blockDiagonal_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_blockDiagonal_stone.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_blockHalf_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_blockHalf_rock.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_blockHalf_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_blockHalf_stone.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_blockQuarter_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_blockQuarter_rock.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_blockQuarter_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_blockQuarter_stone.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_blockSlopeHalfWalls_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_blockSlopeHalfWalls_rock.glb",
+  "uso": "",
+  "kb": 9
+ },
+ {
+  "nome": "cliff_blockSlopeHalfWalls_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_blockSlopeHalfWalls_stone.glb",
+  "uso": "",
+  "kb": 9
+ },
+ {
+  "nome": "cliff_blockSlopeWalls_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_blockSlopeWalls_rock.glb",
+  "uso": "",
+  "kb": 9
+ },
+ {
+  "nome": "cliff_blockSlopeWalls_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_blockSlopeWalls_stone.glb",
+  "uso": "",
+  "kb": 9
+ },
+ {
+  "nome": "cliff_blockSlope_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_blockSlope_rock.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "cliff_blockSlope_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_blockSlope_stone.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "cliff_block_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_block_rock.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_block_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_block_stone.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_cave_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_cave_rock.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "cliff_cave_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_cave_stone.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "cliff_cornerInnerLarge_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_cornerInnerLarge_rock.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "cliff_cornerInnerLarge_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_cornerInnerLarge_stone.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "cliff_cornerInnerTop_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_cornerInnerTop_rock.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "cliff_cornerInnerTop_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_cornerInnerTop_stone.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "cliff_cornerInner_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_cornerInner_rock.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "cliff_cornerInner_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_cornerInner_stone.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "cliff_cornerLarge_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_cornerLarge_rock.glb",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "cliff_cornerLarge_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_cornerLarge_stone.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_cornerTop_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_cornerTop_rock.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_cornerTop_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_cornerTop_stone.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_corner_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_corner_rock.glb",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "cliff_corner_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_corner_stone.glb",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "cliff_diagonal_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_diagonal_rock.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "cliff_diagonal_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_diagonal_stone.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "cliff_halfCornerInner_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_halfCornerInner_rock.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "cliff_halfCornerInner_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_halfCornerInner_stone.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "cliff_halfCorner_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_halfCorner_rock.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_halfCorner_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_halfCorner_stone.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_half_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_half_rock.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "cliff_half_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_half_stone.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "cliff_large_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_large_rock.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_large_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_large_stone.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_rock.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_stepsCornerInner_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_stepsCornerInner_rock.glb",
+  "uso": "",
+  "kb": 15
+ },
+ {
+  "nome": "cliff_stepsCornerInner_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_stepsCornerInner_stone.glb",
+  "uso": "",
+  "kb": 15
+ },
+ {
+  "nome": "cliff_stepsCorner_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_stepsCorner_rock.glb",
+  "uso": "",
+  "kb": 17
+ },
+ {
+  "nome": "cliff_stepsCorner_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_stepsCorner_stone.glb",
+  "uso": "",
+  "kb": 17
+ },
+ {
+  "nome": "cliff_steps_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_steps_rock.glb",
+  "uso": "",
+  "kb": 16
+ },
+ {
+  "nome": "cliff_steps_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_steps_stone.glb",
+  "uso": "",
+  "kb": 16
+ },
+ {
+  "nome": "cliff_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_stone.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "cliff_topDiagonal_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_topDiagonal_rock.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "cliff_topDiagonal_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_topDiagonal_stone.glb",
+  "uso": "",
+  "kb": 10
+ },
+ {
+  "nome": "cliff_top_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_top_rock.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "cliff_top_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_top_stone.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "cliff_waterfallTop_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_waterfallTop_rock.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "cliff_waterfallTop_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_waterfallTop_stone.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "cliff_waterfall_rock",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_waterfall_rock.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "cliff_waterfall_stone",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/cliff_waterfall_stone.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "rock_largeA",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_largeA.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "rock_largeB",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_largeB.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "rock_largeC",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_largeC.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "rock_largeD",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_largeD.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "rock_largeE",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_largeE.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "rock_largeF",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_largeF.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "rock_smallA",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_smallA.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "rock_smallB",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_smallB.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "rock_smallC",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_smallC.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "rock_smallD",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_smallD.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "rock_smallE",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_smallE.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "rock_smallF",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_smallF.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "rock_smallFlatA",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_smallFlatA.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "rock_smallFlatB",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_smallFlatB.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "rock_smallFlatC",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_smallFlatC.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "rock_smallG",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_smallG.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "rock_smallH",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_smallH.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "rock_smallI",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_smallI.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "rock_smallTopA",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_smallTopA.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "rock_smallTopB",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_smallTopB.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "rock_tallA",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_tallA.glb",
+  "uso": "",
+  "kb": 12
+ },
+ {
+  "nome": "rock_tallB",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_tallB.glb",
+  "uso": "",
+  "kb": 14
+ },
+ {
+  "nome": "rock_tallC",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_tallC.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "rock_tallD",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_tallD.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "rock_tallE",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_tallE.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "rock_tallF",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_tallF.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "rock_tallG",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_tallG.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "rock_tallH",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_tallH.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "rock_tallI",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_tallI.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "rock_tallJ",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/rock_tallJ.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "stone_largeA",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_largeA.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "stone_largeB",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_largeB.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "stone_largeC",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_largeC.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "stone_largeD",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_largeD.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "stone_largeE",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_largeE.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "stone_largeF",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_largeF.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "stone_smallA",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_smallA.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "stone_smallB",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_smallB.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "stone_smallC",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_smallC.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "stone_smallD",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_smallD.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "stone_smallE",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_smallE.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "stone_smallF",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_smallF.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "stone_smallFlatA",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_smallFlatA.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "stone_smallFlatB",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_smallFlatB.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "stone_smallFlatC",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_smallFlatC.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "stone_smallG",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_smallG.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "stone_smallH",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_smallH.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "stone_smallI",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_smallI.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "stone_smallTopA",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_smallTopA.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "stone_smallTopB",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_smallTopB.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "stone_tallA",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_tallA.glb",
+  "uso": "",
+  "kb": 11
+ },
+ {
+  "nome": "stone_tallB",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_tallB.glb",
+  "uso": "",
+  "kb": 13
+ },
+ {
+  "nome": "stone_tallC",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_tallC.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "stone_tallD",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_tallD.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "stone_tallE",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_tallE.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "stone_tallF",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_tallF.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "stone_tallG",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_tallG.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "stone_tallH",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_tallH.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "stone_tallI",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_tallI.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "stone_tallJ",
+  "grupo": "Pedras e penhascos (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/stone_tallJ.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "bed",
+  "grupo": "Acampamento: barracas, fogueira, canoa (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bed.glb",
+  "uso": "",
+  "kb": 19
+ },
+ {
+  "nome": "bed_floor",
+  "grupo": "Acampamento: barracas, fogueira, canoa (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bed_floor.glb",
+  "uso": "",
+  "kb": 10
+ },
+ {
+  "nome": "campfire_bricks",
+  "grupo": "Acampamento: barracas, fogueira, canoa (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/campfire_bricks.glb",
+  "uso": "",
+  "kb": 10
+ },
+ {
+  "nome": "campfire_logs",
+  "grupo": "Acampamento: barracas, fogueira, canoa (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/campfire_logs.glb",
+  "uso": "",
+  "kb": 9
+ },
+ {
+  "nome": "campfire_planks",
+  "grupo": "Acampamento: barracas, fogueira, canoa (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/campfire_planks.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "campfire_stones",
+  "grupo": "Acampamento: barracas, fogueira, canoa (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/campfire_stones.glb",
+  "uso": "",
+  "kb": 17
+ },
+ {
+  "nome": "canoe",
+  "grupo": "Acampamento: barracas, fogueira, canoa (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/canoe.glb",
+  "uso": "",
+  "kb": 15
+ },
+ {
+  "nome": "canoe_paddle",
+  "grupo": "Acampamento: barracas, fogueira, canoa (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/canoe_paddle.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "hanging_moss",
+  "grupo": "Acampamento: barracas, fogueira, canoa (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/hanging_moss.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "pot_large",
+  "grupo": "Acampamento: barracas, fogueira, canoa (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/pot_large.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "pot_small",
+  "grupo": "Acampamento: barracas, fogueira, canoa (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/pot_small.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "sign",
+  "grupo": "Acampamento: barracas, fogueira, canoa (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/sign.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "tent_detailedClosed",
+  "grupo": "Acampamento: barracas, fogueira, canoa (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tent_detailedClosed.glb",
+  "uso": "",
+  "kb": 15
+ },
+ {
+  "nome": "tent_detailedOpen",
+  "grupo": "Acampamento: barracas, fogueira, canoa (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tent_detailedOpen.glb",
+  "uso": "",
+  "kb": 15
+ },
+ {
+  "nome": "tent_smallClosed",
+  "grupo": "Acampamento: barracas, fogueira, canoa (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tent_smallClosed.glb",
+  "uso": "",
+  "kb": 13
+ },
+ {
+  "nome": "tent_smallOpen",
+  "grupo": "Acampamento: barracas, fogueira, canoa (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/tent_smallOpen.glb",
+  "uso": "",
+  "kb": 13
+ },
+ {
+  "nome": "bridge_center_stone",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bridge_center_stone.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "bridge_center_stoneRound",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bridge_center_stoneRound.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "bridge_center_wood",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bridge_center_wood.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "bridge_center_woodRound",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bridge_center_woodRound.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "bridge_side_stone",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bridge_side_stone.glb",
+  "uso": "",
+  "kb": 11
+ },
+ {
+  "nome": "bridge_side_stoneRound",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bridge_side_stoneRound.glb",
+  "uso": "",
+  "kb": 13
+ },
+ {
+  "nome": "bridge_side_wood",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bridge_side_wood.glb",
+  "uso": "",
+  "kb": 10
+ },
+ {
+  "nome": "bridge_side_woodRound",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bridge_side_woodRound.glb",
+  "uso": "",
+  "kb": 13
+ },
+ {
+  "nome": "bridge_stone",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bridge_stone.glb",
+  "uso": "",
+  "kb": 17
+ },
+ {
+  "nome": "bridge_stoneNarrow",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bridge_stoneNarrow.glb",
+  "uso": "",
+  "kb": 17
+ },
+ {
+  "nome": "bridge_stoneRound",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bridge_stoneRound.glb",
+  "uso": "",
+  "kb": 22
+ },
+ {
+  "nome": "bridge_stoneRoundNarrow",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bridge_stoneRoundNarrow.glb",
+  "uso": "",
+  "kb": 22
+ },
+ {
+  "nome": "bridge_wood",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bridge_wood.glb",
+  "uso": "",
+  "kb": 15
+ },
+ {
+  "nome": "bridge_woodNarrow",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bridge_woodNarrow.glb",
+  "uso": "",
+  "kb": 15
+ },
+ {
+  "nome": "bridge_woodRound",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bridge_woodRound.glb",
+  "uso": "",
+  "kb": 21
+ },
+ {
+  "nome": "bridge_woodRoundNarrow",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/bridge_woodRoundNarrow.glb",
+  "uso": "",
+  "kb": 21
+ },
+ {
+  "nome": "fence_bend",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/fence_bend.glb",
+  "uso": "",
+  "kb": 16
+ },
+ {
+  "nome": "fence_bendCenter",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/fence_bendCenter.glb",
+  "uso": "",
+  "kb": 20
+ },
+ {
+  "nome": "fence_corner",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/fence_corner.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "fence_gate",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/fence_gate.glb",
+  "uso": "",
+  "kb": 27
+ },
+ {
+  "nome": "fence_planks",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/fence_planks.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "fence_planksDouble",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/fence_planksDouble.glb",
+  "uso": "",
+  "kb": 11
+ },
+ {
+  "nome": "fence_simple",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/fence_simple.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "fence_simpleCenter",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/fence_simpleCenter.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "fence_simpleDiagonal",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/fence_simpleDiagonal.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "fence_simpleDiagonalCenter",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/fence_simpleDiagonalCenter.glb",
+  "uso": "",
+  "kb": 11
+ },
+ {
+  "nome": "fence_simpleHigh",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/fence_simpleHigh.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "fence_simpleLow",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/fence_simpleLow.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "ground_grass",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_grass.glb",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "ground_pathBend",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_pathBend.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "ground_pathBendBank",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_pathBendBank.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "ground_pathCorner",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_pathCorner.glb",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "ground_pathCornerSmall",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_pathCornerSmall.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "ground_pathCross",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_pathCross.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "ground_pathEnd",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_pathEnd.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "ground_pathEndClosed",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_pathEndClosed.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "ground_pathOpen",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_pathOpen.glb",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "ground_pathRocks",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_pathRocks.glb",
+  "uso": "",
+  "kb": 8
+ },
+ {
+  "nome": "ground_pathSide",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_pathSide.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "ground_pathSideOpen",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_pathSideOpen.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "ground_pathSplit",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_pathSplit.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "ground_pathStraight",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_pathStraight.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "ground_pathTile",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_pathTile.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "ground_riverBend",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_riverBend.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "ground_riverBendBank",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_riverBendBank.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "ground_riverCorner",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_riverCorner.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "ground_riverCornerSmall",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_riverCornerSmall.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "ground_riverCross",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_riverCross.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "ground_riverEnd",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_riverEnd.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "ground_riverEndClosed",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_riverEndClosed.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "ground_riverOpen",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_riverOpen.glb",
+  "uso": "",
+  "kb": 2
+ },
+ {
+  "nome": "ground_riverRocks",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_riverRocks.glb",
+  "uso": "",
+  "kb": 9
+ },
+ {
+  "nome": "ground_riverSide",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_riverSide.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "ground_riverSideOpen",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_riverSideOpen.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "ground_riverSplit",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_riverSplit.glb",
+  "uso": "",
+  "kb": 7
+ },
+ {
+  "nome": "ground_riverStraight",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_riverStraight.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "ground_riverTile",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/ground_riverTile.glb",
+  "uso": "",
+  "kb": 9
+ },
+ {
+  "nome": "path_stone",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/path_stone.glb",
+  "uso": "",
+  "kb": 12
+ },
+ {
+  "nome": "path_stoneCircle",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/path_stoneCircle.glb",
+  "uso": "",
+  "kb": 13
+ },
+ {
+  "nome": "path_stoneCorner",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/path_stoneCorner.glb",
+  "uso": "",
+  "kb": 11
+ },
+ {
+  "nome": "path_stoneEnd",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/path_stoneEnd.glb",
+  "uso": "",
+  "kb": 9
+ },
+ {
+  "nome": "path_wood",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/path_wood.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "path_woodCorner",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/path_woodCorner.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "path_woodEnd",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/path_woodEnd.glb",
+  "uso": "",
+  "kb": 5
+ },
+ {
+  "nome": "platform_beach",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/platform_beach.glb",
+  "uso": "",
+  "kb": 13
+ },
+ {
+  "nome": "platform_grass",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/platform_grass.glb",
+  "uso": "",
+  "kb": 12
+ },
+ {
+  "nome": "platform_stone",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/platform_stone.glb",
+  "uso": "",
+  "kb": 13
+ },
+ {
+  "nome": "statue_block",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/statue_block.glb",
+  "uso": "",
+  "kb": 11
+ },
+ {
+  "nome": "statue_column",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/statue_column.glb",
+  "uso": "",
+  "kb": 10
+ },
+ {
+  "nome": "statue_columnDamaged",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/statue_columnDamaged.glb",
+  "uso": "",
+  "kb": 9
+ },
+ {
+  "nome": "statue_head",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/statue_head.glb",
+  "uso": "",
+  "kb": 14
+ },
+ {
+  "nome": "statue_obelisk",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/statue_obelisk.glb",
+  "uso": "",
+  "kb": 4
+ },
+ {
+  "nome": "statue_ring",
+  "grupo": "Cenário: terreno, trilhas, pontes, cercas (Kenney Nature Kit)",
+  "url": "kenney-nature/Models/GLTF format/statue_ring.glb",
+  "uso": "",
+  "kb": 6
+ },
+ {
+  "nome": "Cauldron",
+  "grupo": "Acampamento (OpenGameArt Low Poly Camping)",
+  "url": "camping/obj/Cauldron.obj",
+  "uso": "",
+  "kb": 110
+ },
+ {
+  "nome": "backpack",
+  "grupo": "Acampamento (OpenGameArt Low Poly Camping)",
+  "url": "camping/obj/backpack.obj",
+  "uso": "",
+  "kb": 42
+ },
+ {
+  "nome": "camp_fire",
+  "grupo": "Acampamento (OpenGameArt Low Poly Camping)",
+  "url": "camping/obj/camp_fire.obj",
+  "uso": "",
+  "kb": 17
+ },
+ {
+  "nome": "chair",
+  "grupo": "Acampamento (OpenGameArt Low Poly Camping)",
+  "url": "camping/obj/chair.obj",
+  "uso": "",
+  "kb": 30
+ },
+ {
+  "nome": "sign",
+  "grupo": "Acampamento (OpenGameArt Low Poly Camping)",
+  "url": "camping/obj/sign.obj",
+  "uso": "",
+  "kb": 3
+ },
+ {
+  "nome": "sleeping_bag",
+  "grupo": "Acampamento (OpenGameArt Low Poly Camping)",
+  "url": "camping/obj/sleeping_bag.obj",
+  "uso": "",
+  "kb": 624
+ },
+ {
+  "nome": "tent",
+  "grupo": "Acampamento (OpenGameArt Low Poly Camping)",
+  "url": "camping/obj/tent.obj",
+  "uso": "",
+  "kb": 78
  }
 ]

@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>MGO · Galeria de monstros 3D</title>
+<title>MGO · Galeria de modelos 3D</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   :root { --verde:#1f5a2c; --claro:#e8f5e9; --texto:#1b1b1b; }
@@ -10,15 +10,25 @@
   body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color:var(--texto); background:#f4f7f2; }
   header { background:var(--verde); color:#fff; padding:14px 18px; }
   header h1 { margin:0; font-size:20px; } header p { margin:4px 0 0; font-size:13px; opacity:.9; }
-  main { max-width:1100px; margin:0 auto; padding:14px; }
+  main { max-width:1200px; margin:0 auto; padding:14px; }
   h2 { font-size:16px; margin:22px 0 8px; }
+  [hidden] { display:none !important; }
+  /* menu: uma foto por grupo, com todos os modelos juntos */
+  .menu { display:grid; grid-template-columns:repeat(auto-fill,minmax(420px,1fr)); gap:14px; }
+  @media (max-width:520px) { .menu { grid-template-columns:1fr; } }
+  .menuCard { background:#fff; border:2px solid #d5e2d0; border-radius:14px; padding:10px; cursor:pointer; }
+  .menuCard:hover { border-color:var(--verde); background:var(--claro); }
+  .menuCard h3 { margin:0 0 8px; font-size:17px; } .menuCard h3 small { color:#555; font-weight:normal; }
+  .menuCard img { width:100%; border-radius:8px; display:block; background:#f4f7f2; }
+  .menuCard .abrir { margin-top:8px; font-size:13px; color:var(--verde); font-weight:bold; }
+  .voltar { padding:8px 14px; border:2px solid var(--verde); border-radius:999px; background:#fff; color:var(--verde); font-weight:bold; cursor:pointer; font-size:14px; }
+  /* grupo aberto */
   .grade { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
   .cartao { background:#fff; border:2px solid #d5e2d0; border-radius:12px; padding:8px; text-align:center; cursor:pointer; }
   .cartao.on { border-color:var(--verde); background:var(--claro); }
-  .cartao img { width:100%; aspect-ratio:1; object-fit:contain; background:linear-gradient(#dff0d8,#f4f7f2); border-radius:8px; }
-  .cartao b { display:block; margin-top:4px; font-size:14px; } .cartao small { color:#555; font-size:11px; display:block; }
-  .semArquivo { background:#fafafa; border:2px dashed #cfd8dc; border-radius:12px; padding:8px; text-align:center; font-size:13px; color:#666; }
-  #palco { display:grid; grid-template-columns:minmax(260px,420px) 1fr; gap:14px; align-items:start; }
+  .cartao .foto { width:160px; height:160px; margin:0 auto; border-radius:8px; background-color:#e6f0df; background-repeat:no-repeat; max-width:100%; }
+  .cartao b { display:block; margin-top:4px; font-size:14px; word-break:break-word; } .cartao small { color:#555; font-size:11px; display:block; }
+  #palco { display:grid; grid-template-columns:minmax(260px,420px) 1fr; gap:14px; align-items:start; margin:12px 0; }
   @media (max-width:700px) { #palco { grid-template-columns:1fr; } }
   #viewer { width:100%; aspect-ratio:1; background:linear-gradient(#cfe8ff,#eaf5df 70%,#cfe3a4); border-radius:14px; display:block; }
   .painel { background:#fff; border-radius:12px; padding:12px; border:2px solid #d5e2d0; }
@@ -28,91 +38,137 @@
   .botoes button.on { border-color:var(--verde); background:var(--claro); font-weight:bold; }
   label.parte { display:inline-block; margin-right:12px; font-size:14px; }
   .nota { font-size:12px; color:#555; margin-top:8px; }
-  .previa img { width:100%; border-radius:12px; border:2px solid #d5e2d0; background:#fff; }
+  #status { font-size:14px; padding:10px; background:#fff8e1; border-radius:8px; }
 </style>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 </head>
 <body>
-<header><h1>Galeria de monstros 3D</h1><p>Pacote "Ultimate Monsters" (Quaternius, licença CC0). Clique num monstro para ver girando, com as animações e as partes separadas.</p></header>
+<header><h1>Galeria de modelos 3D</h1><p>Monstros, personagens, itens e tesouros grátis (licença CC0). Clique num grupo para abrir as opções; clique num modelo para vê-lo girando.</p></header>
 <main>
-  <h2>Os 50 monstros do pacote</h2>
-  <div id="grupos"></div>
+  <div id="status" hidden></div>
 
-  <h2 id="tituloPalco">Visualizador</h2>
-  <div id="palco">
-    <canvas id="viewer" width="840" height="840"></canvas>
-    <div class="painel">
-      <h3 id="nomeSel">—</h3><div id="usoSel" class="nota"></div>
-      <div style="margin-top:8px"><b>Partes</b><br><span id="partes"></span></div>
-      <div style="margin-top:8px"><b>Animações</b><div class="botoes" id="animacoes"></div></div>
-      <div class="nota" id="info"></div>
+  <!-- 1) MENU: uma foto por grupo com todos os modelos juntos -->
+  <section id="telaMenu">
+    <div class="menu" id="menu"></div>
+    <p class="nota">Os monstros e personagens vêm com animações (parado, andar, atacar, levar dano, morrer e outras). Os nomes se repetem entre grupos (ex.: Demon grande e Demon voador) porque são modelos diferentes. Baús, moedas e gemas do Treasure Pack são brancos de propósito: o autor entrega sem cor, para pintarmos.</p>
+  </section>
+
+  <!-- 2) GRUPO ABERTO: visualizador + lista de modelos -->
+  <section id="telaGrupo" hidden>
+    <button class="voltar" id="voltar" type="button">← Voltar ao menu</button>
+    <h2 id="tituloGrupo"></h2>
+    <div id="palco">
+      <canvas id="viewer" width="840" height="840"></canvas>
+      <div class="painel">
+        <h3 id="nomeSel">—</h3><div id="usoSel" class="nota"></div>
+        <div style="margin-top:8px"><b>Partes</b><br><span id="partes"></span></div>
+        <div style="margin-top:8px"><b>Animações</b><div class="botoes" id="animacoes"></div></div>
+        <div class="nota" id="info"></div>
+      </div>
     </div>
-  </div>
-
-  <h2>O pacote completo: os 50 monstros (imagem oficial do autor)</h2>
-  <div class="previa"><img src="https://quaternius.com/assets/images/fullres/ultimatemonsters.jpg" alt="Prévia do pacote Ultimate Monsters"></div>
-
-  <p class="nota">Cada monstro vem com 14 animações (parado, andar, correr, atacar, levar dano, morrer, pular, abaixar, acenar e outras) e uma arma ou objeto. Os nomes se repetem entre os grupos (ex.: Demon grande e Demon voador) porque são modelos diferentes.</p>
+    <div class="grade" id="grade"></div>
+  </section>
 </main>
 
 <script type="module">
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
+import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+import { MTLLoader } from 'three/addons/loaders/MTLLoader.js';
 import * as SkeletonUtils from 'three/addons/utils/SkeletonUtils.js'; // copiar modelo COM esqueleto
 
-// Modelos que existem como arquivo (os do jogo e, se houver, os da pasta pacote/: veja catalogo.json)
+// ---- catalogo (catalogo.json) agrupado ----
 let modelos = [];
-try { const r = await fetch('catalogo.json', { cache: 'no-store' }); if (r.ok) { const extra = await r.json(); extra.forEach((e) => { modelos.push(e); }); } } catch (e) {}
+try { const r = await fetch('catalogo.json', { cache: 'no-store' }); if (r.ok) modelos = await r.json(); } catch (e) {}
+const grupos = {}; modelos.forEach((m) => { (grupos[m.grupo] = grupos[m.grupo] || []).push(m); });
+const nomesGrupos = Object.keys(grupos);
+const slug = (g) => g.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+let indice = null; try { const r = await fetch('menu/indice.json', { cache: 'no-store' }); if (r.ok) indice = await r.json(); } catch (e) {}
 
 const luz = (cena) => { cena.add(new THREE.AmbientLight(0xffffff, 2.4)); const s = new THREE.DirectionalLight(0xffffff, 1.5); s.position.set(-3, 6, 5); cena.add(s); };
-const carregar = (url) => new Promise((ok, err) => new GLTFLoader().load(url, ok, undefined, err));
+// glTF/glb abrem direto; FBX (Treasure Pack) vira o mesmo formato { scene, animations }
+const carregar = (url) => new Promise((ok, err) => { if (/\.obj$/i.test(url)) { // OBJ (Low Poly Camping): cores vem do .mtl que fica na pasta irma mtl/
+    const obj = (mats) => { const l = new OBJLoader(); if (mats) l.setMaterials(mats); l.load(url, (o) => ok({ scene: o, animations: [] }), undefined, err); };
+    new MTLLoader().load(url.replace('/obj/', '/mtl/').replace(/\.obj$/i, '.mtl'), (mats) => { mats.preload(); obj(mats); }, undefined, () => obj(null)); }
+  else if (/\.fbx$/i.test(url)) new FBXLoader().load(url, (o) => { [...o.children].forEach((x) => { if (x.isLight || x.isCamera) o.remove(x); }); ok({ scene: o, animations: o.animations || [] }); }, undefined, err); else new GLTFLoader().load(url, ok, undefined, err); });
+function enquadrar(cam, obj) { const b = new THREE.Box3().setFromObject(obj, true), c = b.getCenter(new THREE.Vector3()), t = b.getSize(new THREE.Vector3()), m = Math.max(t.x, t.y, t.z); cam.position.set(c.x + m * 0.9, c.y + m * 0.55, c.z + m * 2.3); cam.near = m / 100; cam.far = m * 100; cam.updateProjectionMatrix(); cam.lookAt(c); return { c, m }; } // near/far proporcionais ao tamanho: o FBX vem em outra escala
 
-// ---- miniaturas: um renderizador pequeno, um quadro por modelo ----
+// ---- GERAR as fotos do menu (so uma vez: abra galeria.html?gerar=1). Uma folha por grupo, com todos os modelos juntos, gravada em menu/ ----
 const rMini = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true }); rMini.setSize(256, 256); rMini.setClearColor(0x000000, 0);
-const gruposEl = document.getElementById('grupos'); const cartoes = {}; const gradeDe = {}; const chave = (m) => m.grupo + '/' + m.nome;
-function enquadrar(cam, obj) { const b = new THREE.Box3().setFromObject(obj, true), c = b.getCenter(new THREE.Vector3()), t = b.getSize(new THREE.Vector3()), m = Math.max(t.x, t.y, t.z); cam.position.set(c.x + m * 0.6, c.y + m * 0.35, c.z + m * 1.5); cam.lookAt(c); return { c, m }; }
-async function miniatura(m) {
-  const g = await carregar(m.url); m.gltf = g;
+async function desenharMini(m) { // desenha o modelo no canvas rMini e libera a memoria (nao guarda o modelo)
+  const g = await carregar(m.url);
   const cena = new THREE.Scene(); luz(cena); const cam = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
   const raiz = SkeletonUtils.clone(g.scene); cena.add(raiz);
   const mix = new THREE.AnimationMixer(raiz); const idle = g.animations.find((a) => a.name === 'Idle'); if (idle) mix.clipAction(idle).play(); mix.update(0.01); raiz.updateMatrixWorld(true);
   enquadrar(cam, raiz); rMini.render(cena, cam);
-  return rMini.domElement.toDataURL('image/png');
+  g.scene.traverse((o) => { if (o.isMesh) { o.geometry.dispose(); [].concat(o.material).forEach((mt) => { for (const k in mt) if (mt[k] && mt[k].isTexture) mt[k].dispose(); mt.dispose(); }); } });
 }
-for (const m of modelos) {
-  const card = document.createElement('div'); card.className = 'cartao'; card.innerHTML = '<img alt="' + m.nome + '"><b>' + m.nome + '</b><small>' + (m.uso || '') + '</small>';
-  if (!gradeDe[m.grupo]) { const t = document.createElement('h2'); t.textContent = m.grupo; const gr = document.createElement('div'); gr.className = 'grade'; gruposEl.appendChild(t); gruposEl.appendChild(gr); gradeDe[m.grupo] = gr; } gradeDe[m.grupo].appendChild(card); cartoes[chave(m)] = card; card.onclick = () => selecionar(m);
-  try { card.querySelector('img').src = await miniatura(m); } catch (e) { card.querySelector('small').textContent = 'não consegui abrir'; }
+async function gerarFolhas() {
+  const st = document.getElementById('status'); st.hidden = false; const idx = {}, CW = 192, CH = 224;
+  for (const g of nomesGrupos) {
+    const lista = grupos[g], cols = Math.min(12, Math.ceil(Math.sqrt(lista.length * 1.2))), rows = Math.ceil(lista.length / cols);
+    const cv = document.createElement('canvas'); cv.width = cols * CW; cv.height = rows * CH; const cx = cv.getContext('2d');
+    cx.fillStyle = '#ffffff'; cx.fillRect(0, 0, cv.width, cv.height);
+    for (let i = 0; i < lista.length; i++) {
+      const m = lista[i], x = (i % cols) * CW, y = Math.floor(i / cols) * CH; st.textContent = 'Gerando as fotos do menu... ' + g + ' ' + (i + 1) + '/' + lista.length;
+      const gr = cx.createLinearGradient(0, y, 0, y + CW); gr.addColorStop(0, '#d6ecd0'); gr.addColorStop(1, '#f4f7f2'); cx.fillStyle = gr; cx.fillRect(x + 2, y + 2, CW - 4, CW - 4);
+      try { await desenharMini(m); cx.drawImage(rMini.domElement, x, y, CW, CW); } catch (e) { cx.fillStyle = '#b00'; cx.fillText('erro', x + 10, y + 20); }
+      cx.fillStyle = '#1b1b1b'; cx.font = 'bold 15px system-ui, sans-serif'; cx.textAlign = 'center'; cx.fillText(m.nome.length > 22 ? m.nome.slice(0, 21) + '…' : m.nome, x + CW / 2, y + CW + 18);
+    }
+    const arq = slug(g) + '.png'; await fetch('salvar?nome=' + arq, { method: 'POST', body: cv.toDataURL('image/png') });
+    idx[g] = { arquivo: 'menu/' + arq, cols, cw: CW, ch: CH, n: lista.length };
+  }
+  await fetch('salvar?nome=indice.json', { method: 'POST', body: JSON.stringify(idx) });
+  st.textContent = 'Pronto! Fotos do menu gravadas em menu/. Recarregando...'; setTimeout(() => { location.href = location.pathname; }, 800);
 }
+if (new URLSearchParams(location.search).has('gerar')) { await gerarFolhas(); }
 
 // ---- visualizador grande ----
 const canvas = document.getElementById('viewer');
 const rend = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); rend.setPixelRatio(Math.min(2, devicePixelRatio));
 const cena = new THREE.Scene(); luz(cena);
 const cam = new THREE.PerspectiveCamera(35, 1, 0.1, 200); const ctl = new OrbitControls(cam, canvas); ctl.autoRotate = true; ctl.autoRotateSpeed = 2.2; ctl.enableDamping = true;
-let atual = null, mixer = null, acao = null; const relogio = new THREE.Clock();
-function tamanho() { const w = canvas.clientWidth; rend.setSize(w, w, false); cam.aspect = 1; cam.updateProjectionMatrix(); }
-addEventListener('resize', tamanho); tamanho();
+let atual = null, mixer = null, acao = null; const relogio = new THREE.Clock(); const cartoes = {}; const chave = (m) => m.grupo + '/' + m.nome;
+function tamanho() { const w = canvas.clientWidth; if (!w) return; rend.setSize(w, w, false); cam.aspect = 1; cam.updateProjectionMatrix(); }
+addEventListener('resize', tamanho);
 
-function selecionar(m) {
-  Object.values(cartoes).forEach((c) => c.classList.remove('on')); cartoes[chave(m)].classList.add('on');
+async function selecionar(m) {
+  if (!m.gltf) m.gltf = await carregar(m.url);
+  Object.values(cartoes).forEach((c) => c.classList.remove('on')); if (cartoes[chave(m)]) cartoes[chave(m)].classList.add('on');
   if (atual) cena.remove(atual); atual = SkeletonUtils.clone(m.gltf.scene); cena.add(atual);
   mixer = new THREE.AnimationMixer(atual); const clips = m.gltf.animations;
   const tocar = (nome) => { if (acao) acao.fadeOut(0.2); const c = clips.find((x) => x.name === nome); if (!c) return; acao = mixer.clipAction(c); acao.reset().fadeIn(0.2).play(); acao.setLoop(nome === 'Death' ? THREE.LoopOnce : THREE.LoopRepeat); acao.clampWhenFinished = true; [].forEach.call(document.querySelectorAll('#animacoes button'), (b) => b.classList.toggle('on', b.textContent === nome)); };
   tocar('Idle'); mixer.update(0.01); atual.updateMatrixWorld(true);
-  const { c, m: tam } = enquadrar(cam, atual); ctl.target.copy(c); ctl.update();
+  const { c } = enquadrar(cam, atual); ctl.target.copy(c); ctl.update();
   document.getElementById('nomeSel').textContent = m.nome + (m.grupo ? ' · ' + m.grupo : ''); document.getElementById('usoSel').textContent = m.uso || '';
-  document.getElementById('animacoes').innerHTML = clips.map((x) => '<button type="button">' + x.name + '</button>').join('');
+  document.getElementById('animacoes').innerHTML = clips.length ? clips.map((x) => '<button type="button">' + x.name + '</button>').join('') : '<span class="nota">Sem animações (objeto parado).</span>';
   [].forEach.call(document.querySelectorAll('#animacoes button'), (b) => { b.onclick = () => tocar(b.textContent); }); tocar('Idle');
   const partes = []; atual.traverse((o) => { if (o.isMesh) partes.push(o); });
-  document.getElementById('partes').innerHTML = partes.map((p, i) => '<label class="parte"><input type="checkbox" checked data-i="' + i + '"> ' + p.name + (/weapon|trident|staff|club|sword/i.test(p.name) ? ' (objeto)' : ' (corpo)') + '</label>').join('');
+  document.getElementById('partes').innerHTML = partes.map((p, i) => '<label class="parte"><input type="checkbox" checked data-i="' + i + '"> ' + (p.name || 'peça ' + (i + 1)) + (/weapon|trident|staff|club|sword/i.test(p.name) ? ' (objeto)' : '') + '</label>').join('');
   [].forEach.call(document.querySelectorAll('#partes input'), (inp) => { inp.onchange = () => { partes[+inp.dataset.i].visible = inp.checked; }; });
   document.getElementById('info').textContent = partes.length + ' partes · ' + clips.length + ' animações · arraste para girar, role para aproximar.';
 }
 (function laco() { requestAnimationFrame(laco); const dt = relogio.getDelta(); if (mixer) mixer.update(dt); ctl.update(); rend.render(cena, cam); })();
-if (modelos[0] && modelos[0].gltf) selecionar(modelos[0]);
 
+// ---- as duas telas ----
+const telaMenu = document.getElementById('telaMenu'), telaGrupo = document.getElementById('telaGrupo');
+function mostrarMenu() { telaGrupo.hidden = true; telaMenu.hidden = false; scrollTo(0, 0); }
+function mostrarGrupo(g) {
+  const lista = grupos[g], ix = indice && indice[g], k = 160 / (ix ? ix.cw : 192);
+  telaMenu.hidden = true; telaGrupo.hidden = false; document.getElementById('tituloGrupo').textContent = g + ' (' + lista.length + ')';
+  const grade = document.getElementById('grade'); grade.innerHTML = ''; Object.keys(cartoes).forEach((c) => delete cartoes[c]);
+  lista.forEach((m, i) => {
+    const card = document.createElement('div'); card.className = 'cartao'; card.innerHTML = '<div class="foto"></div><b>' + m.nome + '</b><small>' + (m.uso || '') + '</small>';
+    if (ix) { const f = card.querySelector('.foto'); f.style.backgroundImage = 'url(' + ix.arquivo + ')'; f.style.backgroundSize = (ix.cols * ix.cw * k) + 'px ' + (Math.ceil(ix.n / ix.cols) * ix.ch * k) + 'px'; f.style.backgroundPosition = (-(i % ix.cols) * ix.cw * k) + 'px ' + (-Math.floor(i / ix.cols) * ix.ch * k) + 'px'; }
+    card.onclick = () => { selecionar(m); scrollTo({ top: 0, behavior: 'smooth' }); }; grade.appendChild(card); cartoes[chave(m)] = card;
+  });
+  tamanho(); scrollTo(0, 0); selecionar(lista[0]);
+}
+document.getElementById('voltar').onclick = mostrarMenu;
+document.getElementById('menu').innerHTML = nomesGrupos.map((g, i) => '<div class="menuCard" data-i="' + i + '"><h3>' + g + ' <small>(' + grupos[g].length + ')</small></h3>' + (indice && indice[g] ? '<img src="' + indice[g].arquivo + '" alt="Todos os modelos de ' + g + '" loading="lazy">' : '<p class="nota">Foto ainda não gerada: abra galeria.html?gerar=1 uma vez.</p>') + '<div class="abrir">Abrir este grupo →</div></div>').join('');
+[].forEach.call(document.querySelectorAll('.menuCard'), (el) => { el.onclick = () => mostrarGrupo(nomesGrupos[+el.dataset.i]); });
 </script>
 </body>
 </html>

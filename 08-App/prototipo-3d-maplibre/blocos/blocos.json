@@ -64,12 +64,51 @@
       "descricao": "Pesquisa rapida DENTRO do jogo, SO NO FINAL e OBRIGATORIA nesta fase (sem opcao de pular; fica pendente ate responder) + envio automatico dos dados da telemetria ao Wix (funcao /pesquisa), com fila se estiver sem internet.",
       "css": "pesquisa.css",
       "js": "pesquisa.js"
+    },
+    "bauFinal": {
+      "descricao": "Bau do tesouro protegido pelo chefao final: fica no lugar da chegada; trancado ate o chefao cair; ao chegar perto abre e saltam moedas de ouro; so depois vem a tela de parabens. Sem o modelo, o jogo celebra ao limpar os monstros como antes.",
+      "js": "bau-final.js",
+      "modulo": true,
+      "usaBibliotecas": [
+        "three",
+        "three/addons/"
+      ],
+      "ativos": [
+        {
+          "de": "../mgo3d/modelos-3d/bau-leve/Chest_Wood.gltf",
+          "para": "modelos/Chest_Wood.gltf"
+        },
+        {
+          "de": "../mgo3d/modelos-3d/bau-leve/Chest_Wood.bin",
+          "para": "modelos/Chest_Wood.bin"
+        },
+        {
+          "de": "../mgo3d/modelos-3d/bau-leve/T_Trim_Furniture_BaseColor.png",
+          "para": "modelos/T_Trim_Furniture_BaseColor.png"
+        },
+        {
+          "de": "../mgo3d/modelos-3d/bau-leve/T_Trim_Metal_BaseColor.png",
+          "para": "modelos/T_Trim_Metal_BaseColor.png"
+        }
+      ],
+      "offline": [
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js",
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/utils/BufferGeometryUtils.js",
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/utils/SkeletonUtils.js"
+      ],
+      "modulosParaAquecer": [
+        "three",
+        "three/addons/loaders/GLTFLoader.js",
+        "three/addons/utils/SkeletonUtils.js"
+      ]
     }
   },
   "modos": {
     "_comentario": "combate = jogo nos parques; livre = treino de mira (joga de qualquer lugar); legado = paginas antigas, sem nenhum bloco.",
     "combate": [
       "monstros3d",
+      "bauFinal",
       "pedraDireita",
       "travaVoltar",
       "telemetria",
@@ -78,6 +117,7 @@
     ],
     "livre": [
       "monstros3d",
+      "bauFinal",
       "pedraDireita",
       "joystick",
       "travaVoltar",

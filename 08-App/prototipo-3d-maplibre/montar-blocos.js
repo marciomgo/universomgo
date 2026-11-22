@@ -22,6 +22,7 @@ function montarBlocos(html, modo, pastaSaida) {
     (b.modulosParaAquecer || []).forEach((m) => ativos.modulos.push(m));
   });
   const mapa = bibs.size ? '<script type="importmap">' + JSON.stringify({ imports: Object.fromEntries([...bibs].map((x) => [x, CATALOGO.bibliotecas[x]])) }) + '</script>' : '';
+  ativos.externos = [...new Set(ativos.externos)]; ativos.modulos = [...new Set(ativos.modulos)]; // blocos diferentes pedem as mesmas bibliotecas: baixa uma vez so
   const listaAtivos = '<script>window.MGO_ATIVOS=' + JSON.stringify(ativos) + ';</script>'; // o 'Baixar o parque' guarda tambem estes arquivos
   const bloco = nomes.length ? '<!-- blocos do modo "' + modo + '": ' + nomes.join(', ') + ' -->\n' + [].concat(estilos, mapa ? [mapa] : [], [listaAtivos], scripts).join('\n') + '\n' : '';
   (CATALOGO.nucleo || []).forEach((n) => copias.push({ de: path.join(__dirname, n), para: n }));
