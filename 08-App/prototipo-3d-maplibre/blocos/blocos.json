@@ -57,7 +57,7 @@
       "js": "telemetria.js"
     },
     "pesquisa": {
-      "descricao": "Pesquisa rapida DENTRO do jogo, SO NO FINAL (5 perguntas) + envio automatico dos dados da telemetria ao Wix (funcao /pesquisa), com fila se estiver sem internet.",
+      "descricao": "Pesquisa rapida DENTRO do jogo, SO NO FINAL e OBRIGATORIA nesta fase (sem opcao de pular; fica pendente ate responder) + envio automatico dos dados da telemetria ao Wix (funcao /pesquisa), com fila se estiver sem internet.",
       "css": "pesquisa.css",
       "js": "pesquisa.js"
     }

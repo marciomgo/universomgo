@@ -60,8 +60,14 @@ function criar(i) {
   const mixer = new THREE.AnimationMixer(corpo), acoes = {};
   m.animacoes.forEach((c) => { acoes[c.name] = mixer.clipAction(c); });
   const em = i.el.querySelector('.em'); if (em) { em.style.visibility = 'hidden'; em.style.fontSize = tipo.fonte + 'px'; } // o boneco plano some; o espaco fica para a barra de vida ficar acima da cabeca
-  const c = { i, grupo, mixer, acoes, atual: null, nome: '', theta: Math.PI, lat: i.lat, lng: i.lng, vidaAnt: i.vida, tHit: -1e9, tMorte: 0 };
-  tocar(c, 'Idle'); return c;
+  const c = { i, grupo, mixer, acoes, atual: null, nome: '', theta: Math.PI, lat: i.lat, lng: i.lng, vidaAnt: i.vida, tHit: -1e9, tMorte: 0, altura: tipo.altura, vida: i.el.querySelector('.vida'), hCaixa: i.el.offsetHeight || tipo.fonte, topoAnt: null };
+  tocar(c, 'Idle');
+  // MEDE o corpo de verdade (animado): a caixa do modelo parado, usada para dimensionar, fica na METADE da altura real (o esqueleto estica a malha).
+  // Assim a barra de energia sabe onde esta a cabeca, e os pes encostam no chao. O tamanho que se ve na tela NAO muda.
+  mixer.update(0.001); corpo.updateMatrixWorld(true);
+  let melhor = null; corpo.traverse((o) => { if (o.isMesh) { const b = new THREE.Box3().setFromObject(o, true); if (!melhor || (b.max.y - b.min.y) > (melhor.max.y - melhor.min.y)) melhor = b; } });
+  if (melhor && isFinite(melhor.min.y)) { corpo.position.y -= melhor.min.y; c.altura = melhor.max.y - melhor.min.y; }
+  return c;
 }
 function tocar(c, nome, vel) {
   const a = c.acoes[nome] || c.acoes.Idle; if (!a) return;
@@ -102,6 +108,21 @@ function atualizar(c, dt, agora) {
   else tocar(c, 'Idle');
 }
 
+const pGround = new THREE.Vector3(), pHead = new THREE.Vector3();
+// A barra de energia e um elemento da pagina preso ao PE do monstro. Aqui medimos, na tela, quantos pixels vai do pe ate o topo da cabeca (a projecao muda com a inclinacao e o zoom)
+// e subimos a barra ate la. 'top' e contado a partir do topo da caixa do marcador, cuja base esta no pe do monstro.
+function posicionarBarrasDeVida(alturaTelaPx) {
+  corpos.forEach((c) => {
+    if (!c.vida || !c.i.vivo) return;
+    const g = c.grupo.position;
+    pGround.set(g.x, 0, g.z).applyMatrix4(camera.projectionMatrix); pHead.set(g.x, c.altura + 0.15, g.z).applyMatrix4(camera.projectionMatrix);
+    const acimaDoPe = ((pHead.y - pGround.y) / 2) * alturaTelaPx; // pixels do pe ate o topo da cabeca
+    if (!isFinite(acimaDoPe)) return;
+    const top = Math.round(c.hCaixa - acimaDoPe - 8); // 8 = altura da barra + folga
+    if (c.topoAnt === null || Math.abs(top - c.topoAnt) >= 1) { c.vida.style.top = top + 'px'; c.topoAnt = top; }
+  });
+}
+
 const camada = {
   id: 'monstros-3d', type: 'custom', renderingMode: '3d',
   onAdd(map, gl) { this.map = map; this.renderer = new THREE.WebGLRenderer({ canvas: map.getCanvas(), context: gl, antialias: true }); this.renderer.autoClear = false; },
@@ -117,6 +138,7 @@ const camada = {
     const m = new THREE.Matrix4().fromArray(args.defaultProjectionData.mainMatrix);
     const l = new THREE.Matrix4().makeTranslation(mc.x, mc.y, mc.z).scale(new THREE.Vector3(s, -s, s)).multiply(new THREE.Matrix4().makeRotationX(Math.PI / 2));
     camera.projectionMatrix = m.multiply(l);
+    posicionarBarrasDeVida(this.map.getCanvas().clientHeight); // a barra de energia fica ACIMA da cabeca de cada monstro (projecao do topo do corpo na tela)
     this.renderer.resetState();
     this.renderer.render(cena, camera);
     this.map.triggerRepaint();

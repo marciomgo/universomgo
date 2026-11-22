@@ -57,6 +57,6 @@ Ficam no topo de `monstros-3d.js` (`TIPOS`: matiz, claridade, saturação; e a l
 
 ## Pesquisa e telemetria
 
-- Ao terminar a missão, os dados técnicos seguem **sozinhos** e a pesquisa abre (pode pular). Só no final: não há pesquisa no meio do jogo. Na tela de parabéns há um botão "Contar como foi" para reabrir. Quem desiste (aviso do voltar) ou sai no meio também é registrado.
+- Ao terminar a missão, os dados técnicos seguem **sozinhos** e a pesquisa abre (pode pular). Só no final e **obrigatória nesta fase**: não há "agora não". Quem sai sem responder (desistiu, fechou, recarregou) fica com a pesquisa **pendente** no celular, e ela vem antes de tudo na próxima vez que abrir o jogo. Quem desiste (aviso do voltar) ou sai no meio também é registrado.
 - Anônimo: sem nome, sem posição. O mesmo `partidaId` atualiza a mesma linha no servidor.
 - Envio para `https://www.meuguiaoutdoor.com.br/_functions/pesquisa` (função `post_pesquisa` em `novositemeuguiaoutdoor/src/backend/http-functions.js`, grava na coleção `PesquisasJogo`). Se o servidor não responder, o jogo guarda uma **fila** no celular e envia depois.

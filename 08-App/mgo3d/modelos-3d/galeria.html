@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>MGO · Galeria de monstros 3D</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --verde:#1f5a2c; --claro:#e8f5e9; --texto:#1b1b1b; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color:var(--texto); background:#f4f7f2; }
+  header { background:var(--verde); color:#fff; padding:14px 18px; }
+  header h1 { margin:0; font-size:20px; } header p { margin:4px 0 0; font-size:13px; opacity:.9; }
+  main { max-width:1100px; margin:0 auto; padding:14px; }
+  h2 { font-size:16px; margin:22px 0 8px; }
+  .grade { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+  .cartao { background:#fff; border:2px solid #d5e2d0; border-radius:12px; padding:8px; text-align:center; cursor:pointer; }
+  .cartao.on { border-color:var(--verde); background:var(--claro); }
+  .cartao img { width:100%; aspect-ratio:1; object-fit:contain; background:linear-gradient(#dff0d8,#f4f7f2); border-radius:8px; }
+  .cartao b { display:block; margin-top:4px; font-size:14px; } .cartao small { color:#555; font-size:11px; display:block; }
+  .semArquivo { background:#fafafa; border:2px dashed #cfd8dc; border-radius:12px; padding:8px; text-align:center; font-size:13px; color:#666; }
+  #palco { display:grid; grid-template-columns:minmax(260px,420px) 1fr; gap:14px; align-items:start; }
+  @media (max-width:700px) { #palco { grid-template-columns:1fr; } }
+  #viewer { width:100%; aspect-ratio:1; background:linear-gradient(#cfe8ff,#eaf5df 70%,#cfe3a4); border-radius:14px; display:block; }
+  .painel { background:#fff; border-radius:12px; padding:12px; border:2px solid #d5e2d0; }
+  .painel h3 { margin:0 0 6px; font-size:17px; }
+  .botoes { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 10px; }
+  .botoes button { padding:7px 10px; border:2px solid #cfd8dc; border-radius:999px; background:#fff; cursor:pointer; font-size:13px; }
+  .botoes button.on { border-color:var(--verde); background:var(--claro); font-weight:bold; }
+  label.parte { display:inline-block; margin-right:12px; font-size:14px; }
+  .nota { font-size:12px; color:#555; margin-top:8px; }
+  .previa img { width:100%; border-radius:12px; border:2px solid #d5e2d0; background:#fff; }
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+</head>
+<body>
+<header><h1>Galeria de monstros 3D</h1><p>Pacote "Ultimate Monsters" (Quaternius, licença CC0). Clique num monstro para ver girando, com as animações e as partes separadas.</p></header>
+<main>
+  <h2>Monstros que já estão baixados</h2>
+  <div class="grade" id="grade"></div>
+
+  <h2 id="tituloPalco">Visualizador</h2>
+  <div id="palco">
+    <canvas id="viewer" width="840" height="840"></canvas>
+    <div class="painel">
+      <h3 id="nomeSel">—</h3><div id="usoSel" class="nota"></div>
+      <div style="margin-top:8px"><b>Partes</b><br><span id="partes"></span></div>
+      <div style="margin-top:8px"><b>Animações</b><div class="botoes" id="animacoes"></div></div>
+      <div class="nota" id="info"></div>
+    </div>
+  </div>
+
+  <h2>O pacote completo: os 50 monstros (imagem oficial do autor)</h2>
+  <div class="previa"><img src="https://quaternius.com/assets/images/fullres/ultimatemonsters.jpg" alt="Prévia do pacote Ultimate Monsters"></div>
+
+  <h2>Os 50 nomes do pacote (os arquivos .gltf ainda não estão todos baixados)</h2>
+  <div class="grade" id="faltam"></div>
+  <p class="nota">Cada monstro vem com 14 animações (parado, andar, correr, atacar, levar dano, morrer, pular, abaixar, acenar e outras) e uma arma ou objeto (Orc_Weapon, Trident...). Ao receber os demais arquivos, eles entram aqui sozinhos.</p>
+</main>
+
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import * as SkeletonUtils from 'three/addons/utils/SkeletonUtils.js'; // copiar modelo COM esqueleto
+
+// Modelos que existem como arquivo (os do jogo e, se houver, os da pasta pacote/: veja catalogo.json)
+const BASE = [
+  { nome: 'Demon', url: 'ultimate-monsters/Demon.gltf', uso: 'No jogo: chefão (vermelho) e chefão final (lilás).' },
+  { nome: 'Orc_Skull', url: 'ultimate-monsters/Orc_Skull.gltf', uso: 'No jogo: zumbi.' }
+];
+const PACOTE = {
+  'Grandes (Big)': ['Alien','Birb','BlueDemon','Bunny','Cactoro','Demon','Dino','Fish','Frog','Monkroose','MushroomKing','Ninja','Orc','Orc_Skull','Tribal','Yeti'],
+  'Gosmas (Blob)': ['Alien','Birb','Cactoro','Cat','Chicken','Dog','Fish','GreenBlob','GreenSpikyBlob','Mushnub','Mushnub_Evolved','Ninja','Orc','Pigeon','PinkBlob','Wizard','Yeti'],
+  'Voadores (Flying)': ['Alpaking','Alpaking_Evolved','Armabee','Armabee_Evolved','Demon','Dragon','Dragon_Evolved','Ghost','Ghost_Skull','Glub','Glub_Evolved','Goleling','Goleling_Evolved','Hywirl','Pigeon','Squidle','Tribal']
+};
+let modelos = BASE.slice();
+try { const r = await fetch('catalogo.json', { cache: 'no-store' }); if (r.ok) { const extra = await r.json(); extra.forEach((e) => { if (!modelos.some((m) => m.url === e.url)) modelos.push(e); }); } } catch (e) {}
+
+const luz = (cena) => { cena.add(new THREE.AmbientLight(0xffffff, 2.4)); const s = new THREE.DirectionalLight(0xffffff, 1.5); s.position.set(-3, 6, 5); cena.add(s); };
+const carregar = (url) => new Promise((ok, err) => new GLTFLoader().load(url, ok, undefined, err));
+
+// ---- miniaturas: um renderizador pequeno, um quadro por modelo ----
+const rMini = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true }); rMini.setSize(256, 256); rMini.setClearColor(0x000000, 0);
+const grade = document.getElementById('grade'); const cartoes = {};
+function enquadrar(cam, obj) { const b = new THREE.Box3().setFromObject(obj, true), c = b.getCenter(new THREE.Vector3()), t = b.getSize(new THREE.Vector3()), m = Math.max(t.x, t.y, t.z); cam.position.set(c.x + m * 0.6, c.y + m * 0.35, c.z + m * 1.5); cam.lookAt(c); return { c, m }; }
+async function miniatura(m) {
+  const g = await carregar(m.url); m.gltf = g;
+  const cena = new THREE.Scene(); luz(cena); const cam = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+  const raiz = SkeletonUtils.clone(g.scene); cena.add(raiz);
+  const mix = new THREE.AnimationMixer(raiz); const idle = g.animations.find((a) => a.name === 'Idle'); if (idle) mix.clipAction(idle).play(); mix.update(0.01); raiz.updateMatrixWorld(true);
+  enquadrar(cam, raiz); rMini.render(cena, cam);
+  return rMini.domElement.toDataURL('image/png');
+}
+for (const m of modelos) {
+  const card = document.createElement('div'); card.className = 'cartao'; card.innerHTML = '<img alt="' + m.nome + '"><b>' + m.nome + '</b><small>' + (m.uso || '') + '</small>';
+  grade.appendChild(card); cartoes[m.nome] = card; card.onclick = () => selecionar(m);
+  try { card.querySelector('img').src = await miniatura(m); } catch (e) { card.querySelector('small').textContent = 'não consegui abrir'; }
+}
+
+// ---- visualizador grande ----
+const canvas = document.getElementById('viewer');
+const rend = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); rend.setPixelRatio(Math.min(2, devicePixelRatio));
+const cena = new THREE.Scene(); luz(cena);
+const cam = new THREE.PerspectiveCamera(35, 1, 0.1, 200); const ctl = new OrbitControls(cam, canvas); ctl.autoRotate = true; ctl.autoRotateSpeed = 2.2; ctl.enableDamping = true;
+let atual = null, mixer = null, acao = null; const relogio = new THREE.Clock();
+function tamanho() { const w = canvas.clientWidth; rend.setSize(w, w, false); cam.aspect = 1; cam.updateProjectionMatrix(); }
+addEventListener('resize', tamanho); tamanho();
+
+function selecionar(m) {
+  Object.values(cartoes).forEach((c) => c.classList.remove('on')); cartoes[m.nome].classList.add('on');
+  if (atual) cena.remove(atual); atual = SkeletonUtils.clone(m.gltf.scene); cena.add(atual);
+  mixer = new THREE.AnimationMixer(atual); const clips = m.gltf.animations;
+  const tocar = (nome) => { if (acao) acao.fadeOut(0.2); const c = clips.find((x) => x.name === nome); if (!c) return; acao = mixer.clipAction(c); acao.reset().fadeIn(0.2).play(); acao.setLoop(nome === 'Death' ? THREE.LoopOnce : THREE.LoopRepeat); acao.clampWhenFinished = true; [].forEach.call(document.querySelectorAll('#animacoes button'), (b) => b.classList.toggle('on', b.textContent === nome)); };
+  tocar('Idle'); mixer.update(0.01); atual.updateMatrixWorld(true);
+  const { c, m: tam } = enquadrar(cam, atual); ctl.target.copy(c); ctl.update();
+  document.getElementById('nomeSel').textContent = m.nome; document.getElementById('usoSel').textContent = m.uso || '';
+  document.getElementById('animacoes').innerHTML = clips.map((x) => '<button type="button">' + x.name + '</button>').join('');
+  [].forEach.call(document.querySelectorAll('#animacoes button'), (b) => { b.onclick = () => tocar(b.textContent); }); tocar('Idle');
+  const partes = []; atual.traverse((o) => { if (o.isMesh) partes.push(o); });
+  document.getElementById('partes').innerHTML = partes.map((p, i) => '<label class="parte"><input type="checkbox" checked data-i="' + i + '"> ' + p.name + (/weapon|trident|staff|club|sword/i.test(p.name) ? ' (objeto)' : ' (corpo)') + '</label>').join('');
+  [].forEach.call(document.querySelectorAll('#partes input'), (inp) => { inp.onchange = () => { partes[+inp.dataset.i].visible = inp.checked; }; });
+  document.getElementById('info').textContent = partes.length + ' partes · ' + clips.length + ' animações · arraste para girar, role para aproximar.';
+}
+(function laco() { requestAnimationFrame(laco); const dt = relogio.getDelta(); if (mixer) mixer.update(dt); ctl.update(); rend.render(cena, cam); })();
+if (modelos[0] && modelos[0].gltf) selecionar(modelos[0]);
+
+// ---- o que falta baixar ----
+const faltam = document.getElementById('faltam'); const temNome = (g, n) => modelos.some((m) => m.nome === n && (m.grupo === g || !m.grupo));
+Object.entries(PACOTE).forEach(([g, lista]) => { lista.forEach((n) => { const d = document.createElement('div'); d.className = 'semArquivo'; d.innerHTML = '<b>' + n + '</b><small>' + g + '</small>'; faltam.appendChild(d); }); });
+</script>
+</body>
+</html>
