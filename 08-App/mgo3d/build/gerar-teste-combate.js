@@ -79,16 +79,8 @@ const modelo = fs.readFileSync(MODELO, 'utf8');
 const fonteDinamica = fs.readFileSync(path.join(__dirname, 'combate-dinamico.js'), 'utf8'); // funcao que monta o combate no navegador (largada livre)
 const resumos = [];
 
-// ---- MONSTROS 3D + LAYOUT DOS BOTOES (vindos do modo livre; SEM o joystick) ----
-// camada3d.js (fonte unica em prototipo-3d-maplibre/) e os modelos .gltf sao copiados para saida/; cada pagina de combate ganha a camada 3D e o layout: pedra a DIREITA do estilingue.
-const MODELOS_3D = path.join(RAIZ, 'modelos-3d', 'ultimate-monsters');
-const CAMADA_3D = path.join(RAIZ, '..', 'prototipo-3d-maplibre', 'camada3d.js');
-const LAYOUT_CSS = '<style>/* layout do modo livre: botoes da pedra a direita do estilingue */#trocaPedraWrap{left:calc(50% + 52px)}.pedra-reserva{left:auto;right:-22px}#pedraReserva2{left:auto;right:-24px}</style>';
-const BLOCO_3D = '\n' + LAYOUT_CSS + '\n<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>\n<script type="module" src="camada3d.js"></script>\n';
-function comRecursos3D(html) { return html.includes('</body>') ? html.replace('</body>', () => BLOCO_3D + '</body>') : html; }
-fs.copyFileSync(CAMADA_3D, path.join(SAIDA, 'camada3d.js'));
-fs.mkdirSync(path.join(SAIDA, 'modelos'), { recursive: true });
-['Demon.gltf', 'Orc_Skull.gltf'].forEach((n) => fs.copyFileSync(path.join(MODELOS_3D, n), path.join(SAIDA, 'modelos', n)));
+// ---- BLOCOS (3D, layout dos botoes): quem liga e o montador unico do prototipo; o modo deste jogo e 'combate' (ver prototipo-3d-maplibre/blocos/blocos.json) ----
+const { montarBlocos } = require(path.join(RAIZ, '..', 'prototipo-3d-maplibre', 'montar-blocos.js'));
 regras.parques.forEach((pq) => {
   const f = path.join(RAIZ, 'arena', 'parques', pq.slug, 'arena.json');
   if (!fs.existsSync(f)) { avisos.push(pq.slug + ': arena.json nao existe (rode arena/gerar-arena.js ' + pq.slug + ')'); return; }
@@ -133,7 +125,7 @@ regras.parques.forEach((pq) => {
   }
   resumo.largadaLivre = dinamico;
   const arq = 'combate-' + pq.slug + '.html', man = 'manifest-combate-' + pq.slug + '.json';
-  fs.writeFileSync(path.join(SAIDA, arq), comRecursos3D(modelo.replace('/*DADOS*/', () => 'const DADOS = ' + JSON.stringify(dados) + ';').replace('/*COMBATE_DINAMICO*/', () => fonteDinamica).replace('__MANIFESTO__', man)));
+  fs.writeFileSync(path.join(SAIDA, arq), montarBlocos(modelo.replace('/*DADOS*/', () => 'const DADOS = ' + JSON.stringify(dados) + ';').replace('/*COMBATE_DINAMICO*/', () => fonteDinamica).replace('__MANIFESTO__', man), 'combate', SAIDA));
   fs.writeFileSync(path.join(SAIDA, man), JSON.stringify({ name: 'MGO · Combate · ' + pq.nome, short_name: 'MGO', start_url: './' + arq, scope: './', display: 'standalone', orientation: 'portrait', background_color: '#1f5a2c', theme_color: '#2f6b3a', icons: [{ src: 'icon-192.png', sizes: '192x192', type: 'image/png' }, { src: 'icon-512.png', sizes: '512x512', type: 'image/png' }] }, null, 1));
   resumos.push(Object.assign({ arquivo: arq }, resumo));
   // material para o visualizador de conferencia (satelite): o combate montado + a area segura, os caminhos e as zonas

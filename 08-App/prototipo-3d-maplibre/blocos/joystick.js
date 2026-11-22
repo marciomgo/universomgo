@@ -1,11 +1,10 @@
 // MODO LIVRE: joystick na tela para andar sem GPS (a "caminhada simulada" do jogo, a mesma das setas do teclado).
 // Para cima = anda · para baixo = da re · esquerda/direita = gira (o tiro e a camera seguem para onde o Mineu olha).
-// Layout (so no modo livre): joystick embaixo a ESQUERDA, estilingue no meio e botoes da pedra a DIREITA do estilingue.
+// BLOCO joystick (ver blocos/blocos.json). Fica embaixo a ESQUERDA; o layout da pedra e outro bloco (pedraDireita).
 // So aparece quando o jogo ja comecou e NAO esta usando o GPS real (com GPS, voce anda de verdade). Classic script: usa as variaveis do jogo (tecla, modoReal, satelite, jogoIniciado).
 (function joystickLivre() {
   var css = document.createElement('style');
   css.textContent = '#joy{position:fixed;left:12px;bottom:26px;width:112px;height:112px;border-radius:50%;background:rgba(255,255,255,.28);border:3px solid rgba(255,255,255,.8);z-index:6;touch-action:none;user-select:none;-webkit-user-select:none;display:none}' +
-    '#trocaPedraWrap{left:calc(50% + 52px)}.pedra-reserva{left:auto;right:-22px}#pedraReserva2{left:auto;right:-24px}' +
     '#joyBola{position:absolute;left:50%;top:50%;width:50px;height:50px;margin:-25px 0 0 -25px;border-radius:50%;background:rgba(255,255,255,.95);box-shadow:0 2px 6px rgba(0,0,0,.45);pointer-events:none}' +
     '#joy:before,#joy:after{content:"";position:absolute;background:rgba(255,255,255,.55);pointer-events:none}#joy:before{left:50%;top:10px;bottom:10px;width:2px;margin-left:-1px}#joy:after{top:50%;left:10px;right:10px;height:2px;margin-top:-1px}';
   document.head.appendChild(css);

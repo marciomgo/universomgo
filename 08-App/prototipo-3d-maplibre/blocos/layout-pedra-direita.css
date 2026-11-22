@@ -1,0 +1,4 @@
+/* bloco pedraDireita: botoes da pedra a direita do estilingue (o estilingue fica centralizado) */
+#trocaPedraWrap{left:calc(50% + 52px)}
+.pedra-reserva{left:auto;right:-22px}
+#pedraReserva2{left:auto;right:-24px}

@@ -77,9 +77,11 @@ function escreverManifest(arq) {
   fs.writeFileSync(__dirname + '/saida/manifest-' + arq.replace('.html', '') + '.json', JSON.stringify(man, null, 1));
 }
 const modelo = fs.readFileSync(__dirname + '/proto-modelo.html', 'utf8');
+const { montarBlocos } = require('./montar-blocos.js');
+const MODO_DA_PAGINA = { 'mapa3d-livre.html': 'livre' }; // as demais paginas sao 'legado' (sem blocos)
 [['mapa3d.html', parcao()], ['mapa3d-casa.html', casa()], ['mapa3d-livre.html', livre()], ['mapa3d-combate-1.html', combate(1)], ['mapa3d-combate-2.html', combate(2)]].forEach(([arq, dados]) => {
-  fs.writeFileSync(__dirname + '/saida/' + arq, modelo.replace('/*DADOS*/', () => 'const DADOS = ' + JSON.stringify(dados) + ';').replace('__MANIFESTO__', 'manifest-' + arq.replace('.html', '') + '.json'));
+  const pagina = modelo.replace('/*DADOS*/', () => 'const DADOS = ' + JSON.stringify(dados) + ';').replace('__MANIFESTO__', 'manifest-' + arq.replace('.html', '') + '.json');
+  fs.writeFileSync(__dirname + '/saida/' + arq, montarBlocos(pagina, MODO_DA_PAGINA[arq] || 'legado', __dirname + '/saida'));
   escreverManifest(arq);
-  if (arq === 'mapa3d-livre.html') require('./camada3d-instalar.js')(); // monstros 3D so no modo livre
   console.log(arq, 'pontos', dados.pontos.length, 'zumbis', dados.zumbis.length, 'chefoes', dados.chefoes.length, 'bombas', dados.bombas.length);
 });

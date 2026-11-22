@@ -1,4 +1,4 @@
-// MODO LIVRE: os monstros do jogo aparecem em 3D de verdade (Quaternius, CC0) no lugar dos bonecos planos. Dando a volta, aparece o lado e as costas.
+// BLOCO monstros3d (ver blocos/blocos.json): os monstros do jogo aparecem em 3D de verdade (Quaternius, CC0) no lugar dos bonecos planos. Dando a volta, aparece o lado e as costas.
 // Zumbi = Orc_Skull; chefao = Demon (o chefao FINAL e um Demon maior). A logica do jogo NAO muda: cada inimigo do jogo (lista `inimigos`) ganha um corpo 3D
 // que segue a posicao dele, vira para onde ele anda (ou para o jogador), e toca a animacao certa: parado, andando, atacando, levando dano e morrendo.
 // Roda como modulo DEPOIS do script do jogo (usa as variaveis do jogo: mapa, POS, inimigos, CONTATO_M, ZUMBI_VEL, CHEFAO_VEL...). So acrescenta uma camada.
