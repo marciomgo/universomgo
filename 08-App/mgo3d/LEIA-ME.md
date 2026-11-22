@@ -26,7 +26,7 @@ node arena/buscar-parque-api.js <slug> <relation|way> <id>   # baixa um parque n
 node arena/gerar-arena.js <slug>                 # gera arena/parques/<slug>/arena.json
 node build/gerar-teste-combate.js                # gera saida/ + conferir/dados/
 node conferir/srv.js                             # http://localhost:8771/  (satélite + combate + EDITOR; botões no topo trocam de parque)
-node build/servir-saida.js                       # http://localhost:8772/combate.html  (testa as páginas; imagens vêm de docs/)
+node build/servir-saida.js                       # http://localhost:8772/jogo.html  (testa as páginas; imagens vêm de docs/)
 ```
 
 ## Editor de ajustes (conferir/, http://localhost:8771/)

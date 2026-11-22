@@ -124,7 +124,7 @@ regras.parques.forEach((pq) => {
     dados.pontos = []; dados.zumbis = []; dados.chefoes = []; dados.curas = []; dados.pedras = []; dados.bombas = [];
   }
   resumo.largadaLivre = dinamico;
-  const arq = 'combate-' + pq.slug + '.html', man = 'manifest-combate-' + pq.slug + '.json';
+  const arq = 'jogo-' + pq.slug + '.html', man = 'manifest-jogo-' + pq.slug + '.json'; // endereco PUBLICO: /jogo-<parque>.html (o 'combate' e o nome do modo, so interno)
   fs.writeFileSync(path.join(SAIDA, arq), montarBlocos(modelo.replace('/*DADOS*/', () => 'const DADOS = ' + JSON.stringify(dados) + ';').replace('/*COMBATE_DINAMICO*/', () => fonteDinamica).replace('__MANIFESTO__', man), 'combate', SAIDA));
   fs.writeFileSync(path.join(SAIDA, man), JSON.stringify({ name: 'MGO · Combate · ' + pq.nome, short_name: 'MGO', start_url: './' + arq, scope: './', display: 'standalone', orientation: 'portrait', background_color: '#1f5a2c', theme_color: '#2f6b3a', icons: [{ src: 'icon-192.png', sizes: '192x192', type: 'image/png' }, { src: 'icon-512.png', sizes: '512x512', type: 'image/png' }] }, null, 1));
   resumos.push(Object.assign({ arquivo: arq }, resumo));
@@ -133,9 +133,13 @@ regras.parques.forEach((pq) => {
   fs.writeFileSync(path.join(RAIZ, 'conferir', 'dados', pq.slug + '.json'), JSON.stringify({ dados: dadosEditor, dinamico, combateEditado, arena: { perimetroExtra: arena.perimetroExtra, terreno: arena.terreno, perimetroOriginal: arena.perimetroOriginal, seguraEditada: arena.seguraEditada, construcoes: arena.construcoes, agua: arena.agua, viasCarro: arena.viasCarro, viasServico: arena.viasServico, largada: arena.largada, segura: arena.segura, caminhos: arena.caminhos, caminhosIds: arena.caminhosIds, caminhosRemovidos: arena.caminhosRemovidos, caminhosExtra: arena.caminhosExtra, zonas: arena.zonas, zonasAuto: arena.zonasAuto, zonasAutoIgnoradas: arena.zonasAutoIgnoradas, zonasAutoLivres: arena.zonasAutoLivres, liberar: arena.liberar, lados: arena.lados, ladoPendente: arena.ladoPendente, apagarNoPonto: arena.apagarNoPonto, apagados: arena.apagados } }));
 });
 
+// ---- ENDERECOS ANTIGOS (publicados em 22/11 como /combate...): redirecionam para o novo, mantendo ?parametros. Remover quando nao houver mais link antigo em uso. ----
+const ANTIGOS = [['combate.html', 'jogo.html']].concat(regras.parques.map((pq) => ['combate-' + pq.slug + '.html', 'jogo-' + pq.slug + '.html']));
+ANTIGOS.forEach(([velho, novo]) => fs.writeFileSync(path.join(SAIDA, velho), '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><title>MGO · Jogo</title><meta name="viewport" content="width=device-width,initial-scale=1"><noscript><meta http-equiv="refresh" content="0;url=' + novo + '"></noscript></head><body style="font-family:system-ui,sans-serif;text-align:center;padding:40px"><script>location.replace("' + novo + '" + location.search + location.hash);</script><p><a href="' + novo + '">Abrir o jogo</a></p></body></html>\n'));
+
 // ---- pagina de entrada: escolhe o parque ----
-const botoes = regras.parques.map((pq) => '<a class="parque" href="combate-' + pq.slug + '.html">' + pq.nome + '</a>').join('\n    ');
-fs.writeFileSync(path.join(SAIDA, 'combate.html'), `<!DOCTYPE html>
+const botoes = regras.parques.map((pq) => '<a class="parque" href="jogo-' + pq.slug + '.html">' + pq.nome + '</a>').join('\n    ');
+fs.writeFileSync(path.join(SAIDA, 'jogo.html'), `<!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>MGO · Combate</title><meta name="theme-color" content="#2f6b3a">
 <style>
