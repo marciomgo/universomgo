@@ -44,9 +44,11 @@
     "chefaoFinalDistDaBaseM": 20
   },
   "itens": {
-    "curas": 5,
-    "pedras": 11,
-    "bombas": 5,
+    "_o_que_e": "Itens do percurso, colocados DEPOIS que o percurso e sorteado, perto dele. O numero e fixo por percurso e cresce com o tamanho dele: quantidade por BASE (1 = uma por base; com 5 bases, 5 itens). Mude aqui para ter mais ou menos.",
+    "curasPorBase": 1,
+    "pedrasPorBase": 1,
+    "bombasPorBase": 1,
+    "distEntreItensM": 12,
     "distMaxDaRotaM": 60,
     "distMaxBombasM": 100,
     "emojisBomba": [

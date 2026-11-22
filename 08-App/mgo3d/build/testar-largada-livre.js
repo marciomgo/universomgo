@@ -7,13 +7,14 @@ const rnd = () => { sem = (sem * 16807 + 12345) % 2147483647; return sem / 21474
 for (const pq of regras.parques) {
   sem = 4242;
   const a = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'arena', 'parques', pq.slug, 'arena.json'), 'utf8'));
-  const A = { pontos: a.pontos.filter((p) => p.seguro !== false), curas: a.curas, pedras: a.pedrasNormais, bombas: a.bombas, segura: a.segura };
+  const A = { pontos: a.poolPontos, itens: a.poolItens, bombas: a.poolBombas, segura: a.segura };
+  let s2 = 99; const rnd2 = () => { s2 = (s2 * 16807 + 12345) % 2147483647; return s2 / 2147483647; };
   const R = { bases: regras.bases, monstros: regras.monstros, itens: regras.itens };
   const par = turf.polygon([JSON.parse(a.perimetro)]); const [W, S, E, N] = turf.bbox(par);
   const N_TESTES = 300; let ok = 0, completo = 0, falhou = 0; const comp = [], tZ = [], nCur = [], nPed = [], nBom = [], dPrim = []; let foraSegura = 0, ms = 0;
   for (let i = 0; i < N_TESTES; i++) {
     let L; do { L = { lng: W + rnd() * (E - W), lat: S + rnd() * (N - S) }; } while (!turf.booleanPointInPolygon([L.lng, L.lat], par));
-    const t0 = Date.now(); const c = gerar(L, A, R); ms += Date.now() - t0;
+    const t0 = Date.now(); const c = gerar(L, A, R, rnd2); ms += Date.now() - t0;
     if (!c || !c.pontos.length) { falhou++; continue; }
     ok++; if (c.pontos.length >= R.bases.quantidade) completo++;
     const linha = [L].concat(c.pontos); let m = 0; for (let k = 1; k < linha.length; k++) m += turf.distance([linha[k - 1].lng, linha[k - 1].lat], [linha[k].lng, linha[k].lat], { units: 'meters' });
@@ -21,8 +22,11 @@ for (const pq of regras.parques) {
     dPrim.push(turf.distance([L.lng, L.lat], [c.pontos[0].lng, c.pontos[0].lat], { units: 'meters' }));
     if (a.segura) { const seg = turf.feature(a.segura); [].concat(c.zumbis, c.chefoes).forEach((p) => { if (!turf.booleanPointInPolygon([p.lng, p.lat], seg)) foraSegura++; }); }
   }
+  // VARIEDADE: da MESMA largada, quantos percursos diferentes saem em 20 partidas?
+  const L0 = { lat: a.largada.lat, lng: a.largada.lng }; const assin = new Set(), primeiras = new Set();
+  for (let k = 0; k < 20; k++) { const c = gerar(L0, A, R, rnd2); if (c) { assin.add(c.pontos.map((p) => p.lat + ',' + p.lng).join(';')); primeiras.add(c.pontos[0].lat + ',' + c.pontos[0].lng); } }
   const med = (v) => v.length ? Math.round(v.slice().sort((x, y) => x - y)[Math.floor(v.length / 2)]) : '-';
   const mn = (v) => v.length ? Math.min(...v) : '-';
   console.log(pq.slug.padEnd(18), `partidas ${N_TESTES}: montou ${ok} (completas com ${R.bases.quantidade} bases: ${completo}), falhou ${falhou}`,
-    `| percurso mediano ${med(comp)} m, 1a base a ${med(dPrim)} m | monstros med ${med(tZ)} (min ${mn(tZ)}) | curas med ${med(nCur)} (min ${mn(nCur)}), pedras med ${med(nPed)} (min ${mn(nPed)}), bombas med ${med(nBom)} (min ${mn(nBom)}) | monstros fora do verde: ${foraSegura} | ${Math.round(ms / N_TESTES)} ms/partida`);
+    `| percurso mediano ${med(comp)} m, 1a base a ${med(dPrim)} m | monstros med ${med(tZ)} (min ${mn(tZ)}) | curas med ${med(nCur)} (min ${mn(nCur)}), pedras med ${med(nPed)} (min ${mn(nPed)}), bombas med ${med(nBom)} (min ${mn(nBom)}) | monstros fora do verde: ${foraSegura} | ${Math.round(ms / N_TESTES)} ms/partida | mesma largada, 20 partidas: ${assin.size} percursos diferentes, ${primeiras.size} primeiras bases diferentes`);
 }

@@ -19,6 +19,7 @@ function salvar(slug, ed) {
   const op = lerJson(path.join(dir, 'opcoes.json'), {});
   op.caminhosRemovidos = ed.caminhosRemovidos || [];
   op.ignorarZonasAuto = ed.ignorarZonasAuto || [];
+  if (Array.isArray(ed.apagarNoPonto)) op.apagarNoPonto = ed.apagarNoPonto.filter((p) => p && typeof p.lat === 'number' && typeof p.lng === 'number');
   grava('opcoes.json', op);
   if (Array.isArray(ed.segura) && ed.segura.length) grava('segura-editada.json', ed.segura);
   if (ed.voltarVerdeAuto) { const f = path.join(dir, 'segura-editada.json'); if (fs.existsSync(f)) fs.unlinkSync(f); }
@@ -34,8 +35,25 @@ function salvar(slug, ed) {
   return { arena: linhas(a).slice(0, 700), avisos: av >= 0 ? linhas(b.slice(av)).slice(0, 600) : 'sem avisos' };
 }
 
+function escolherLado(slug, pt) { // grava o lado oficial (um ponto dentro dele) e gera de novo
+  const dir = path.join(RAIZ, 'arena', 'parques', slug);
+  const f = path.join(dir, 'opcoes.json'); const op = lerJson(f, {});
+  const hist = path.join(dir, 'edicoes-anteriores', new Date().toISOString().replace(/[:.]/g, '-')); fs.mkdirSync(hist, { recursive: true }); if (fs.existsSync(f)) fs.copyFileSync(f, path.join(hist, 'opcoes.json'));
+  op.ladoOficial = { lng: pt.lng, lat: pt.lat }; fs.writeFileSync(f, JSON.stringify(op));
+  const roda = (args) => execFileSync(process.execPath, args, { cwd: RAIZ, encoding: 'utf8', timeout: 280000 });
+  const a = roda(['arena/gerar-arena.js', slug]); roda(['build/gerar-teste-combate.js']);
+  return { ok: true, arena: a.split(String.fromCharCode(10)).filter((x) => x.indexOf('LADOS') === 0).join(' ') };
+}
+
 http.createServer((q, r) => {
   const u = decodeURIComponent(q.url.split('?')[0]);
+  if (q.method === 'POST' && u.startsWith('/lado/')) {
+    const slug = u.slice(6);
+    if (!SLUGS.includes(slug)) { r.writeHead(400); return r.end('parque invalido'); }
+    let corpo = ''; q.on('data', (d) => { corpo += d; if (corpo.length > 1e5) q.destroy(); });
+    q.on('end', () => { try { const pt = JSON.parse(corpo); if (typeof pt.lng !== 'number' || typeof pt.lat !== 'number') throw new Error('ponto invalido'); const res = escolherLado(slug, pt); r.writeHead(200, { 'Content-Type': 'application/json' }); r.end(JSON.stringify(res)); } catch (e) { r.writeHead(500, { 'Content-Type': 'application/json' }); r.end(JSON.stringify({ ok: false, erro: String(e.message || e).slice(0, 500) })); } });
+    return;
+  }
   if (q.method === 'POST' && u.startsWith('/salvar/')) {
     const slug = u.slice(8);
     if (!SLUGS.includes(slug)) { r.writeHead(400); return r.end('parque invalido'); }

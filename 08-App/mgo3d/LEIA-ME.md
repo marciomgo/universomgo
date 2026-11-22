@@ -58,6 +58,18 @@ O gerador lê os sinais do OpenStreetMap e decide o que bloquear. As regras são
 - **Área verde** (onde o jogo coloca bases, monstros e itens): lápis ✏️ para puxar os cantos, lixeira para apagar um pedaço, "Área verde nova" para desenhar outra (`segura-editada.json`; o contorno do jogo cresce para conter o verde; as zonas proibidas desenhadas continuam cortando). "↩ verde automático" apaga a edição.
 - **Itens do combate** (bases, zumbis, chefões, curas, pedras, bombas): mover, apagar e adicionar no mapa (`combate-editado.json`, vale no lugar do combate montado pelo código e sobrevive a novas gerações da arena). "↩ combate automático" apaga a edição.
 
+### Regras que valem para QUALQUER parque (tudo em `arena/regras-terreno.json`, nada específico de um parque)
+- **Satélite + OpenStreetMap se somam**: basta a coisa aparecer em um dos dois. O satélite (`arena/detectar-satelite.js`) acha quadras de areia/azuis e telhados; o que só ele vê vira zona proibida.
+- **Trilhas** (`trilhas`): footway, path, pedestrian, cycleway e **steps** (escadinha). Só nelas entram pontos e itens.
+- **Sem pontos** (`semPontos`): cachorródromo (forma real + 2 m) e `highway=track` (linha + 3 m). Monstros podem, largada/bases/curas/pedras/bombas não.
+- **Lados** (`lados`): rua de carro que corta o parque cria perímetros independentes (mesmo com ponte). Só UM vale; o código avisa (AVISOS do build e faixa vermelha no editor) e o Márcio escolhe clicando no lado (`opcoes.json` → `ladoOficial`).
+- **Frestas** (`verde`): o verde não tem pedaço solto menor que 300 m² nem passagem mais estreita que 6 m.
+- **Lagos grandes** são multipolígonos no OpenStreetMap: o download (`buscar-parque-api.js`) já os junta. Atualizar só isso num parque existente: `node arena/buscar-parque-api.js <slug> --so-relacoes`.
+- **Só o que está dentro do perímetro oficial** aparece no editor (prédios, água, cercas, trilhas são cortados no perímetro).
+- **Editor**: tocar na BORDA de qualquer área = Apagar ou Editar (aparecem os pontos para puxar/criar/tirar, depois ✔ Pronto). Tudo é editável, menos apagar o contorno. Apagar grava em `opcoes.json` → `apagarNoPonto`; zonas próprias em `zonas.json` (polígono, círculo, linha com largura, ou com `semPontos:true`).
+- **Parque novo, passo a passo**: 1) `node arena/buscar-parque-api.js <slug> <relation|way> <id>`; 2) `node arena/gerar-arena.js <slug>`; 3) `node arena/detectar-satelite.js <slug>` (precisa do passo 2 feito) e de novo `node arena/gerar-arena.js <slug>` para as zonas do satélite entrarem; 4) acrescentar o parque em `conteudo/combate-teste.json`; 5) `node build/gerar-teste-combate.js`.
+- Atenção: um verde editado à mão (`segura-editada.json`) fica congelado e **não recebe regras novas**. O gerador avisa quando ele é quase igual ao automático; "voltar verde automático" no editor descongela.
+
 ## O que mudou no modelo do jogo (`proto-modelo.html`), tudo ligado só por chaves do DADOS
 - `semEspecial`: só estilingue com pedra normal + galho (sem pedra amarela).
 - `celebraAoLimpar`: nas missões de parque, "Missão cumprida!" quando todos os monstros morrem; "Jogar de novo" recarrega a missão.

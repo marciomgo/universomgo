@@ -32,51 +32,30 @@ function espalhar(cands, n) { // escolhe n candidatos bem espalhados (o proximo 
   return esc;
 }
 
+const gerarDin = require('./combate-dinamico.js');
+const semente = (s) => () => { s = (s * 16807 + 12345) % 2147483647; return s / 2147483647; };
+// piscinas de locais validos da arena no formato do montador (listas de [lat,lng]); arena.json antigo, sem piscinas, cai nas listas fixas
+function poolsDe(arena, segura) {
+  const seg = segura ? segura.geometry : null;
+  const par = (l) => (l || []).map((p) => [p.lat, p.lng]);
+  return { pontos: arena.poolPontos || par(arena.pontos.filter((p) => p.seguro !== false)), itens: arena.poolItens || par(arena.curas.concat(arena.pedrasNormais)), bombas: arena.poolBombas || par(arena.bombas), segura: seg };
+}
 function montarCombate(arena) {
   const L = arena.largada, B = regras.bases, M = regras.monstros, I = regras.itens;
   const segura = arena.segura ? turf.feature(arena.segura) : null;
   const naSegura = (p) => !segura || turf.booleanPointInPolygon(turf.point([p.lng, p.lat]), segura);
 
-  // 1) bases em sequencia: a 1a longe da largada, as outras sempre as mais proximas da anterior
-  let raio = B.raioMaxDaLargadaM, rota = [];
-  for (; raio <= 420; raio += 40) {
-    const todos = arena.pontos.filter((p) => p.seguro !== false && dist(p, L) >= B.distMinDaLargadaM && dist(p, L) <= raio);
-    rota = [];
-    const primeira = todos.slice().sort((a, b) => Math.abs(dist(a, L) - B.alvoDaPrimeiraM) - Math.abs(dist(b, L) - B.alvoDaPrimeiraM))[0];
-    if (!primeira) continue;
-    rota.push(primeira); let atual = primeira;
-    while (rota.length < B.quantidade) {
-      const c = todos.filter((p) => rota.every((r) => dist(p, r) >= B.distMinEntreBasesM)).sort((a, b) => dist(a, atual) - dist(b, atual))[0];
-      if (!c) break; rota.push(c); atual = c;
-    }
-    if (rota.length >= B.quantidade) break;
-  }
-  if (rota.length < B.quantidade) avisos.push(arena.slug + ': so achei ' + rota.length + ' bases (queria ' + B.quantidade + ')');
-  if (raio > B.raioMaxDaLargadaM) avisos.push(arena.slug + ': precisei abrir o raio das bases para ' + raio + ' m');
+  // O exemplo mostrado no editor e montado PELO MESMO codigo do jogo (combate-dinamico.js), com semente fixa so para o exemplo nao mudar a cada build.
+  const c = gerarDin(L, poolsDe(arena, segura), { bases: B, monstros: M, itens: I }, semente(777));
+  if (!c) { avisos.push(arena.slug + ': nao consegui montar o combate de exemplo'); return { resumo: { parque: arena.slug, bases: 0 }, dados: { slug: 'combate-' + arena.slug, nomeParque: arena.nomeExibicao, largada: L, perimetro: [], perimetroExtra: [], pontos: [], curas: [], pedras: [], bombas: [], chefoes: [], zumbis: [] } }; }
+  const rota = c.pontos, zumbis = c.zumbis, chefoes = c.chefoes, curas = c.curas, pedras = c.pedras, bombas = c.bombas;
   const linha = [L].concat(rota);
   const compr = Math.round(linha.slice(1).reduce((s, p, i) => s + dist(linha[i], p), 0));
-
-  // 2) monstros: tentam o angulo/distancia pedidos e, se cairem fora da area segura, recuam
-  const posicao = (base, m, ang) => {
-    for (const f of [1, 0.75, 0.5]) for (let k = 0; k < 12; k++) { const p = em(base, m * f, ang + k * 30); if (naSegura(p)) return p; }
-    avisos.push(arena.slug + ': monstro sem lugar seguro perto da base ' + base.codigo); return null;
-  };
-  const zumbis = [], chefoes = [];
-  rota.forEach((b, i) => {
-    const n = M.zumbisPorBase, ult = i === rota.length - 1;
-    for (let k = 0; k < n; k++) { const p = posicao(b, M.zumbiDistDaBaseM, (360 / n) * k + i * 40 + 20); if (p) zumbis.push(p); }
-    if (M.chefaoEmCadaBase) { const p = posicao(b, M.chefaoDistDaBaseM, 70 + i * 55); if (p) chefoes.push(Object.assign(p, { final: false })); }
-    if (ult) { const p = posicao(b, M.chefaoFinalDistDaBaseM, 250); if (p) chefoes.push(Object.assign(p, { final: true })); }
-  });
-
-  // 3) itens: so os que ficam perto do percurso, bem espalhados
-  const perto = (lista) => lista.filter((p) => distAteRota(p, linha) <= I.distMaxDaRotaM);
-  const curas = espalhar(perto(arena.curas), I.curas);
-  const pedras = espalhar(perto(arena.pedrasNormais), I.pedras);
-  const bombas = espalhar(arena.bombas.filter((p) => distAteRota(p, linha) <= (I.distMaxBombasM || I.distMaxDaRotaM)), I.bombas);
-  if (curas.length < 3) avisos.push(arena.slug + ': so ' + curas.length + ' curas perto do percurso');
-  if (pedras.length < 3) avisos.push(arena.slug + ': so ' + pedras.length + ' pedras perto do percurso');
-  if (bombas.length < 3) avisos.push(arena.slug + ': so ' + bombas.length + ' bombas perto do percurso');
+  if (rota.length < B.quantidade) avisos.push(arena.slug + ': so achei ' + rota.length + ' bases (queria ' + B.quantidade + ')');
+  const q = (pb, fx) => (pb !== undefined ? Math.round(rota.length * pb) : fx);
+  if (curas.length < q(I.curasPorBase, I.curas)) avisos.push(arena.slug + ': so ' + curas.length + ' de ' + q(I.curasPorBase, I.curas) + ' curas no exemplo');
+  if (pedras.length < q(I.pedrasPorBase, I.pedras)) avisos.push(arena.slug + ': so ' + pedras.length + ' de ' + q(I.pedrasPorBase, I.pedras) + ' pedras no exemplo');
+  if (bombas.length < q(I.bombasPorBase, I.bombas)) avisos.push(arena.slug + ': so ' + bombas.length + ' de ' + q(I.bombasPorBase, I.bombas) + ' bombas no exemplo');
 
   return {
     resumo: { parque: arena.slug, bases: rota.length, percurso_m: compr, zumbis: zumbis.length, chefoes: chefoes.length, curas: curas.length, pedras: pedras.length, bombas: bombas.length },
@@ -89,7 +68,7 @@ function montarCombate(arena) {
       bombas: bombas.map((p, i) => ({ lat: p.lat, lng: p.lng, e: I.emojisBomba[i % I.emojisBomba.length] })),
       chefoes: chefoes.map((c) => ({ lat: arred(c.lat), lng: arred(c.lng), final: c.final })),
       zumbis: zumbis.map((z) => ({ lat: arred(z.lat), lng: arred(z.lng) })),
-      semEspecial: !regras.armas.pedraEspecial, celebraAoLimpar: !!regras.celebraAoLimpar, pesquisaUrl: regras.pesquisaUrl
+      semEspecial: !regras.armas.pedraEspecial, celebraAoLimpar: !!regras.celebraAoLimpar, pesquisaUrl: /COLOCAR-O-LINK/.test(regras.pesquisaUrl || '') ? '' : regras.pesquisaUrl /* link provisorio: sem botao de pesquisa (nao mostra link quebrado) */
     }
   };
 }
@@ -99,10 +78,22 @@ fs.mkdirSync(SAIDA, { recursive: true });
 const modelo = fs.readFileSync(MODELO, 'utf8');
 const fonteDinamica = fs.readFileSync(path.join(__dirname, 'combate-dinamico.js'), 'utf8'); // funcao que monta o combate no navegador (largada livre)
 const resumos = [];
+
+// ---- MONSTROS 3D + LAYOUT DOS BOTOES (vindos do modo livre; SEM o joystick) ----
+// camada3d.js (fonte unica em prototipo-3d-maplibre/) e os modelos .gltf sao copiados para saida/; cada pagina de combate ganha a camada 3D e o layout: pedra a DIREITA do estilingue.
+const MODELOS_3D = path.join(RAIZ, 'modelos-3d', 'ultimate-monsters');
+const CAMADA_3D = path.join(RAIZ, '..', 'prototipo-3d-maplibre', 'camada3d.js');
+const LAYOUT_CSS = '<style>/* layout do modo livre: botoes da pedra a direita do estilingue */#trocaPedraWrap{left:calc(50% + 52px)}.pedra-reserva{left:auto;right:-22px}#pedraReserva2{left:auto;right:-24px}</style>';
+const BLOCO_3D = '\n' + LAYOUT_CSS + '\n<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>\n<script type="module" src="camada3d.js"></script>\n';
+function comRecursos3D(html) { return html.includes('</body>') ? html.replace('</body>', () => BLOCO_3D + '</body>') : html; }
+fs.copyFileSync(CAMADA_3D, path.join(SAIDA, 'camada3d.js'));
+fs.mkdirSync(path.join(SAIDA, 'modelos'), { recursive: true });
+['Demon.gltf', 'Orc_Skull.gltf'].forEach((n) => fs.copyFileSync(path.join(MODELOS_3D, n), path.join(SAIDA, 'modelos', n)));
 regras.parques.forEach((pq) => {
   const f = path.join(RAIZ, 'arena', 'parques', pq.slug, 'arena.json');
   if (!fs.existsSync(f)) { avisos.push(pq.slug + ': arena.json nao existe (rode arena/gerar-arena.js ' + pq.slug + ')'); return; }
   const arena = JSON.parse(fs.readFileSync(f, 'utf8')); arena.nomeExibicao = pq.nome;
+  if (arena.ladoPendente) avisos.push(pq.slug + ': ATENCAO — uma rua divide o parque em ' + arena.lados.length + ' lados (' + arena.lados.map((l) => l.ha + ' ha').join(' / ') + '). Esta usando o maior de forma PROVISORIA. Abra o editor (localhost:8771/?p=' + pq.slug + ') e escolha o lado oficial');
   const { resumo, dados } = montarCombate(arena);
   // combate arrumado a mao no editor (arena/parques/<slug>/combate-editado.json): substitui o que o codigo montou
   const fe = path.join(RAIZ, 'arena', 'parques', pq.slug, 'combate-editado.json');
@@ -136,18 +127,18 @@ regras.parques.forEach((pq) => {
     const cru = (l) => l.map((p) => ({ lat: p.lat, lng: p.lng }));
     let seg = null; if (arena.segura) { try { seg = turf.truncate(turf.simplify(turf.feature(arena.segura), { tolerance: 0.00002, highQuality: true }), { precision: 6 }).geometry; } catch (e) { seg = arena.segura; } }
     dados.dinamico = true;
-    dados.arena = { pontos: cru(arena.pontos.filter((p) => p.seguro !== false)), curas: cru(arena.curas), pedras: cru(arena.pedrasNormais), bombas: cru(arena.bombas), segura: seg };
+    const pl = poolsDe(arena, null); dados.arena = { pontos: pl.pontos, itens: pl.itens, bombas: pl.bombas, segura: seg };
     dados.regrasDinamicas = { bases: regras.bases, monstros: regras.monstros, itens: regras.itens };
     dados.pontos = []; dados.zumbis = []; dados.chefoes = []; dados.curas = []; dados.pedras = []; dados.bombas = [];
   }
   resumo.largadaLivre = dinamico;
   const arq = 'combate-' + pq.slug + '.html', man = 'manifest-combate-' + pq.slug + '.json';
-  fs.writeFileSync(path.join(SAIDA, arq), modelo.replace('/*DADOS*/', () => 'const DADOS = ' + JSON.stringify(dados) + ';').replace('/*COMBATE_DINAMICO*/', () => fonteDinamica).replace('__MANIFESTO__', man));
+  fs.writeFileSync(path.join(SAIDA, arq), comRecursos3D(modelo.replace('/*DADOS*/', () => 'const DADOS = ' + JSON.stringify(dados) + ';').replace('/*COMBATE_DINAMICO*/', () => fonteDinamica).replace('__MANIFESTO__', man)));
   fs.writeFileSync(path.join(SAIDA, man), JSON.stringify({ name: 'MGO · Combate · ' + pq.nome, short_name: 'MGO', start_url: './' + arq, scope: './', display: 'standalone', orientation: 'portrait', background_color: '#1f5a2c', theme_color: '#2f6b3a', icons: [{ src: 'icon-192.png', sizes: '192x192', type: 'image/png' }, { src: 'icon-512.png', sizes: '512x512', type: 'image/png' }] }, null, 1));
   resumos.push(Object.assign({ arquivo: arq }, resumo));
   // material para o visualizador de conferencia (satelite): o combate montado + a area segura, os caminhos e as zonas
   fs.mkdirSync(path.join(RAIZ, 'conferir', 'dados'), { recursive: true });
-  fs.writeFileSync(path.join(RAIZ, 'conferir', 'dados', pq.slug + '.json'), JSON.stringify({ dados: dadosEditor, dinamico, combateEditado, arena: { perimetroExtra: arena.perimetroExtra, terreno: arena.terreno, perimetroOriginal: arena.perimetroOriginal, seguraEditada: arena.seguraEditada, construcoes: arena.construcoes, agua: arena.agua, viasCarro: arena.viasCarro, viasServico: arena.viasServico, largada: arena.largada, segura: arena.segura, caminhos: arena.caminhos, caminhosIds: arena.caminhosIds, caminhosRemovidos: arena.caminhosRemovidos, caminhosExtra: arena.caminhosExtra, zonas: arena.zonas, zonasAuto: arena.zonasAuto, zonasAutoIgnoradas: arena.zonasAutoIgnoradas, zonasAutoLivres: arena.zonasAutoLivres, liberar: arena.liberar } }));
+  fs.writeFileSync(path.join(RAIZ, 'conferir', 'dados', pq.slug + '.json'), JSON.stringify({ dados: dadosEditor, dinamico, combateEditado, arena: { perimetroExtra: arena.perimetroExtra, terreno: arena.terreno, perimetroOriginal: arena.perimetroOriginal, seguraEditada: arena.seguraEditada, construcoes: arena.construcoes, agua: arena.agua, viasCarro: arena.viasCarro, viasServico: arena.viasServico, largada: arena.largada, segura: arena.segura, caminhos: arena.caminhos, caminhosIds: arena.caminhosIds, caminhosRemovidos: arena.caminhosRemovidos, caminhosExtra: arena.caminhosExtra, zonas: arena.zonas, zonasAuto: arena.zonasAuto, zonasAutoIgnoradas: arena.zonasAutoIgnoradas, zonasAutoLivres: arena.zonasAutoLivres, liberar: arena.liberar, lados: arena.lados, ladoPendente: arena.ladoPendente, apagarNoPonto: arena.apagarNoPonto, apagados: arena.apagados } }));
 });
 
 // ---- pagina de entrada: escolhe o parque ----

@@ -1,0 +1,32 @@
+{
+ "gerado": "deteccao automatica na foto de satelite Esri; sao SUGESTOES",
+ "novos": [
+  {
+   "tipo": "construcao",
+   "cor": "telhaBranca",
+   "m2": 42,
+   "poligono": [
+    [
+     -51.2006289,
+     -30.024895
+    ],
+    [
+     -51.2005408,
+     -30.0249712
+    ],
+    [
+     -51.2005806,
+     -30.0250057
+    ],
+    [
+     -51.2006686,
+     -30.0249294
+    ],
+    [
+     -51.2006289,
+     -30.024895
+    ]
+   ]
+  }
+ ]
+}

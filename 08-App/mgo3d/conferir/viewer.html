@@ -25,7 +25,7 @@
  .e{font-size:20px;line-height:20px;text-align:center;filter:drop-shadow(0 1px 1px #000)}
  .n{background:#2979ff;color:#fff;border:2px solid #fff;border-radius:50%;font:bold 13px Arial;width:24px;height:24px;line-height:20px;text-align:center}
  body:not(.editando) .leaflet-verde-pane path, body:not(.editando) .leaflet-edicao-pane path, body:not(.editando) .leaflet-perimetro-pane path{pointer-events:none !important}
- body.so-perimetro .leaflet-overlay-pane, body.so-perimetro .leaflet-marker-pane, body.so-perimetro .leaflet-verde-pane, body.so-perimetro .leaflet-edicao-pane, body.so-perimetro .leaflet-zonasAuto-pane{display:none}
+ body.so-perimetro .leaflet-overlay-pane, body.so-perimetro .leaflet-marker-pane, body.so-perimetro .leaflet-verde-pane, body.so-perimetro .leaflet-edicao-pane, body.so-perimetro .leaflet-zonasAuto-pane, body.so-perimetro .leaflet-hit0-pane, body.so-perimetro .leaflet-hit1-pane, body.so-perimetro .leaflet-hit2-pane{display:none}
  .sujo{display:none;color:#b26a00;font-weight:bold}
  body.sujo-on .sujo{display:inline}
 </style></head><body>
@@ -40,7 +40,10 @@
  <label><input type="radio" name="modo" value="verde"> 🟩 Área verde nova (polígono)</label>
  <label><input type="radio" name="modo" value="proibida" checked> 🔴 Zona proibida (círculo ou polígono)</label>
  <label><input type="radio" name="modo" value="liberar"> 🟢 Liberar área do mapa (polígono)</label>
- <label><input type="radio" name="modo" value="caminho"> 🔵 Trilha nova (linha)</label>
+ <label><input type="radio" name="modo" value="caminho"> ⚫ Trilha nova (linha)</label>
+ <label><input type="radio" name="modo" value="semPontos"> 🟠 Área sem pontos (polígono; monstros podem)</label>
+ <label><input type="radio" name="modo" value="linhaBloq"> 🟧 Linha que bloqueia (canal, cerca; linha)</label>
+ <label><input type="radio" name="modo" value="linhaSem"> 🟣 Caminho sem pontos (linha; monstros podem)</label>
  <div class="dica">Ferramentas de desenho à esquerda do mapa. O lápis ✏️ edita tudo o que é desenhado (inclusive a <b>área verde</b> e o <b>contorno amarelo</b>: puxe os quadradinhos nos cantos e nos meios dos lados); a lixeira 🗑 apaga.</div>
  <hr>
  <div><b>2 · Itens do combate:</b></div>
@@ -59,7 +62,7 @@
  <div class="dica" style="background:#e8f5e9;padding:6px;border-radius:6px"><b>Largada livre:</b> no jogo o combate é montado onde a pessoa estiver, dentro do parque. O que aparece aqui é só um <b>exemplo</b> a partir da largada padrão (L). Se você mover, apagar ou adicionar itens e salvar, esse parque passa a ter <b>percurso fixo</b> (sem largada livre) até você clicar em “↩ combate automático”.</div>
  <div class="dica">Em “➕”, toque no mapa onde quer colocar. Bases são numeradas pela ordem; apagar uma renumera as seguintes.</div>
  <hr>
- <div class="dica"><b>Toques no mapa:</b> trilha ciano = tirar/devolver · círculo laranja = ignorar parquinho/quadra · <b>L verde</b> = arraste para mudar a largada.</div>
+ <div class="dica"><b>Para mexer em qualquer área:</b> toque na <b>borda ou dentro</b> dela e escolha <b>Apagar</b> ou <b>Editar</b> (Editar mostra os pontos para você puxar, criar ou tirar; depois toque em ✔ Pronto). · <b>Toques no mapa:</b> trilha preta pontilhada = tirar/devolver · círculo laranja = ignorar parquinho/quadra · <b>L verde</b> = arraste para mudar a largada.</div>
  <button class="peq" id="voltaVerde">↩ verde automático</button><button class="peq" id="voltaCombate">↩ combate automático</button>
  <button id="salvar">💾 Salvar e gerar de novo</button>
  <div class="dica">O que você arrumar no combate fica guardado: ao salvar o verde, as zonas ou as trilhas, o código regenera só a arena. Pode levar até 1 minuto. <span class="sujo">● alterações não salvas</span></div>
@@ -93,7 +96,7 @@ fetch('dados/'+slug+'.json?'+Date.now()).then(function(r){return r.json();}).the
  m.createPane('verde'); m.getPane('verde').style.zIndex=350;
  m.createPane('edicao'); m.getPane('edicao').style.zIndex=355; /* formas desenhadas (zonas, liberar, trilha nova, contorno) ficam abaixo das trilhas do mapa */
  m.createPane('zonasAuto'); m.getPane('zonasAuto').style.zIndex=360;
- m.createPane('perimetro'); m.getPane('perimetro').style.zIndex=365; /* o contorno fica acima de quase tudo */ /* o verde fica abaixo das trilhas e dos itens, para nao atrapalhar o toque */
+ m.createPane('perimetro'); m.getPane('perimetro').style.zIndex=365; m.createPane('hitL'); m.getPane('hitL').style.zIndex=338; m.createPane('hit0'); m.getPane('hit0').style.zIndex=340; m.createPane('hit1'); m.getPane('hit1').style.zIndex=342; m.createPane('hit2'); m.getPane('hit2').style.zIndex=344; /* o contorno fica acima de quase tudo */ /* o verde fica abaixo das trilhas e dos itens, para nao atrapalhar o toque */
  var esri=function(n){return L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/'+n+'/MapServer/tile/{z}/{y}/{x}',{maxZoom:21,maxNativeZoom:19});};
  var raster=function(u,o){return L.tileLayer(u,Object.assign({maxZoom:21,maxNativeZoom:19},o||{}));};
  var BASES=[
@@ -108,46 +111,170 @@ fetch('dados/'+slug+'.json?'+Date.now()).then(function(r){return r.json();}).the
  var ll=function(c){return [c[1],c[0]];};
  var per=C.perimetro.map(ll);
  var pl=L.polygon(per,{color:'#ffeb3b',weight:4,fill:false,dashArray:'8 5',pane:'perimetro'});
- var gOrig=L.layerGroup().addTo(m); /* o contorno que o OpenStreetMap tem, para comparar com o seu */
+ var gOrig=L.layerGroup(); /* o contorno que o OpenStreetMap tem, para comparar com o seu */
  if(A.perimetroOriginal)L.polygon(JSON.parse(A.perimetroOriginal).map(ll),{color:'#ff4081',weight:3,fill:false,dashArray:'2 6',interactive:false,pane:'perimetro'}).addTo(gOrig);
 
- // camadas so para ver (o que o mapa ja tem)
- var gPredios=L.layerGroup(),gAgua=L.layerGroup(),gCarro=L.layerGroup(),gServico=L.layerGroup();
- (A.construcoes||[]).forEach(function(r){L.polygon(r.map(ll),{color:'#ff5252',weight:1.5,fillColor:'#ff5252',fillOpacity:.25,interactive:false}).addTo(gPredios);});
+ // ---- COMO MEXER EM QUALQUER AREA: toque na BORDA dela -> pergunta "Apagar" ou "Editar". Editar = aparecem os pontos para puxar/criar/tirar, e botao "Pronto". ----
+ var apagarPts=(A.apagarNoPonto||[]).slice(),alvos=[],gApag=L.layerGroup().addTo(m),editandoLayer=null,ocupado=false,semSnap=false;
+ var CINZA={color:'#9e9e9e',weight:2,fill:false,dashArray:'4 3',opacity:.85};
+ var barraEd=document.createElement('div');barraEd.className='caixa';barraEd.style.cssText='display:none;position:absolute;left:50%;transform:translateX(-50%);top:56px;z-index:1300;background:#fff3cd;padding:10px 14px;font-weight:bold;max-width:80%;text-align:center';
+ barraEd.innerHTML='<span id="barraEdTxt"></span> <button id="barraEdMenos" style="margin-left:8px;padding:8px 12px;font-weight:bold;cursor:pointer">➖ Menos pontos</button> <button id="barraEdOk" style="margin-left:8px;padding:8px 14px;font-weight:bold;cursor:pointer;background:#1b7a35;color:#fff;border:0;border-radius:6px">✔ Pronto</button>';
+ document.body.appendChild(barraEd);
+ function ptNaLinha(layer,ll0){var best=null,bd=1e12,pts=layer.getLatLngs(),p=m.project(ll0);for(var i=0;i<pts.length-1;i++){var c=L.LineUtil.closestPointOnSegment(p,m.project(pts[i]),m.project(pts[i+1])),d=p.distanceTo(c);if(d<bd){bd=d;best=m.unproject(c);}}return best||ll0;}
+ function hitDe(vis,prio,preenche){var o={fill:!!preenche,fillOpacity:0,weight:16,opacity:0,pane:'hit'+(prio||0)};if(vis instanceof L.Circle)return L.circle(vis.getLatLng(),Object.assign({radius:vis.getRadius()},o));return vis instanceof L.Polygon?L.polygon(vis.getLatLngs(),o):L.polyline(vis.getLatLngs(),o);}
+ function menu(e,nome,acoes){
+  var cx=document.createElement('div');cx.innerHTML='<b>'+nome+'</b><br>';
+  acoes.forEach(function(a){var b=document.createElement('button');b.textContent=a[0];b.style.cssText='margin:6px 4px 0 0;padding:8px;cursor:pointer;font-weight:bold';b.onclick=function(){m.closePopup();a[1]();};cx.appendChild(b);});
+  L.popup().setLatLng(e.latlng).setContent(cx).openOn(m);
+ }
+ /* ---- um toque lista TUDO o que existe naquele ponto (varias coisas podem estar empilhadas): voce escolhe qual e o que fazer ---- */
+ var hitReg=[];
+ function polosDe(vis){var rings=[];(function walk(x){if(!x||!x.length)return;if(x[0].lat!==undefined){rings.push(x);return;}x.forEach(walk);})(vis.getLatLngs());return rings;}
+ function pipPx(p,ring){var d=false;for(var i=0,j=ring.length-1;i<ring.length;j=i++){var a=ring[i],b=ring[j];if(((a.y>p.y)!==(b.y>p.y))&&(p.x<(b.x-a.x)*(p.y-a.y)/(b.y-a.y)+a.x))d=!d;}return d;}
+ function candidato(r,latlng){
+  var vis=r.vis,p=m.project(latlng),TOL=10;
+  if(vis instanceof L.Circle){var c=m.project(vis.getLatLng()),dc=p.distanceTo(c),rad=vis._radius||0;return (r.preenche&&dc<=rad)||Math.abs(dc-rad)<=TOL;}
+  var rings=polosDe(vis).map(function(rg){return rg.map(function(q){return m.project(q);});}),poli=vis instanceof L.Polygon,best=1e9;
+  rings.forEach(function(rg){var n=rg.length,lim=poli?n:n-1;for(var i=0;i<lim;i++){var d=p.distanceTo(L.LineUtil.closestPointOnSegment(p,rg[i],rg[(i+1)%n]));if(d<best)best=d;}});
+  if(best<=TOL)return true;
+  if(poli&&r.preenche&&rings.length&&pipPx(p,rings[0])){for(var k=1;k<rings.length;k++)if(pipPx(p,rings[k]))return false;return true;}
+  return false;
+ }
+ function destaca(vis,on){if(on){if(!vis._orig)vis._orig=Object.assign({},vis.options);vis.setStyle({color:'#ffff00',weight:6,opacity:1,dashArray:null});}else if(vis._orig){vis.setStyle({color:vis._orig.color,weight:vis._orig.weight,opacity:vis._orig.opacity,dashArray:vis._orig.dashArray||null});vis._orig=null;}}
+ m.on('popupclose',function(){hitReg.forEach(function(r){destaca(r.vis,false);});});
+ function registra(r){hitReg.push(r);r.hit.on('click',function(e){abreAqui(e.latlng);});}
+ var pausaSnap=false,popAtual=null;
+ m.on('popupclose',function(){popAtual=null;});
+ function abreAqui(latlng){
+  if(editandoLayer||ocupado)return;
+  hitReg.forEach(function(x){destaca(x.vis,false);});
+  var cands=hitReg.filter(function(r){return m.hasLayer(r.hit)&&candidato(r,latlng);}).sort(function(a,b){return b.prio-a.prio;});
+  if(!cands.length){m.closePopup();return;}
+  var cx=document.createElement('div');cx.style.cssText='max-height:340px;overflow:auto;padding-right:4px';
+  var lista=cands.map(function(r){return {r:r,ac:r.acoes(latlng)};});
+  var apagaveis=lista.filter(function(o){return !o.r.fundo&&o.ac.some(function(a){return /^🗑/.test(a[0]);});});
+  if(lista.length>1){
+   var h=document.createElement('div');h.style.marginBottom='4px';h.innerHTML='<b>Há '+lista.length+' coisas neste ponto.</b><br><span style="font-size:12px">Passe o mouse em cada uma para vê-la em amarelo. A lista fica aberta: dá para apagar várias seguidas.</span>';cx.appendChild(h);
+   if(apagaveis.length>1){var bt=document.createElement('button');bt.textContent='🗑 Apagar todas, menos a área verde ('+apagaveis.length+')';bt.style.cssText='margin:2px 0 6px;padding:8px;cursor:pointer;font-weight:bold;background:#ffcdd2';
+    bt.onclick=function(){salvaEstado();pausaSnap=true;try{apagaveis.forEach(function(o){var a=o.ac.filter(function(x){return /^🗑/.test(x[0]);})[0];if(a)a[1]();});}finally{pausaSnap=false;}abreAqui(latlng);};cx.appendChild(bt);}
+  }
+  lista.forEach(function(o){
+   var r=o.r,sec=document.createElement('div');sec.style.cssText='border-top:1px solid #ccc;padding:5px 0';sec.innerHTML='<b>'+r.nome+'</b><br>';
+   o.ac.forEach(function(a){var fica=/^(🗑|↩)/.test(a[0]),b=document.createElement('button');b.textContent=a[0];b.style.cssText='margin:6px 4px 0 0;padding:8px;cursor:pointer;font-weight:bold';
+    b.onclick=function(){hitReg.forEach(function(x){destaca(x.vis,false);});if(!fica)m.closePopup();a[1]();if(fica)abreAqui(latlng);};sec.appendChild(b);});
+   sec.onmouseenter=function(){destaca(r.vis,true);};sec.onmouseleave=function(){destaca(r.vis,false);};
+   cx.appendChild(sec);
+  });
+  if(popAtual&&m.hasLayer(popAtual))popAtual.setContent(cx);else popAtual=L.popup({maxWidth:380}).setLatLng(latlng).setContent(cx).openOn(m);
+ }
+ /* ---- PONTOS DEMAIS: forma com muitos pontos empilhados num canto fica impossivel de puxar. Ao editar, funde pontos colados e tira os que estao em linha reta; "Menos pontos" simplifica mais. ---- */
+ var tolAtual=0.4;
+ function dpXY(pts,tol){var n=pts.length,keep=[],st=[[0,n-1]],i;for(i=0;i<n;i++)keep.push(false);keep[0]=keep[n-1]=true;
+  function dseg(p,a,b){var dx=b.x-a.x,dy=b.y-a.y,l2=dx*dx+dy*dy,t=l2?Math.max(0,Math.min(1,((p.x-a.x)*dx+(p.y-a.y)*dy)/l2)):0;return Math.sqrt(Math.pow(p.x-a.x-t*dx,2)+Math.pow(p.y-a.y-t*dy,2));}
+  while(st.length){var s=st.pop(),a=s[0],b=s[1],md=-1,mi=-1;for(i=a+1;i<b;i++){var d=dseg(pts[i],pts[a],pts[b]);if(d>md){md=d;mi=i;}}if(md>tol){keep[mi]=true;st.push([a,mi]);st.push([mi,b]);}}
+  return pts.filter(function(q,k){return keep[k];});}
+ function reduzAnel(pts,fechado,tolM){
+  if(pts.length<=(fechado?4:2))return pts;
+  var kx=111320*Math.cos(pts[0].lat*Math.PI/180),ky=111320;
+  var P=pts.map(function(p){return {x:p.lng*kx,y:p.lat*ky,ll:p};}),K=[P[0]];
+  for(var i=1;i<P.length;i++){var u=K[K.length-1];if(Math.sqrt(Math.pow(P[i].x-u.x,2)+Math.pow(P[i].y-u.y,2))>=2*tolM||(!fechado&&i===P.length-1))K.push(P[i]);}
+  if(fechado&&K.length>1){var a=K[K.length-1],b=K[0];if(Math.sqrt(Math.pow(a.x-b.x,2)+Math.pow(a.y-b.y,2))<2*tolM)K.pop();}
+  var path=fechado?K.concat([K[0]]):K,keep=dpXY(path,tolM);if(fechado)keep.pop();
+  if(keep.length<(fechado?3:2))return pts;
+  return keep.map(function(q){return q.ll;});
+ }
+ function reduzPontos(layer,tolM){
+  var r={antes:0,depois:0};if(layer instanceof L.Circle||!layer.getLatLngs)return r;
+  var fechado=layer instanceof L.Polygon;
+  function walk(x){if(!x||!x.length)return x;if(x[0].lat!==undefined){r.antes+=x.length;var y=reduzAnel(x,fechado,tolM);r.depois+=y.length;return y;}return x.map(walk);}
+  layer.setLatLngs(walk(layer.getLatLngs()));if(L.Edit&&L.Edit.Poly)layer.editing=new L.Edit.Poly(layer); /* o editor guarda a lista antiga de pontos: recria */return r;
+ }
+ function textoEdicao(nome,r){return '✏️ Editando: '+nome+' ('+r.antes+' → '+r.depois+' pontos). Arraste os pontos; arraste os pontinhos do meio para criar novos; toque num ponto para tirá-lo. Se estiver cheio de pontos juntos, use "Menos pontos".';}
+ function editar(layer,nome){
+  if(semSnap){semSnap=false;}else salvaEstado();
+  if(editandoLayer)terminarEdicao();
+  editandoLayer=layer;layer._nomeEd=nome;if(layer._hit)m.removeLayer(layer._hit);tolAtual=0.4;var rr0=reduzPontos(layer,tolAtual);layer.editing.enable();
+  document.getElementById('barraEdTxt').textContent=textoEdicao(nome,rr0);
+  barraEd.style.display='block';
+ }
+ function terminarEdicao(){
+  var l=editandoLayer;if(!l)return;editandoLayer=null;l.editing.disable();barraEd.style.display='none';
+  if(l._hit){if(l instanceof L.Circle){l._hit.setLatLng(l.getLatLng());l._hit.setRadius(l.getRadius());}else l._hit.setLatLngs(l.getLatLngs());l._hit.addTo(m);}
+  if(l._tipo==='segura'||l._tipo==='buraco'){seguraMexida=true;voltarVerdeAuto=false;}
+  if(l===pl)perimetroMexido=true;
+  marcarSujo(true);
+ }
+ document.getElementById('barraEdOk').onclick=terminarEdicao;
+ document.getElementById('barraEdMenos').onclick=function(){var l=editandoLayer;if(!l)return;tolAtual=tolAtual*2.5;l.editing.disable();var r=reduzPontos(l,tolAtual);l.editing.enable();document.getElementById('barraEdTxt').textContent=textoEdicao(l._nomeEd||'forma',r);};
+ ['draw:drawstart','draw:editstart','draw:deletestart'].forEach(function(n){m.on(n,function(){if(n!=='draw:drawstart')salvaEstado();ocupado=true;});});
+ ['draw:drawstop','draw:editstop','draw:deletestop'].forEach(function(n){m.on(n,function(){ocupado=false;});});
+ function apagaEd(layer){salvaEstado();ed.removeLayer(layer);if(layer._hit)m.removeLayer(layer._hit);if(layer._tipo==='segura'||layer._tipo==='buraco'){seguraMexida=true;voltarVerdeAuto=false;}marcarSujo(true);}
+ var NOMES_ED={perimetro:'Contorno do parque (amarelo)',segura:'Área verde',buraco:'Contorno verde pontilhado = buraco no verde (apagar: o verde passa a cobrir esse lugar)',proibida:'Zona proibida',liberar:'Área liberada',caminho:'Trilha nova',semPontos:'Área sem pontos (monstros podem)',linhaBloq:'Linha'};
+ function clicavelEd(layer,tipo){
+  var nome=(layer._kind&&layer._kind.nome)||NOMES_ED[tipo]||'Área',hit=hitDe(layer,tipo==='segura'?0:2,tipo!=='perimetro');layer._hit=hit;hit.addTo(m);
+  registra({vis:layer,hit:hit,nome:nome,fundo:tipo==='segura',prio:tipo==='segura'?0:2,preenche:tipo!=='perimetro',acoes:function(){var ac=[];if(tipo!=='perimetro')ac.push(['🗑 Apagar',function(){apagaEd(layer);}]);ac.push(['✏️ Editar',function(){editar(layer,nome);}]);return ac;}});
+ }
+ function apagavel(layer,nome,grupo,opts){
+  opts=opts||{};layer.options.interactive=false;var estilo=Object.assign({},layer.options),ehPoli=layer instanceof L.Polygon;
+  layer.addTo(grupo);alvos.push(layer);layer._apag=!!opts.apagado;layer._pts=opts.pts||[];
+  function aplica(){if(layer._apag)layer.setStyle(CINZA);else layer.setStyle({color:estilo.color,weight:estilo.weight,fill:ehPoli,fillColor:estilo.fillColor,fillOpacity:estilo.fillOpacity,dashArray:estilo.dashArray||null,opacity:estilo.opacity===undefined?1:estilo.opacity});}
+  aplica();layer._aplica=aplica;
+  var hit=hitDe(layer,1,ehPoli);hit.addTo(grupo);
+  if(opts.dica)hit.bindTooltip(opts.dica,{sticky:true});
+  registra({vis:layer,hit:hit,nome:nome,prio:1,preenche:ehPoli,acoes:function(latlng){
+   var pt=ehPoli?latlng:ptNaLinha(layer,latlng);
+   function apaga(){salvaEstado();var o={lat:pt.lat,lng:pt.lng};if(opts.gen)o.t=opts.gen;apagarPts.push(o);layer._pts=[o];layer._apag=true;aplica();marcarSujo(true);}
+   if(layer._apag)return [['↩ Devolver (volta a bloquear)',function(){salvaEstado();layer._pts.forEach(function(o){var i=apagarPts.indexOf(o);if(i>=0)apagarPts.splice(i,1);});layer._pts=[];layer._apag=false;aplica();marcarSujo(true);}]];
+   var ac=[['🗑 Apagar (deixa de bloquear)',apaga]];
+   if(ehPoli)ac.push(['✏️ Editar (vira zona sua)',function(){apaga();var td=opts.tipoEd||'proibida',nl=adiciona(L.polygon(layer.getLatLngs()[0],{pane:'edicao'}),td);semSnap=true;editar(nl,NOMES_ED[td]);}]);
+   else if(opts.linhaKind)ac.push(['✏️ Editar (vira linha sua)',function(){apaga();var nl=L.polyline(layer.getLatLngs(),{pane:'edicao'});nl._kind=opts.linhaKind;nl._estilo=opts.linhaKind.estilo;adiciona(nl,'linhaBloq');semSnap=true;editar(nl,opts.linhaKind.nome);}]);
+   return ac;}});
+ }
+ (A.apagados||[]).forEach(function(o){
+  var pts=o.is.map(function(i){return apagarPts[i];}).filter(Boolean),st={color:'#9e9e9e',weight:2,pane:'zonasAuto'};
+  apagavel(o.linha?L.polyline(o.c.map(ll),st):L.polygon(o.c.map(ll),st),o.nome+' (apagado)',gApag,{apagado:true,pts:pts,dica:o.nome+' — apagado: toque na borda para devolver'});
+ });
+
+ // camadas do que o mapa ja tem (clique = apagar / editar)
+ var gPredios=L.layerGroup().addTo(m),gAgua=L.layerGroup(),gCarro=L.layerGroup(),gServico=L.layerGroup();
+ (A.construcoes||[]).forEach(function(r){apagavel(L.polygon(r.map(ll),{color:'#ff5252',weight:1.5,fillColor:'#ff5252',fillOpacity:.25,pane:'zonasAuto'}),'Prédio',gPredios,{gen:'Prédio'});});
  (A.agua||[]).forEach(function(r){L.polygon(r.map(ll),{color:'#18ffff',weight:1.5,fillColor:'#18ffff',fillOpacity:.3,interactive:false}).addTo(gAgua);});
  (A.viasCarro||[]).forEach(function(r){L.polyline(r.map(ll),{color:'#ffab00',weight:3,opacity:.9,interactive:false}).addTo(gCarro);});
  (A.viasServico||[]).forEach(function(r){L.polyline(r.map(ll),{color:'#ff9100',weight:2,opacity:.8,dashArray:'3 4',interactive:false}).addTo(gServico);});
- var T=A.terreno||{},gAguaT=L.layerGroup().addTo(m),gMata=L.layerGroup().addTo(m),gMataF=L.layerGroup().addTo(m),gRestr=L.layerGroup().addTo(m),gBarr=L.layerGroup(),gLib=L.layerGroup();
- (T.agua||[]).forEach(function(r){L.polygon(r.map(ll),{color:'#00b0ff',weight:1.5,fillColor:'#00b0ff',fillOpacity:.35,interactive:false,pane:'zonasAuto'}).addTo(gAguaT);});
- (T.aguaLinhas||[]).forEach(function(r){L.polyline(r.map(ll),{color:'#00b0ff',weight:3,interactive:false,pane:'zonasAuto'}).addTo(gAguaT);});
- (T.mata||[]).forEach(function(g){var polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;polys.forEach(function(p){L.polygon(p.map(function(r){return r.map(ll);}),{color:'#c62828',weight:1.5,fillColor:'#ff1744',fillOpacity:.38,interactive:false,pane:'zonasAuto'}).addTo(gMata);});});
- (T.mataFechada||[]).forEach(function(g){var polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;polys.forEach(function(p){L.polygon(p.map(function(r){return r.map(ll);}),{color:'#b71c1c',weight:2,fillColor:'#ff0000',fillOpacity:.45,interactive:false,pane:'zonasAuto'}).addTo(gMataF);});});
- (T.restrito||[]).forEach(function(r){L.polygon(r.map(ll),{color:'#b71c1c',weight:1.5,fillColor:'#ff0000',fillOpacity:.40,interactive:false,pane:'zonasAuto'}).addTo(gRestr);});
- (T.barreiras||[]).forEach(function(r){L.polyline(r.map(ll),{color:'#ff6d00',weight:3,dashArray:'2 4',interactive:false,pane:'zonasAuto'}).addTo(gBarr);});
+ var T=A.terreno||{},gAguaT=L.layerGroup().addTo(m),gMata=L.layerGroup().addTo(m),gMataF=L.layerGroup().addTo(m),gRestr=L.layerGroup().addTo(m),gSemP=L.layerGroup().addTo(m),gTrack=L.layerGroup().addTo(m),gBarr=L.layerGroup(),gLib=L.layerGroup();
+ (T.agua||[]).forEach(function(r){apagavel(L.polygon(r.map(ll),{color:'#00b0ff',weight:1.5,fillColor:'#00b0ff',fillOpacity:.35,pane:'zonasAuto'}),'Água / lago',gAguaT,{gen:'Água'});});
+ (T.aguaLinhas||[]).forEach(function(r){apagavel(L.polyline(r.map(ll),{color:'#00b0ff',weight:3,pane:'zonasAuto'}),'Canal / vala',gAguaT,{gen:'Canal',linhaKind:{nome:'Canal / vala',buffer_m:4,semPontos:false,estilo:{color:'#00b0ff',weight:4,dashArray:null}}});});
+ (T.mata||[]).forEach(function(g){var polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;polys.forEach(function(p){apagavel(L.polygon(p.map(function(r){return r.map(ll);}),T.monstrosNaMata?{color:'#e65100',weight:1.5,fillColor:'#ff9100',fillOpacity:.30,dashArray:'6 4',pane:'zonasAuto'}:{color:'#c62828',weight:1.5,fillColor:'#ff1744',fillOpacity:.38,pane:'zonasAuto'}),T.monstrosNaMata?'Mata com trilha (monstros sim, pontos só na trilha)':'Mata com trilha (bloqueada fora do corredor)',gMata,{gen:'Mata',tipoEd:T.monstrosNaMata?'semPontos':'proibida'});});});
+ (T.mataFechada||[]).forEach(function(g){var polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;polys.forEach(function(p){apagavel(L.polygon(p.map(function(r){return r.map(ll);}),{color:'#b71c1c',weight:2,fillColor:'#ff0000',fillOpacity:.45,pane:'zonasAuto'}),'Mata FECHADA (sem trilha)',gMataF,{gen:'Mata'});});});
+ (T.semPontos||[]).forEach(function(r){apagavel(L.polygon(r.map(ll),{color:'#e65100',weight:2,fillColor:'#ff9100',fillOpacity:.38,dashArray:'6 4',pane:'zonasAuto'}),'Cachorródromo (sem pontos)',gSemP,{gen:'Cachorródromo (sem pontos)',tipoEd:'semPontos',dica:'Cachorródromo: monstros podem, pontos e itens não'});});
+ (T.tracks||[]).forEach(function(r,i){apagavel(L.polyline(r.map(ll),{color:'#d500f9',weight:5,opacity:.9,dashArray:'10 6',pane:'zonasAuto'}),'Caminho sem pontos (highway=track)',gTrack,{gen:'Caminho sem pontos (track)',linhaKind:{nome:'Caminho sem pontos',buffer_m:3,semPontos:true,estilo:{color:'#d500f9',weight:5,dashArray:'10 6'}},dica:'highway=track nº '+(i+1)+' — caminho SEM pontos (monstros podem passar)'});});
+ (T.restrito||[]).forEach(function(r){apagavel(L.polygon(r.map(ll),{color:'#b71c1c',weight:1.5,fillColor:'#ff0000',fillOpacity:.40,pane:'zonasAuto'}),'Área restrita',gRestr,{gen:'Área restrita'});});
+ (T.barreiras||[]).forEach(function(r){apagavel(L.polyline(r.map(ll),{color:'#ff6d00',weight:3,dashArray:'2 4',pane:'zonasAuto'}),'Cerca / muro',gBarr,{gen:'Cerca',linhaKind:{nome:'Cerca / muro',buffer_m:2.5,semPontos:false,estilo:{color:'#ff6d00',weight:4,dashArray:'2 4'}}});});
  (T.libera||[]).forEach(function(z){L.circle([z.lat,z.lng],{radius:z.r,color:'#ffffff',weight:1.5,fillOpacity:.12,interactive:false,pane:'zonasAuto'}).addTo(gLib);});
- L.control.layers(bases,{'🔴 Mata FECHADA (sem trilha): proibida, prioridade total':gMataF,'🔴 Mata com trilha: bloqueada fora do corredor':gMata,'💧 Água, canais e alagadiço (bloqueados)':gAguaT,'🔴 Áreas restritas (privada, estacionamento, instalações)':gRestr,'🧱 Cercas e muros':gBarr,'🍖 Churrasqueira, piquenique, abrigo, banco (liberam a mata)':gLib,'🧭 Contorno original do OpenStreetMap (rosa pontilhado)':gOrig,'🏠 Prédios mapeados (vermelho)':gPredios,'💧 Água mapeada':gAgua,'🚗 Ruas de carro (bloqueadas)':gCarro,'🅿️ Vias de serviço/estacionamento':gServico},{position:'bottomright',collapsed:false}).addTo(m);
+ L.control.layers(bases,{'🔴 Mata FECHADA (sem trilha): proibida, prioridade total':gMataF,'🟠 Mata com trilha: monstros sim, pontos só na trilha':gMata,'💧 Água, canais e alagadiço (bloqueados)':gAguaT,'🔴 Áreas restritas (privada, estacionamento, instalações)':gRestr,'🐕 Cachorródromo: monstros sim, pontos/itens não':gSemP,'🟣 Caminho sem pontos (highway=track): monstros sim, pontos/itens não':gTrack,'🧱 Cercas e muros':gBarr,'🍖 Churrasqueira, piquenique, abrigo, banco (liberam a mata)':gLib,'🧭 Contorno original do OpenStreetMap (rosa pontilhado)':gOrig,'🏠 Prédios (bloqueados)':gPredios,'⬜ Apagados por você (cinza: toque para devolver)':gApag,'💧 Água mapeada':gAgua,'🚗 Ruas de carro (bloqueadas)':gCarro,'🅿️ Vias de serviço/estacionamento':gServico},{position:'bottomright',collapsed:false}).addTo(m);
 
  // trilhas do mapa (OpenStreetMap): clicar = tirar / devolver
- var removidos={};
+ var removidos={},trilhasReg=[];
  function trilha(c,id,tirada){
-  var vis=L.polyline(c.map(ll),{color:tirada?'#9e9e9e':'#00e5ff',weight:2.5,opacity:tirada?.7:.8,dashArray:tirada?'5 5':null,interactive:false}).addTo(m);
-  var hit=L.polyline(c.map(ll),{color:'#000',weight:16,opacity:0}).addTo(m);
+  var vis=L.polyline(c.map(ll),{color:tirada?'#9e9e9e':'#000',weight:tirada?2:1.5,opacity:tirada?.7:.95,dashArray:tirada?'5 5':'1 4',interactive:false}).addTo(m);
+  var hit=L.polyline(c.map(ll),{color:'#000',weight:12,opacity:0}).addTo(m);
   if(tirada)removidos[id]=true;
-  hit.on('click',function(){ if(removidos[id]){delete removidos[id];vis.setStyle({color:'#00e5ff',opacity:.8,dashArray:null});}else{removidos[id]=true;vis.setStyle({color:'#9e9e9e',opacity:.7,dashArray:'5 5'});} marcarSujo(true);});
+  trilhasReg.push({id:id,vis:vis});
+  hit.on('click',function(){ salvaEstado(); if(removidos[id]){delete removidos[id];vis.setStyle({color:'#000',weight:1.5,opacity:.95,dashArray:'1 4'});}else{removidos[id]=true;vis.setStyle({color:'#9e9e9e',weight:2,opacity:.7,dashArray:'5 5'});} marcarSujo(true);});
  }
  (A.caminhos||[]).forEach(function(c,i){trilha(c,A.caminhosIds[i],false);});
  (A.caminhosRemovidos||[]).forEach(function(o){trilha(o.c,o.id,true);});
 
  // parquinhos/quadras achados no mapa: clicar = ignorar / devolver
- var ignoradas={};
+ var ignoradas={},zonasReg={};
  function zonaAuto(z,ign){
   var pts=z.poligono?z.poligono.map(ll):null;
   var forma=function(o){return pts?L.polygon(pts,o):L.circle([z.lat,z.lng],Object.assign({radius:18},o));};
   var vermelho={color:'#d50000',weight:2,fill:true,fillColor:'#ff0000',fillOpacity:.35,dashArray:null},cinza={color:'#9e9e9e',weight:2,fill:false,dashArray:'4 3'};
   var vis=forma(Object.assign({interactive:false,pane:'zonasAuto'},ign?cinza:vermelho)).addTo(m);
-  var hit=forma({color:'#000',weight:14,fill:false,opacity:0,pane:'zonasAuto'}).addTo(m).bindTooltip(z.nome+(ign?' (ignorado)':' (achado no mapa)')+' — toque na borda para ignorar/devolver');
-  var chave=z.lat+','+z.lng; if(ign)ignoradas[chave]=[z.lat,z.lng];
-  hit.on('click',function(){ if(ignoradas[chave]){delete ignoradas[chave];vis.setStyle(vermelho);}else{ignoradas[chave]=[z.lat,z.lng];vis.setStyle(cinza);} marcarSujo(true);});
+  var hit=forma({color:'#000',weight:14,fill:true,fillOpacity:0,opacity:0,pane:'hit1'}).addTo(m).bindTooltip(z.nome+(ign?' (ignorado)':' (achado no mapa)')+' — toque na borda para apagar/editar');
+  var chave=z.lat+','+z.lng; if(ign)ignoradas[chave]=[z.lat,z.lng]; zonasReg[chave]={vis:vis,v:vermelho,c:cinza};
+  registra({vis:vis,hit:hit,nome:z.nome,prio:1,preenche:true,acoes:function(){ if(ignoradas[chave])return [['↩ Devolver (volta a bloquear)',function(){salvaEstado();delete ignoradas[chave];vis.setStyle(vermelho);marcarSujo(true);}]]; var ac=[['🗑 Apagar (deixa de bloquear)',function(){salvaEstado();ignoradas[chave]=[z.lat,z.lng];vis.setStyle(cinza);marcarSujo(true);}]]; if(pts)ac.push(['✏️ Editar (vira zona sua)',function(){salvaEstado();ignoradas[chave]=[z.lat,z.lng];vis.setStyle(cinza);marcarSujo(true);var nl=adiciona(L.polygon(pts,{pane:'edicao'}),'proibida');semSnap=true;editar(nl,'Zona proibida');}]); return ac;}});
  }
  (A.zonasAuto||[]).forEach(function(z){zonaAuto(z,false);});
  (A.zonasAutoIgnoradas||[]).forEach(function(z){zonaAuto(z,true);});
@@ -155,33 +282,40 @@ fetch('dados/'+slug+'.json?'+Date.now()).then(function(r){return r.json();}).the
 
  // o que o Marcio desenha / ajusta (editavel): contorno, area verde, zonas, liberacoes, trilhas novas
  var ed=new L.FeatureGroup().addTo(m);
- var ESTILO={perimetro:{color:'#ffeb3b',weight:4,fill:false,dashArray:'8 5'},segura:{color:'#76ff03',weight:2,fillColor:'#76ff03',fillOpacity:.18},proibida:{color:'#d50000',weight:2,fillColor:'#ff0000',fillOpacity:.40},liberar:{color:'#00e676',weight:2,fillColor:'#00e676',fillOpacity:.25},caminho:{color:'#2979ff',weight:4,opacity:.95}};
- function adiciona(layer,tipo){layer._tipo=tipo;layer.setStyle(ESTILO[tipo]);ed.addLayer(layer);return layer;}
+ var ESTILO={perimetro:{color:'#ffeb3b',weight:4,fill:false,dashArray:'8 5'},segura:{color:'#76ff03',weight:2,fillColor:'#76ff03',fillOpacity:.18},proibida:{color:'#d50000',weight:2,fillColor:'#ff0000',fillOpacity:.40},liberar:{color:'#00e676',weight:2,fillColor:'#00e676',fillOpacity:.25},caminho:{color:'#000',weight:2.5,opacity:.95},buraco:{color:'#76ff03',weight:2,fill:false,dashArray:'4 4'},semPontos:{color:'#e65100',weight:2,fillColor:'#ff9100',fillOpacity:.38,dashArray:'6 4'},linhaBloq:{color:'#ff6d00',weight:4,dashArray:'2 4'}};
+ function adiciona(layer,tipo){layer._tipo=tipo;layer.setStyle(layer._estilo||ESTILO[tipo]);ed.addLayer(layer);clicavelEd(layer,tipo);return layer;}
  var perimetroMexido=false,seguraMexida=false,voltarVerdeAuto=false,combateMexido=false,voltarCombateAuto=false;
  adiciona(pl,'perimetro');
  (A.perimetroExtra?JSON.parse(A.perimetroExtra):[]).forEach(function(r){L.polygon(r.map(ll),{color:'#ffeb3b',weight:4,fill:false,dashArray:'8 5',interactive:false,pane:'perimetro'}).addTo(m);});
+ function buraco(ring){return adiciona(L.polygon(ring,{pane:'verde'}),'buraco');}
  function verde(latlngs){var p=L.polygon(latlngs,{pane:'verde'});return adiciona(p,'segura');}
- if(A.segura){var gg=A.segura.type==='Polygon'?[A.segura.coordinates]:A.segura.coordinates;gg.forEach(function(poly){verde(poly.map(function(r){return r.map(ll);}));});}
- (A.zonas||[]).forEach(function(z){ adiciona(z.poligono?L.polygon(z.poligono.map(ll),{pane:'edicao'}):L.circle([z.lat,z.lng],{radius:z.r,pane:'edicao'}),'proibida'); });
+ if(A.segura){var gg=A.segura.type==='Polygon'?[A.segura.coordinates]:A.segura.coordinates;gg.forEach(function(poly){verde([poly[0].map(ll)]);for(var k=1;k<poly.length;k++)buraco(poly[k].map(ll));});}
+ (A.zonas||[]).forEach(function(z){
+  if(z.linha){var ln=L.polyline(z.linha.map(ll),{pane:'edicao'});ln._kind={nome:z.nome||'Linha',buffer_m:z.buffer_m||3,semPontos:!!z.semPontos,estilo:z.semPontos?{color:'#d500f9',weight:5,dashArray:'10 6'}:{color:'#ff6d00',weight:4,dashArray:'2 4'}};ln._estilo=ln._kind.estilo;adiciona(ln,'linhaBloq');}
+  else adiciona(z.poligono?L.polygon(z.poligono.map(ll),{pane:'edicao'}):L.circle([z.lat,z.lng],{radius:z.r,pane:'edicao'}),z.semPontos?'semPontos':'proibida');
+ });
  (A.liberar||[]).forEach(function(p){ adiciona(L.polygon(p.map(ll),{pane:'edicao'}),'liberar'); });
  (A.caminhosExtra||[]).forEach(function(c){ adiciona(L.polyline(c.map(ll),{pane:'edicao'}),'caminho'); });
  var assinatura=function(l){return JSON.stringify(l.getLatLngs());};
- var segSig=function(){var a=[];ed.eachLayer(function(l){if(l._tipo==='segura')a.push(assinatura(l));});return a.sort().join('|');};
+ var segSig=function(){var a=[];ed.eachLayer(function(l){if(l._tipo==='segura'||l._tipo==='buraco')a.push(assinatura(l));});return a.sort().join('|');};
  var origPer=assinatura(pl),origSeg=segSig();
  var ctl=new L.Control.Draw({position:'topleft',draw:{polygon:{allowIntersection:false,shapeOptions:Object.assign({pane:'edicao'},ESTILO.proibida)},circle:{shapeOptions:Object.assign({pane:'edicao'},ESTILO.proibida)},polyline:{shapeOptions:Object.assign({pane:'edicao'},ESTILO.caminho)},rectangle:false,marker:false,circlemarker:false},edit:{featureGroup:ed}});
  m.addControl(ctl);
  var modo=function(){return document.querySelector('input[name=modo]:checked').value;};
- var NOMES={verde:'Área verde nova',proibida:'Zona proibida',liberar:'Liberar área do mapa',caminho:'Trilha nova'};
+ var NOMES={verde:'Área verde nova',proibida:'Zona proibida',liberar:'Liberar área do mapa',caminho:'Trilha nova',semPontos:'Área sem pontos',linhaBloq:'Linha que bloqueia',linhaSem:'Caminho sem pontos'};
  m.on(L.Draw.Event.CREATED,function(e){
+  salvaEstado();
   var t=modo(),k=e.layerType;
-  var ok=(k==='polygon'&&(t==='verde'||t==='proibida'||t==='liberar'))||(k==='circle'&&t==='proibida')||(k==='polyline'&&t==='caminho');
-  if(!ok){alert('Esse desenho não combina com "'+NOMES[t]+'".\n\nÁrea verde e Liberar área: polígono.\nZona proibida: círculo ou polígono.\nTrilha nova: linha.\n\nTroque a opção em "Desenhar como" ou use outra ferramenta.');return;}
-  if(t==='verde'){verde(e.layer.getLatLngs());seguraMexida=true;voltarVerdeAuto=false;}else adiciona(e.layer,t);
+  var ok=(k==='polygon'&&(t==='verde'||t==='proibida'||t==='liberar'))||(k==='circle'&&t==='proibida')||(k==='polyline'&&t==='caminho')||(k==='polygon'&&t==='semPontos')||(k==='polyline'&&(t==='linhaBloq'||t==='linhaSem'));
+  if(!ok){alert('Esse desenho não combina com "'+NOMES[t]+'".\n\nÁrea verde, Liberar área e Área sem pontos: polígono.\nZona proibida: círculo ou polígono.\nTrilha nova, Linha que bloqueia e Caminho sem pontos: linha.\n\nTroque a opção em "Desenhar como" ou use outra ferramenta.');return;}
+  var nl;if(t==='verde'){nl=verde(e.layer.getLatLngs());seguraMexida=true;voltarVerdeAuto=false;}
+  else if(t==='linhaBloq'||t==='linhaSem'){var sem=t==='linhaSem';e.layer._kind={nome:sem?'Caminho sem pontos':'Linha que bloqueia',buffer_m:3,semPontos:sem,estilo:sem?{color:'#d500f9',weight:5,dashArray:'10 6'}:{color:'#ff6d00',weight:4,dashArray:'2 4'}};e.layer._estilo=e.layer._kind.estilo;nl=adiciona(e.layer,'linhaBloq');}
+  else nl=adiciona(e.layer,t);
   marcarSujo(true);
  });
- function tocou(layers){ if(!layers)return; layers.eachLayer(function(l){ if(l===pl)perimetroMexido=true; if(l._tipo==='segura'){seguraMexida=true;voltarVerdeAuto=false;} }); }
- m.on(L.Draw.Event.EDITED,function(e){tocou(e.layers);marcarSujo(true);});
- m.on(L.Draw.Event.DELETED,function(e){ if(e.layers&&e.layers.hasLayer(pl)){ed.addLayer(pl);alert('O contorno amarelo não pode ser apagado: só ajustado (lápis ✏️ e puxe os pontos).');} tocou(e.layers);marcarSujo(true);});
+ function tocou(layers){ if(!layers)return; layers.eachLayer(function(l){ if(l===pl)perimetroMexido=true; if(l._tipo==='segura'||l._tipo==='buraco'){seguraMexida=true;voltarVerdeAuto=false;} }); }
+ m.on(L.Draw.Event.EDITED,function(e){tocou(e.layers);marcarSujo(true);setTimeout(function(){e.layers.eachLayer(function(l){if(l._hit){if(l instanceof L.Circle){l._hit.setLatLng(l.getLatLng());l._hit.setRadius(l.getRadius());}else l._hit.setLatLngs(l.getLatLngs());}});},60);});
+ m.on(L.Draw.Event.DELETED,function(e){ if(e.layers&&e.layers.hasLayer(pl)){ed.addLayer(pl);alert('O contorno amarelo não pode ser apagado: só ajustado (lápis ✏️ e puxe os pontos).');} tocou(e.layers);if(e.layers)e.layers.eachLayer(function(l){if(l._hit)m.removeLayer(l._hit);});marcarSujo(true);});
 
  // ---- itens do combate (bases, monstros, curas, pedras, bombas) ----
  var ferrSel=document.getElementById('ferr');
@@ -197,8 +331,9 @@ fetch('dados/'+slug+'.json?'+Date.now()).then(function(r){return r.json();}).the
   ['curas','pedras','bombas','zumbis','chefoes','pontos'].forEach(function(kind){
    itens[kind].forEach(function(it,i){
     var mk=L.marker([it.lat,it.lng],{icon:icone(kind,it,i),draggable:ferr()==='mover',interactive:ferr()!=='nenhuma',zIndexOffset:kind==='pontos'?500:200}).addTo(camadaItens);
+    mk.on('dragstart',function(){salvaEstado();});
     mk.on('dragend',function(){var p=mk.getLatLng();it.lat=+p.lat.toFixed(7);it.lng=+p.lng.toFixed(7);combateMexido=true;voltarCombateAuto=false;marcarSujo(true);desenhaRota();});
-    mk.on('click',function(){ if(ferr()!=='apagar')return; itens[kind].splice(itens[kind].indexOf(it),1); combateMexido=true;voltarCombateAuto=false;marcarSujo(true);desenhaItens(); });
+    mk.on('click',function(){ if(ferr()!=='apagar')return; salvaEstado(); itens[kind].splice(itens[kind].indexOf(it),1); combateMexido=true;voltarCombateAuto=false;marcarSujo(true);desenhaItens(); });
    });
   });
   desenhaRota();
@@ -215,6 +350,7 @@ fetch('dados/'+slug+'.json?'+Date.now()).then(function(r){return r.json();}).the
  m.on('click',function(e){
   var f=ferr(); if(f.indexOf('add-')!==0)return;
   var p={lat:+e.latlng.lat.toFixed(7),lng:+e.latlng.lng.toFixed(7)};
+  salvaEstado();
   if(f==='add-base')itens.pontos.push(p);
   else if(f==='add-zumbi')itens.zumbis.push(p);
   else if(f==='add-chefao'){p.final=false;itens.chefoes.push(p);}
@@ -229,14 +365,80 @@ fetch('dados/'+slug+'.json?'+Date.now()).then(function(r){return r.json();}).the
  // largada
  var largadaMovida=false;
  var largada=L.marker([C.largada.lat,C.largada.lng],{draggable:true,zIndexOffset:1000,icon:L.divIcon({className:'',html:'<div class="n" style="background:#00c853;width:28px;height:28px;line-height:24px">L</div>',iconSize:[28,28],iconAnchor:[14,14]})}).addTo(m).bindTooltip('largada (arraste para mudar)');
+ largada.on('dragstart',function(){salvaEstado();});
  largada.on('dragend',function(){largadaMovida=true;C.largada={lat:largada.getLatLng().lat,lng:largada.getLatLng().lng};marcarSujo(true);desenhaRota();});
 
  m.fitBounds(L.latLngBounds([[C.largada.lat,C.largada.lng]].concat(itens.pontos.map(function(p){return [p.lat,p.lng];}))).pad(.4)); if(q.get('todo'))m.fitBounds(pl.getBounds().pad(.05));
  var lg=document.getElementById('legenda');lg.onclick=function(e){if(e.target.tagName==='A')return;lg.classList.toggle('mini');};
  if(window.innerHeight<560){document.getElementById('corpoPainel').style.display='none';lg.classList.add('mini');}
- lg.innerHTML='<b>'+C.nomeParque+'</b> · L largada · números = bases na ordem · 🧟 zumbi · 👹 chefão · 👿 chefão final · ✚ cura · 🪨 pedra<br>tracejado azul = percurso · ciano = trilhas do mapa · <span style="color:#33691e">verde = área do jogo (editável)</span> · <span style="color:#d50000">vermelho = proibida</span> · <span style="color:#1565c0">azul grosso = trilha nova</span><br>'+(A.seguraEditada?'<b>O verde foi editado por você.</b> ':'')+(D.combateEditado?'<b>O combate foi arrumado por você.</b> ':'')+'<a href="?p='+slug+'&todo=1">ver o parque inteiro</a>';
+ lg.innerHTML='<b>'+C.nomeParque+'</b> · L largada · números = bases na ordem · 🧟 zumbi · 👹 chefão · 👿 chefão final · ✚ cura · 🪨 pedra<br>tracejado azul = percurso · preto pontilhado = trilhas do mapa · <span style="color:#33691e">verde = área do jogo (editável)</span> · <span style="color:#d50000">vermelho = proibida</span> · <span style="color:#1565c0">azul grosso = trilha nova</span><br>'+(A.seguraEditada?'<b>O verde foi editado por você.</b> ':'')+(D.combateEditado?'<b>O combate foi arrumado por você.</b> ':'')+'<a href="?p='+slug+'&todo=1">ver o parque inteiro</a>';
 
  var cb=document.getElementById('soPerim');cb.onchange=function(){document.body.classList.toggle('so-perimetro',cb.checked);};if(q.get('so')==='perimetro'){cb.checked=true;document.body.classList.add('so-perimetro');}
+ /* ---- DESFAZER / REFAZER: guarda o estado antes de cada mudanca (apagar, editar, desenhar, mover). Ctrl+Z e Ctrl+Y tambem funcionam. ---- */
+ var hist=[],futuro=[];
+ var bar=document.createElement('div');bar.className='caixa';bar.style.cssText='left:372px;top:8px;padding:6px 8px;display:flex;gap:6px;z-index:1250';
+ bar.innerHTML='<button id="bUndo" style="padding:8px 12px;font-weight:bold;cursor:pointer">↩ Desfazer</button><button id="bRedo" style="padding:8px 12px;font-weight:bold;cursor:pointer">↪ Refazer</button>';
+ document.body.appendChild(bar);
+ function atualizaBotoes(){var u=document.getElementById('bUndo'),r=document.getElementById('bRedo');u.disabled=!hist.length;r.disabled=!futuro.length;u.style.opacity=hist.length?1:.45;r.style.opacity=futuro.length?1:.45;}
+ function estado(){
+  var o={apagar:apagarPts.map(function(p){return [p.lat,p.lng];}),removidos:removidos,ign:ignoradas,itens:itens,largada:C.largada,
+   fl:[seguraMexida,voltarVerdeAuto,perimetroMexido,combateMexido,voltarCombateAuto,largadaMovida],
+   alvos:alvos.map(function(l){return {a:!!l._apag,p:(l._pts||[]).map(function(q){return apagarPts.indexOf(q);})};}),per:pl.getLatLngs(),camadas:[]};
+  ed.eachLayer(function(l){if(l===pl)return;var e={t:l._tipo,k:l._kind||null};if(l instanceof L.Circle){e.c=l.getLatLng();e.r=l.getRadius();}else e.ll=l.getLatLngs();o.camadas.push(e);});
+  return JSON.stringify(o);
+ }
+ function salvaEstado(){if(pausaSnap)return;var s=estado();if(hist.length&&hist[hist.length-1]===s)return;hist.push(s);if(hist.length>80)hist.shift();futuro=[];atualizaBotoes();}
+ function restaura(js){
+  var o=JSON.parse(js);
+  if(editandoLayer){var el=editandoLayer;editandoLayer=null;try{el.editing.disable();}catch(x){}barraEd.style.display='none';}
+  m.closePopup();
+  ed.eachLayer(function(l){if(l===pl)return;ed.removeLayer(l);if(l._hit)m.removeLayer(l._hit);});
+  pl.setLatLngs(o.per);if(pl._hit){pl._hit.setLatLngs(o.per);if(!m.hasLayer(pl._hit))pl._hit.addTo(m);}
+  o.camadas.forEach(function(e){
+   var l2;
+   if(e.c)l2=L.circle(e.c,{radius:e.r,pane:'edicao'});
+   else if(e.t==='caminho'||e.t==='linhaBloq')l2=L.polyline(e.ll,{pane:'edicao'});
+   else l2=L.polygon(e.ll,{pane:(e.t==='segura'||e.t==='buraco')?'verde':'edicao'});
+   if(e.k){l2._kind=e.k;l2._estilo=e.k.estilo;}
+   adiciona(l2,e.t);
+  });
+  apagarPts=o.apagar.map(function(p){return {lat:p[0],lng:p[1]};});
+  alvos.forEach(function(l,i){var s=o.alvos[i];if(!s)return;l._apag=s.a;l._pts=s.p.map(function(k){return apagarPts[k];}).filter(Boolean);if(l._aplica)l._aplica();});
+  removidos=o.removidos;
+  trilhasReg.forEach(function(t){if(t.id!=null&&removidos[t.id])t.vis.setStyle({color:'#9e9e9e',weight:2,opacity:.7,dashArray:'5 5'});else t.vis.setStyle({color:'#000',weight:1.5,opacity:.95,dashArray:'1 4'});});
+  ignoradas=o.ign;
+  Object.keys(zonasReg).forEach(function(k){var z=zonasReg[k];z.vis.setStyle(ignoradas[k]?z.c:z.v);});
+  itens=o.itens;C.largada=o.largada;largada.setLatLng([o.largada.lat,o.largada.lng]);desenhaItens();
+  seguraMexida=o.fl[0];voltarVerdeAuto=o.fl[1];perimetroMexido=o.fl[2];combateMexido=o.fl[3];voltarCombateAuto=o.fl[4];largadaMovida=o.fl[5];
+  marcarSujo(true);
+ }
+ function desfazer(){if(!hist.length)return;futuro.push(estado());restaura(hist.pop());atualizaBotoes();}
+ function refazer(){if(!futuro.length)return;hist.push(estado());restaura(futuro.pop());atualizaBotoes();}
+ document.getElementById('bUndo').onclick=desfazer;document.getElementById('bRedo').onclick=refazer;
+ document.addEventListener('keydown',function(e){var t=e.target&&e.target.tagName;if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT')return;if((e.ctrlKey||e.metaKey)&&!e.shiftKey&&e.key==='z'){e.preventDefault();desfazer();}else if((e.ctrlKey||e.metaKey)&&(e.key==='y'||(e.shiftKey&&e.key==='Z'))){e.preventDefault();refazer();}});
+ atualizaBotoes();
+
+ /* LADOS: ruas de carro dividem o parque; so um lado vale (o outro e apagado). Clique num lado para torná-lo o oficial. */
+ var LADOS=A.lados||[];
+ if(LADOS.length>1){
+  var cores=['#00e676','#ff9100','#40c4ff','#e040fb'];
+  LADOS.forEach(function(l,i){
+   var p=L.polygon(l.anel.map(ll),{color:l.oficial?'#ffeb3b':'#9e9e9e',weight:l.oficial?0:2,dashArray:'6 6',fillColor:cores[i%4],fillOpacity:l.oficial?0:.12,pane:'hitL',interactive:!(l.oficial&&!A.ladoPendente)}).addTo(m);
+   var rot=(l.oficial?'✅ Lado oficial':'Lado NÃO usado')+' · '+String(l.ha).replace('.',',')+' ha';
+   var d=document.createElement('div');d.innerHTML='<b>'+rot+'</b><br>';
+   if(!l.oficial||A.ladoPendente){var bt=document.createElement('button');bt.textContent=l.oficial?'Confirmar este lado':'Usar este lado como oficial';bt.style.cssText='margin-top:6px;padding:8px;font-weight:bold;cursor:pointer';bt.onclick=function(){escolherLado(l);};d.appendChild(bt);}
+   p.bindPopup(d);
+   if(!l.oficial)p.bindTooltip(rot+' — toque para trocar',{sticky:true});
+  });
+  var bn=document.createElement('div');bn.className='caixa';bn.style.cssText='left:50%;transform:translateX(-50%);top:8px;z-index:1200;background:'+(A.ladoPendente?'#ffcdd2':'#e8f5e9')+';padding:8px 14px;font-weight:bold;max-width:70%;text-align:center;position:absolute';
+  bn.innerHTML=A.ladoPendente?'⚠️ Uma rua divide este parque em '+LADOS.length+' lados ('+LADOS.map(function(l){return String(l.ha).replace('.',',')+' ha';}).join(' / ')+'). Hoje o jogo usa o maior, de forma PROVISÓRIA. Toque no lado que você quer e confirme.':'Rua divide o parque em '+LADOS.length+' lados. Lado oficial já escolhido (toque num lado cinza para trocar).';
+  document.body.appendChild(bn);
+ }
+ function escolherLado(l){
+  if(!confirm('Usar este lado ('+String(l.ha).replace('.',',')+' ha) como o único do jogo? Os outros lados deixam de valer. A página recarrega e as alterações não salvas serão perdidas.'))return;
+  var s2=document.getElementById('status');s2.textContent='Escolhendo o lado e gerando de novo… (até 1 minuto)';
+  fetch('/lado/'+slug,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({lng:l.ponto[0],lat:l.ponto[1]})}).then(function(r){return r.json();}).then(function(j){if(!j.ok){s2.textContent='Erro: '+j.erro;return;}sujo=false;location.reload();}).catch(function(e){s2.textContent='Erro: '+e;});
+ }
  var st=document.getElementById('status'),bs=document.getElementById('salvar');
  document.getElementById('voltaVerde').onclick=function(){if(!confirm('Voltar o verde ao que o código gera sozinho? Os ajustes do verde serão descartados ao salvar.'))return;voltarVerdeAuto=true;seguraMexida=false;marcarSujo(true);st.className='';st.textContent='O verde voltará ao automático quando você salvar.';};
  document.getElementById('voltaCombate').onclick=function(){if(!confirm('Voltar o combate ao que o código monta sozinho? Os itens que você arrumou serão descartados ao salvar.'))return;voltarCombateAuto=true;combateMexido=false;marcarSujo(true);st.className='';st.textContent='O combate voltará ao automático quando você salvar.';};
@@ -246,15 +448,20 @@ fetch('dados/'+slug+'.json?'+Date.now()).then(function(r){return r.json();}).the
   confirmarModo(); /* se ainda estava editando/apagando, confirma antes de salvar */
   if(assinatura(pl)!==origPer)perimetroMexido=true;
   if(segSig()!==origSeg){seguraMexida=true;voltarVerdeAuto=false;}
-  var zonas=[],liberar=[],extra=[],seg=[];
+  var zonas=[],liberar=[],extra=[],seg=[],segO=[],segH=[];
+  function pipRing(p,r){var d=false;for(var i=0,j=r.length-1;i<r.length;j=i++){var xi=r[i][0],yi=r[i][1],xj=r[j][0],yj=r[j][1];if(((yi>p[1])!==(yj>p[1]))&&(p[0]<(xj-xi)*(p[1]-yi)/(yj-yi)+xi))d=!d;}return d;}
   ed.eachLayer(function(l){
    if(l._tipo==='proibida'){ if(l instanceof L.Circle){var c=l.getLatLng();zonas.push({nome:'Zona proibida',lat:+c.lat.toFixed(7),lng:+c.lng.toFixed(7),r:Math.round(l.getRadius()*10)/10});}
     else zonas.push({nome:'Zona proibida',poligono:par(l.getLatLngs()[0])}); }
+   else if(l._tipo==='semPontos'){zonas.push({nome:'Área sem pontos',semPontos:true,poligono:par(l.getLatLngs()[0])});}
+   else if(l._tipo==='linhaBloq'){zonas.push({nome:l._kind.nome,linha:par(l.getLatLngs()),buffer_m:l._kind.buffer_m,semPontos:!!l._kind.semPontos});}
    else if(l._tipo==='liberar'){liberar.push(par(l.getLatLngs()[0]));}
    else if(l._tipo==='caminho'){extra.push(par(l.getLatLngs()));}
-   else if(l._tipo==='segura'){var rs=l.getLatLngs();if(rs.length&&!Array.isArray(rs[0]))rs=[rs];seg.push(rs.map(function(r){return fechar(par(r));}));}
+   else if(l._tipo==='segura'){var rs=l.getLatLngs();if(rs.length&&!Array.isArray(rs[0]))rs=[rs];segO.push(rs.map(function(r){return fechar(par(r));}));}
+   else if(l._tipo==='buraco'){segH.push(fechar(par(l.getLatLngs()[0])));}
   });
-  var corpo={zonas:zonas,liberar:liberar,caminhosExtra:extra,caminhosRemovidos:Object.keys(removidos).map(Number),ignorarZonasAuto:Object.keys(ignoradas).map(function(k){return ignoradas[k];})};
+  segO.forEach(function(poly){segH.forEach(function(h){if(pipRing(h[0],poly[0]))poly.push(h);});seg.push(poly);});
+  var corpo={apagarNoPonto:apagarPts,zonas:zonas,liberar:liberar,caminhosExtra:extra,caminhosRemovidos:Object.keys(removidos).map(Number),ignorarZonasAuto:Object.keys(ignoradas).map(function(k){return ignoradas[k];})};
   if(seguraMexida&&seg.length)corpo.segura=seg;
   if(voltarVerdeAuto)corpo.voltarVerdeAuto=true;
   if(perimetroMexido){var ring=par(pl.getLatLngs()[0]);if(ring.length>=3)corpo.perimetro=ring;}

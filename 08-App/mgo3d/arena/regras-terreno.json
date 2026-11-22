@@ -36,7 +36,7 @@
     "buffer_m": 4
   },
   "mataDensa": {
-    "_o_que_e": "Verde escuro (mata/mato). MATA FECHADA = nenhuma trilha atravessa: proibida inteira e com prioridade total (nenhum sinal a reabre). MATA COM TRILHA = so vale um corredor em volta da trilha; os sinais abaixo (churrasqueira, banco...) abrem circulos so dentro dela.",
+    "_o_que_e": "Verde escuro (mata/mato). MATA COM TRILHA: os monstros podem ficar na mata toda, mas bases, largada, curas, pedras e bombas so no corredor de corredor_da_trilha_m em volta da trilha (monstros_na_mata_com_trilha=false volta a proibir a mata inteira). MATA FECHADA (nenhuma trilha atravessa): proibida inteira, para tudo, com prioridade total. Os sinais de 'libera' (churrasqueira, banco...) abrem circulos so dentro da mata com trilha.",
     "natural": [
       "wood",
       "scrub"
@@ -45,7 +45,8 @@
       "forest"
     ],
     "corredor_da_trilha_m": 8,
-    "trilha_minima_dentro_m": 15
+    "trilha_minima_dentro_m": 15,
+    "monstros_na_mata_com_trilha": true
   },
   "libera": {
     "_o_que_e": "Sinais de que da para ir ate la mesmo debaixo das arvores: churrasqueira, mesa de piquenique, abrigo, banco. Abrem um circulo dentro da mata densa.",
@@ -144,5 +145,52 @@
       "bloquear": false,
       "buffer_m": 2
     }
+  },
+  "semPontos": {
+    "_o_que_e": "Areas e linhas onde os MONSTROS podem aparecer (fica no verde), mas largada, bases, curas, pedras e bombas NAO. Ex.: cachorrodromo (leisure=dog_park, forma real + buffer_m) e vias highway=track (linha + track_buffer_m).",
+    "leisure": [
+      "dog_park"
+    ],
+    "buffer_m": 2,
+    "highway": [
+      "track"
+    ],
+    "track_buffer_m": 3
+  },
+  "trilhas": {
+    "_o_que_e": "Tipos de via do OpenStreetMap que valem como trilha de pedestre (por onde o jogo coloca pontos e itens). 'steps' (degraus/escadinhas) entram porque muitas trilhas de parque estao mapeadas assim, mesmo sem degrau nenhum.",
+    "highway": [
+      "footway",
+      "path",
+      "pedestrian",
+      "cycleway",
+      "steps"
+    ]
+  },
+  "lados": {
+    "_o_que_e": "Ruas de carro que cortam o parque o dividem em LADOS. Cada lado vira um perimetro proprio e o jogo usa so UM (a crianca nunca atravessa a rua, mesmo se houver ponte/passarela). O codigo nao sabe qual lado e o certo: avisa e voce escolhe no editor. Lados menores que area_minima_m2 sao ignorados.",
+    "highway": [
+      "primary",
+      "primary_link",
+      "secondary",
+      "secondary_link",
+      "tertiary",
+      "tertiary_link",
+      "residential",
+      "trunk",
+      "trunk_link",
+      "unclassified"
+    ],
+    "corte_m": 8,
+    "area_minima_m2": 8000
+  },
+  "verde": {
+    "_o_que_e": "Limpeza do verde: tira pedacinhos de area livre menores que area_minima_m2 e passagens mais estreitas que largura_minima_m entre areas proibidas (nao faz sentido deixar ponto num cantinho assim).",
+    "largura_minima_m": 6,
+    "area_minima_m2": 300
+  },
+  "viasServico": {
+    "_o_que_e": "Via de servico (highway=service, ex.: estrada de manutencao do parque) NAO e trilha: bloqueia uma faixa em volta do eixo. folga_cada_lado_m e a distancia para CADA lado, entao a faixa total e o dobro (2,5 = 5 m de faixa). Ruas de carro (secondary, residential...) usam 8 m para cada lado no codigo.",
+    "folga_cada_lado_m": 2.5
   }
 }
