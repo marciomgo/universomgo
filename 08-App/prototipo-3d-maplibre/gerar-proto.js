@@ -80,7 +80,7 @@ const modelo = fs.readFileSync(__dirname + '/proto-modelo.html', 'utf8');
 const { montarBlocos } = require('./montar-blocos.js');
 const MODO_DA_PAGINA = { 'mapa3d-livre.html': 'livre' }; // as demais paginas sao 'legado' (sem blocos)
 [['mapa3d.html', parcao()], ['mapa3d-casa.html', casa()], ['mapa3d-livre.html', livre()], ['mapa3d-combate-1.html', combate(1)], ['mapa3d-combate-2.html', combate(2)]].forEach(([arq, dados]) => {
-  const pagina = modelo.replace('/*DADOS*/', () => 'const DADOS = ' + JSON.stringify(dados) + ';').replace('__MANIFESTO__', 'manifest-' + arq.replace('.html', '') + '.json');
+  const pagina = modelo.replace('/*DADOS*/', () => 'const DADOS = ' + JSON.stringify(dados) + ';').replace('/*COMBATE_DINAMICO*/', '').replace('__MANIFESTO__', 'manifest-' + arq.replace('.html', '') + '.json'); /* so o combate dos parques usa o montador dinamico */
   fs.writeFileSync(__dirname + '/saida/' + arq, montarBlocos(pagina, MODO_DA_PAGINA[arq] || 'legado', __dirname + '/saida'));
   escreverManifest(arq);
   console.log(arq, 'pontos', dados.pontos.length, 'zumbis', dados.zumbis.length, 'chefoes', dados.chefoes.length, 'bombas', dados.bombas.length);
