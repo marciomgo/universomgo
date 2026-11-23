@@ -654,7 +654,7 @@ function empurrarFora(o, folga) { /* tira o objeto (POS ou monstro, com lat/lng)
     var f = r / d; o.lat = c.lat + (dl * f) / 111320; o.lng = c.lng + (dn * f) / (111320 * cl);
   }
 }
-var obstaculos = [];
+var obstaculos = [], aguas = []; /* aguas = so os poligonos de agua (o bloco pesca usa) */
 function carregarObstaculos(lat, lng) {
   obstaculos = [];
   var fs2 = [];
@@ -670,10 +670,12 @@ function carregarObstaculos(lat, lng) {
       obstaculos.push({ p: p, bb: [minx, miny, maxx, maxy] });
     });
   });
+  aguas = obstaculos.slice();
   obstaculosFixos.forEach(function (o) { obstaculos.push(o); }); /* a montanha etc. contam como obstaculo (a grade de caminhos desvia delas) */
   return obstaculos.length;
 }
-function dentroDoAnel(x, y, anel) {
+/* (era dentroDoAnel: tinha o MESMO nome de outra funcao mais abaixo, que a sobrescrevia; por isso agua e obstaculos nunca eram detectados. Renomeada em 22/11.) */
+function pontoNoAnel(x, y, anel) {
   var dentro = false;
   for (var i = 0, j = anel.length - 1; i < anel.length; j = i++) {
     var xi = anel[i][0], yi = anel[i][1], xj = anel[j][0], yj = anel[j][1];
@@ -685,9 +687,9 @@ function emObstaculo(lat, lng) {
   for (var k = 0; k < obstaculos.length; k++) {
     var o = obstaculos[k];
     if (lng < o.bb[0] || lng > o.bb[2] || lat < o.bb[1] || lat > o.bb[3]) continue;
-    if (!dentroDoAnel(lng, lat, o.p[0])) continue;
+    if (!pontoNoAnel(lng, lat, o.p[0])) continue;
     var buraco = false;
-    for (var h = 1; h < o.p.length; h++) { if (dentroDoAnel(lng, lat, o.p[h])) { buraco = true; break; } }
+    for (var h = 1; h < o.p.length; h++) { if (pontoNoAnel(lng, lat, o.p[h])) { buraco = true; break; } }
     if (!buraco) return true;
   }
   return false;
@@ -1123,7 +1125,7 @@ function atualizarBatalha(dt, agora) {
   if (era !== emBatalha) pintaInc();
   fBat += ((emBatalha ? 1 : 0) - fBat) * (1 - Math.exp(-3 * dt));
 }
-function congelado() { return satelite && !DADOS.dupla; } /* vista de cima: no solo o jogo para (nada te persegue); na dupla o mundo segue e voce fica invisivel (ver editar-dupla.js) */
+function congelado() { return (satelite && !DADOS.dupla) || !!window.MGO_PESCANDO; } /* vista de cima: no solo o jogo para (nada te persegue); na dupla o mundo segue e voce fica invisivel (ver editar-dupla.js) */
 function quadro(agora) {
   var dt = Math.min(0.05, (agora - ultimo) / 1000); ultimo = agora;
   var andando = false;

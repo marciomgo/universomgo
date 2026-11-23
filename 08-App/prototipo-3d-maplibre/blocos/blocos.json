@@ -149,6 +149,11 @@
       "modulosParaAquecer": [
         "three"
       ]
+    },
+    "pesca": {
+      "descricao": "Pescaria no lago (acao extra tranquila): botao Pescar perto da agua, varinha na mao do Mineu apontada para a boia, espera de alguns minutos, peixe + um pouco de vida, dicas de conversa; os monstros fazem pausa. Teste rapido: ?pesca=rapido.",
+      "css": "pesca.css",
+      "js": "pesca.js"
     }
   },
   "modos": {
@@ -158,6 +163,7 @@
       "bauFinal",
       "marcoMoeda",
       "mineu3d",
+      "pesca",
       "travaVoltar",
       "telemetria",
       "pesquisa",
@@ -168,6 +174,7 @@
       "bauFinal",
       "marcoMoeda",
       "mineu3d",
+      "pesca",
       "joystick",
       "travaVoltar",
       "telemetria",

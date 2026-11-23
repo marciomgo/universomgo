@@ -1,0 +1,30 @@
+/* bloco pesca: botao de pescar, faixa "pescando", cartao do peixe e boia no lago */
+#btnPescar{position:fixed;left:50%;bottom:112px;transform:translateX(-50%);z-index:7;display:none;width:74px;height:74px;border-radius:50%;border:3px solid #29b6f6;background:rgba(255,255,255,.96);box-shadow:0 2px 8px rgba(0,0,0,.4);cursor:pointer;padding:0;line-height:1;touch-action:manipulation}
+#btnPescar span{display:block;font-size:30px}
+#btnPescar small{display:block;font-size:11px;font-weight:bold;color:#01579b;margin-top:1px}
+#btnPescar.parar{border-color:#90a4ae}
+#btnPescar.parar small{color:#455a64}
+#btnPescar.puxar{border-color:#ff7043;background:#fff3e0;width:96px;height:96px;animation:pescaPulsa .5s ease-in-out infinite}
+#btnPescar.puxar span{font-size:38px}
+#btnPescar.puxar small{font-size:14px;color:#d84315}
+@keyframes pescaPulsa{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.12)}}
+#pescaFaixa{position:fixed;left:50%;top:64px;transform:translateX(-50%);z-index:7;display:none;max-width:88vw;padding:8px 14px;border-radius:999px;background:rgba(1,87,155,.88);color:#fff;font:600 14px system-ui,sans-serif;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.pesca-boia{pointer-events:none;font-size:22px;text-align:center;filter:drop-shadow(0 2px 2px rgba(0,0,0,.45))}
+.pesca-boia span{display:inline-block;animation:boiaBalanca 2.6s ease-in-out infinite}
+.pesca-boia.mordeu span{animation:boiaPuxa .22s linear infinite}
+.pesca-boia:after{content:"";display:block;margin:-4px auto 0;width:26px;height:9px;border-radius:50%;border:2px solid rgba(255,255,255,.75);animation:boiaOnda 2.6s ease-out infinite}
+@keyframes boiaBalanca{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
+@keyframes boiaPuxa{0%,100%{transform:translate(-2px,2px)}50%{transform:translate(2px,6px)}}
+@keyframes boiaOnda{0%{opacity:.9;transform:scale(.5)}100%{opacity:0;transform:scale(1.8)}}
+#pescaCard{position:fixed;inset:0;z-index:99996;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.45);padding:16px}
+#pescaCard .pc{background:#fff;border-radius:18px;padding:20px 18px;max-width:340px;width:100%;text-align:center;box-shadow:0 6px 24px rgba(0,0,0,.45);font-family:system-ui,sans-serif}
+#pescaCard .pc-peixe{font-size:92px;line-height:1.05}
+#pescaCard h2{margin:6px 0 2px;font-size:24px;color:#01579b}
+#pescaCard .pc-raro{display:inline-block;margin-bottom:4px;padding:2px 10px;border-radius:999px;background:#ffd54f;color:#6d4c00;font-weight:bold;font-size:13px}
+#pescaCard p{margin:6px 0;font-size:15px;color:#37474f}
+#pescaCard .pc-vida{font-weight:bold;color:#2e7d32}
+#pescaCard .pc-total{font-size:13px;color:#78909c}
+#pescaCard .pc-botoes{display:flex;gap:8px;margin-top:12px}
+#pescaCard button{flex:1;padding:12px 8px;border-radius:12px;border:0;font-size:15px;font-weight:bold;cursor:pointer}
+#pescaCard .pc-continua{background:#29b6f6;color:#fff}
+#pescaCard .pc-para{background:#eceff1;color:#455a64}
