@@ -40,11 +40,11 @@
       ]
     },
     "pedraDireita": {
-      "descricao": "Layout dos botoes: estilingue no meio e botoes da pedra a DIREITA dele.",
+      "descricao": "(DESLIGADO desde 22/11 a pedido do Marcio: os botoes da pedra voltaram para a ESQUERDA do estilingue, que e o layout padrao do jogo.) Layout alternativo: botoes da pedra a DIREITA do estilingue.",
       "css": "layout-pedra-direita.css"
     },
     "joystick": {
-      "descricao": "Joystick na tela (anda/gira sem GPS). Aparece so com o jogo iniciado e sem GPS real. Fica embaixo a ESQUERDA.",
+      "descricao": "Joystick na tela (anda/gira sem GPS). Aparece so com o jogo iniciado e sem GPS real. Fica a ESQUERDA, ACIMA dos botoes da pedra (que ficam a esquerda do estilingue).",
       "js": "joystick.js"
     },
     "travaVoltar": {
@@ -139,7 +139,6 @@
       "monstros3d",
       "bauFinal",
       "marcoMoeda",
-      "pedraDireita",
       "travaVoltar",
       "telemetria",
       "pesquisa",
@@ -148,7 +147,6 @@
     "livre": [
       "monstros3d",
       "bauFinal",
-      "pedraDireita",
       "joystick",
       "travaVoltar",
       "telemetria",
