@@ -131,6 +131,24 @@
         "three",
         "three/addons/loaders/GLTFLoader.js"
       ]
+    },
+    "mineu3d": {
+      "descricao": "Corpo do Mineu desenhado dentro da cena 3D com profundidade verdadeira (montanha, logo e monstros o tapam de forma exata). Le a posicao/tamanho da imagem do Mineu de DOM e desenha a mesma imagem com profundidade; se der erro, volta ao Mineu de DOM. Precisa ser a ULTIMA camada 3D.",
+      "js": "mineu-3d.js",
+      "modulo": true,
+      "usaBibliotecas": [
+        "three",
+        "three/addons/"
+      ],
+      "offline": [
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js",
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/utils/BufferGeometryUtils.js",
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/utils/SkeletonUtils.js"
+      ],
+      "modulosParaAquecer": [
+        "three"
+      ]
     }
   },
   "modos": {
@@ -139,6 +157,7 @@
       "monstros3d",
       "bauFinal",
       "marcoMoeda",
+      "mineu3d",
       "travaVoltar",
       "telemetria",
       "pesquisa",
@@ -148,6 +167,7 @@
       "monstros3d",
       "bauFinal",
       "marcoMoeda",
+      "mineu3d",
       "joystick",
       "travaVoltar",
       "telemetria",
