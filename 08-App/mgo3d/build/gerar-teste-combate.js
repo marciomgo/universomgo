@@ -40,6 +40,13 @@ function poolsDe(arena, segura) {
   const par = (l) => (l || []).map((p) => [p.lat, p.lng]);
   return { pontos: arena.poolPontos || par(arena.pontos.filter((p) => p.seguro !== false)), itens: arena.poolItens || par(arena.curas.concat(arena.pedrasNormais)), bombas: arena.poolBombas || par(arena.bombas), segura: seg };
 }
+// MARCO (rocha com moeda de ouro gigante): fica no MEIO do parque, em terreno seguro (fora de predio, agua e zonas proibidas)
+function centroDoParque(arena, segura) {
+  if (!segura) return null;
+  let c = turf.centerOfMass(segura).geometry.coordinates;
+  if (!turf.booleanPointInPolygon(turf.point(c), segura)) c = turf.pointOnFeature(segura).geometry.coordinates;
+  return { lat: arred(c[1]), lng: arred(c[0]) };
+}
 function montarCombate(arena) {
   const L = arena.largada, B = regras.bases, M = regras.monstros, I = regras.itens;
   const segura = arena.segura ? turf.feature(arena.segura) : null;
@@ -61,6 +68,7 @@ function montarCombate(arena) {
     resumo: { parque: arena.slug, bases: rota.length, percurso_m: compr, zumbis: zumbis.length, chefoes: chefoes.length, curas: curas.length, pedras: pedras.length, bombas: bombas.length },
     dados: {
       slug: 'combate-' + arena.slug, nomeParque: arena.nomeExibicao,
+      marco: centroDoParque(arena, segura),
       largada: L, perimetro: typeof arena.perimetro === 'string' ? JSON.parse(arena.perimetro) : arena.perimetro, perimetroExtra: arena.perimetroExtra ? JSON.parse(arena.perimetroExtra) : [],
       pontos: rota.map((p, i) => ({ n: i + 1, lat: p.lat, lng: p.lng })),
       curas: curas.map((p) => ({ lat: p.lat, lng: p.lng })),
