@@ -104,7 +104,7 @@
       ]
     },
     "marcoMoeda": {
-      "descricao": "Marco do parque: rocha alta (Kenney rock_tallB, CC0) no meio do parque com o logo do MGO girando e flutuando em cima. Lugar = DADOS.marco (centro do terreno seguro, calculado no build). So enfeite/referencia, com pino no mapa.",
+      "descricao": "Marco do parque: rocha alta (Kenney rock_tallB, CC0) no meio do parque com o logo do MGO girando e flutuando em cima. Lugar = DADOS.marco (centro do terreno seguro, calculado no build). So enfeite/referencia, com pino no mapa. No modo livre (sem parque) aparece a ~24 m de onde o jogador esta quando o jogo comeca.",
       "js": "marco-moeda.js",
       "modulo": true,
       "usaBibliotecas": [
@@ -147,6 +147,7 @@
     "livre": [
       "monstros3d",
       "bauFinal",
+      "marcoMoeda",
       "joystick",
       "travaVoltar",
       "telemetria",
